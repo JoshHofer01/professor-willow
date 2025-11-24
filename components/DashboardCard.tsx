@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { LucideIcon } from "lucide-react";
+import { ArrowRight, LucideIcon } from "lucide-react";
 
 export type CardSize = "default" | "wide" | "tall" | "large";
 
@@ -63,8 +63,9 @@ export function DashboardCard({
       <CardFooter className="flex w-full justify-end-safe">
         <Link href={button.href} className={cn("mt-2", button.className)}>
           <Button className="w-full">
-            <p>{button.text}</p>
             {button.icon && <button.icon />}
+            <p>{button.text}</p>
+            <ArrowRight />
           </Button>
         </Link>
       </CardFooter>}
