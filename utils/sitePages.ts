@@ -15,5 +15,5 @@ export const pages = [
     title: "Settings",
     href: "/settings",
     icon: Settings,
-  },
+  }
 ];

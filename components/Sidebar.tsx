@@ -1,9 +1,6 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -41,16 +38,6 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarFooter>
-          <SidebarMenuItem key={"settings"} className="my-1">
-            <SidebarMenuButton asChild className="text-lg font-semibold justify-center">
-              <Link href="/">
-                <Settings />
-                <span>Settings</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarFooter>
       </SidebarContent>
     </Sidebar>
   );

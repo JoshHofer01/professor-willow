@@ -1,20 +1,15 @@
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { pages } from "@/utils/sitePages";
-import { Calendar, Home, Inbox, Settings } from "lucide-react";
 import Link from "next/link";
 
 const TopNav = () => {
   return (
-    <NavigationMenu className="bg-sidebar pt-1 pb-2 md:hidden">
+    <NavigationMenu className="bg-sidebar pt-1 pb-2">
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
           <Link href="/">

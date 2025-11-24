@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { ArrowRight, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 export type CardSize = "default" | "wide" | "tall" | "large";
 
