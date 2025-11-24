@@ -7,49 +7,33 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { pages } from "@/utils/sitePages";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Events",
-    url: "/events",
-    icon: Calendar,
-  },
-  {
-    title: "Pokedex",
-    url: "/",
-    icon: Inbox,
-  },
-];
 
 export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
+          <Link href="/">
           <SidebarGroupLabel className="text-3xl mt-2">
             Professor
           </SidebarGroupLabel>
           <SidebarGroupLabel className="text-4xl">Willow</SidebarGroupLabel>
+          </Link>
           <SidebarGroupContent>
             <SidebarMenu className="mt-5">
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="my-1">
+              {pages.map((page) => (
+                <SidebarMenuItem key={page.title} className="my-1">
                   <SidebarMenuButton asChild className="text-xl font-semibold">
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                    <Link href={page.href}>
+                      <page.icon />
+                      <span>{page.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -59,7 +43,7 @@ export function AppSidebar() {
         </SidebarGroup>
         <SidebarFooter>
           <SidebarMenuItem key={"settings"} className="my-1">
-            <SidebarMenuButton asChild className="text-xl font-semibold justify-center">
+            <SidebarMenuButton asChild className="text-lg font-semibold justify-center">
               <Link href="/">
                 <Settings />
                 <span>Settings</span>
