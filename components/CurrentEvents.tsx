@@ -34,13 +34,17 @@ export function CurrentEventsCarousel({
                 <Image
                   src={event.image}
                   alt={event.name}
-                  fill
                   className="rounded-lg object-cover"
+                  width={1000}
+                  height={0}
+                  loading="eager"
                 />
               </div>
               <div className="text-white flex flex-col md:text-base text-sm font-semibold mt-2 text-center">
                 <p className="px-3">{event.name}</p>
-                <p className="text-muted-foreground">{index + 1}/{eventData.length}</p>
+                <p className="text-muted-foreground">
+                  {index + 1}/{eventData.length}
+                </p>
               </div>
             </div>
           </CarouselItem>
