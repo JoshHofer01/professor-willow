@@ -1,11 +1,12 @@
 import { CurrentEventsCarousel } from "@/components/CurrentEvents";
 import { DashboardCard } from "@/components/DashboardCard";
 import { Button } from "@/components/ui/button";
+import { liveEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
 export default function DashboardPage() {
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
-      <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
         <DashboardCard
           title="Welcome to ProfessorWillow"
           description="ProfessorWillow is a web app that tracks current and recent Pokémon GO events, with built-in tools like an IV calculator and GBL build guides to help you play more efficiently."
@@ -18,15 +19,13 @@ export default function DashboardPage() {
 
         <DashboardCard
           title="Current Events"
-          size="tall"
         >
-          <CurrentEventsCarousel />
+          <CurrentEventsCarousel eventData={liveEvents}/>
         </DashboardCard>
-
 
         <DashboardCard
           title="All Events"
-          description="View interactive calendar of live and recent events in Pokemon GO"
+          description="Overview of live, upcoming, and recent events in Pokemon GO"
           className=""
           button={{
             text: "View Events",

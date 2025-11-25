@@ -1,44 +1,51 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Autoplay from "embla-carousel-autoplay"
-
-import { Card, CardContent } from "@/components/ui/card"
+import * as React from "react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
+import { GameEvent } from "@/interfaces/interfaces";
+import Image from "next/image";
 
-export function CurrentEventsCarousel() {
+export function CurrentEventsCarousel({
+  eventData,
+}: {
+  eventData: GameEvent[];
+}) {
   const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
-  )
-
+    Autoplay({ delay: 3500, stopOnInteraction: true })
+  );
 
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="m-2 flex-1"
+      className="w-full border-x border-b rounded-2xl"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent>
-        {Array.from({ length: 3 }).map((_, index) => (
-          <CarouselItem key={index}>
+      <CarouselContent className="-ml-2 md:-ml-4">
+        {eventData.map((event, index) => (
+          <CarouselItem key={index} className="pl-2 md:pl-4 basis-full">
             <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
+              <div className="relative w-full aspect-video">
+                <Image
+                  src={event.image}
+                  alt={event.name}
+                  fill
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <div className="text-white flex flex-col md:text-base text-sm font-semibold mt-2 text-center">
+                <p className="px-3">{event.name}</p>
+                <p className="text-muted-foreground">{index + 1}/{eventData.length}</p>
+              </div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      {/* <div id="carouselText" className="font-semibold text-sm text-center">
-        <p>Current Events</p>
-      </div> */}
     </Carousel>
-  )
+  );
 }

@@ -46,7 +46,7 @@ export function DashboardCard({
   button,
 }: DashboardCardProps) {
   return (
-    <Card className={cn("flex flex-col", sizeClasses[size], className)}>
+    <Card className={cn("flex flex-col py-6", sizeClasses[size], className)}>
       <CardHeader className="">
         <div className="flex items-start justify-between gap-2">
           <div className="space-y-1">
