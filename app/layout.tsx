@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 import PageFooter from "@/components/PageFooter";
@@ -30,7 +27,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
     <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -38,7 +34,7 @@ export default function RootLayout({
         <TopNav />
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset>
+          <SidebarInset className="overflow-x-hidden">
             <main>
               {children}
               <PageFooter />
