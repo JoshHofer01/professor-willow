@@ -9,12 +9,12 @@ import Link from "next/link";
 
 const TopNav = () => {
   return (
-    <NavigationMenu className="bg-sidebar pt-1 pb-2 md:hidden">
+    <NavigationMenu className="bg-sidebar pb-1 md:hidden">
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
           <Link href="/">
-            <div className="items-center flex flex-col ml-3 mr-3">
-              <h1 className="text-sm mt-2 font-bold">Professor</h1>
+            <div className="items-center flex flex-col ml-8 mr-3">
+              <h1 className="text-sm mt-1 font-bold">Professor</h1>
               <h1 className="text-xl font-bold">Willow</h1>
             </div>
           </Link>
