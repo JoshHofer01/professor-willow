@@ -7,5 +7,6 @@ export interface GameEvent {
   image: string;
   start: string;
   end: string;
-  isLive?: boolean
+  status: "live" | "upcoming" | "completed";
+
 }

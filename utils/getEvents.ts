@@ -18,11 +18,13 @@ const response = await fetch(
         return;
       }
       if (now >= startDate && now <= endDate) {
-        event.isLive = true;
+        event.status = "live";
         liveEvents.push(event);
       } else if (now < startDate) {
+        event.status = "upcoming";
         upcomingEvents.push(event);
       } else {
+        event.status = "completed";
         completedEvents.push(event);
       }
     } catch {
