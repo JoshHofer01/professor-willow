@@ -27,8 +27,8 @@ const EventCard = ({ event, className }: { event: GameEvent; className?: string;
           <Image
             src={event.image}
             alt={event.name}
-            width={200}
-            height={200}
+            width={1000}
+            height={0}
             className="w-full h-full object-cover not-lg:max-h-28 not-lg:max-w-44 lg:h-36"
           />
           {/* Gradient fade for mobile only */}
