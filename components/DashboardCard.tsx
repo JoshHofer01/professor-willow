@@ -12,13 +12,15 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ArrowRight, LucideIcon } from "lucide-react";
 
-export type CardSize = "default" | "wide" | "tall" | "large";
+export type CardSize = "default" | "wide" | "tall" | "large" | "xlWide" | "xlTall";
 
 const sizeClasses: Record<CardSize, string> = {
   default: "",
   wide: "md:col-span-2",
   tall: "md:row-span-2",
   large: "md:col-span-2 md:row-span-2",
+  xlWide: "xl:col-span-2",
+  xlTall: "xl:row-span-2"
 };
 
 export interface DashboardCardProps {

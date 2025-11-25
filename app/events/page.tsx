@@ -66,7 +66,7 @@ const EventSection = ({ title, events, color }: { title: string; events: GameEve
       <div className="flex justify-between items-center mb-3 pr-4 lg:pr-0">
         <h2 className="text-3xl font-bold">{title}</h2>
         {hasMoreThanThree && (
-          <Button variant="link" className="lg:hidden">
+          <Button variant="ghost" className="lg:hidden">
             View All
           </Button>
         )}
@@ -103,7 +103,7 @@ const EventsPage = async () => {
       </div>
 
       <div className="space-y-8">
-        {/* Event information fetch can be found in getEvents.ts */}
+        {/* Event information fetch can be found in getEvents.tsx */}
         <EventSection title="Live Events" events={liveEvents} color="bg-green-500" />
         <EventSection title="Upcoming Events" events={upcomingEvents} color="bg-blue-500" />
         <EventSection title="Completed Events" events={completedEvents} color="bg-slate-500" />
