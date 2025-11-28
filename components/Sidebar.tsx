@@ -11,17 +11,16 @@ import {
 import Link from "next/link";
 import { pages } from "@/utils/sitePages";
 
-
 export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
           <Link href="/">
-          <SidebarGroupLabel className="text-3xl mt-2">
-            Professor
-          </SidebarGroupLabel>
-          <SidebarGroupLabel className="text-4xl">Willow</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-3xl mt-2">
+              Professor
+            </SidebarGroupLabel>
+            <SidebarGroupLabel className="text-4xl">Willow</SidebarGroupLabel>
           </Link>
           <SidebarGroupContent>
             <SidebarMenu className="mt-5">
@@ -35,6 +34,8 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+            <SidebarMenu>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

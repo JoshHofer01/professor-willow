@@ -1,9 +1,10 @@
-import { CurrentEventsCarousel } from "@/components/CurrentEvents";
-import { DashboardCard } from "@/components/DashboardCard";
+import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
+import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import { Button } from "@/components/ui/button";
-import { liveEvents } from "@/utils/getEvents";
+import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const { liveEvents } = await getEvents();
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">

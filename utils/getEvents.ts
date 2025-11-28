@@ -1,14 +1,16 @@
 import { GameEvent } from "@/interfaces/interfaces";
 
-const response = await fetch(
-    "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.min.json"
+export async function getEvents() {
+  const response = await fetch(
+    "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.min.json",
+    { next: { revalidate: 60 } }
   );
   const eventsData: GameEvent[] = await response.json();
 
   const now = new Date();
-  export const liveEvents: GameEvent[] = [];
-  export const upcomingEvents: GameEvent[] = [];
-  export const completedEvents: GameEvent[] = [];
+  const liveEvents: GameEvent[] = [];
+  const upcomingEvents: GameEvent[] = [];
+  const completedEvents: GameEvent[] = [];
 
   eventsData.forEach((event) => {
     try {
@@ -18,20 +20,28 @@ const response = await fetch(
         return;
       }
       if (now >= startDate && now <= endDate) {
-        event.status = "live";
-        liveEvents.push(event);
+        liveEvents.push({ ...event, status: "live" });
       } else if (now < startDate) {
-        event.status = "upcoming";
-        upcomingEvents.push(event);
+        upcomingEvents.push({ ...event, status: "upcoming" });
       } else {
-        event.status = "completed";
-        completedEvents.push(event);
+        completedEvents.push({ ...event, status: "completed" });
       }
-    } catch {
-      // Fail silently for any malformed event data
+    } catch (err) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Invalid event:", event, err);
+      }
     }
   });
 
-  liveEvents.sort((a, b) => new Date(a.end).getTime() - new Date(b.end).getTime());
-  upcomingEvents.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
-  completedEvents.sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime());
+  liveEvents.sort(
+    (a, b) => new Date(a.end).getTime() - new Date(b.end).getTime()
+  );
+  upcomingEvents.sort(
+    (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime()
+  );
+  completedEvents.sort(
+    (a, b) => new Date(b.end).getTime() - new Date(a.end).getTime()
+  );
+
+  return { liveEvents, upcomingEvents, completedEvents };
+}

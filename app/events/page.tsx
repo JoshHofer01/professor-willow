@@ -1,90 +1,10 @@
 // app/events/page.tsx
-import { EventEndingCountdown } from "@/components/EventEndingCountdown";
-import { Badge } from "@/components/ui/badge";
+import { CalendarPageCard } from "@/components/CustomCards/EventCards";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GameEvent } from "@/interfaces/interfaces";
-import { cn } from "@/lib/utils";
-import { completedEvents, liveEvents, upcomingEvents } from "@/utils/getEvents";
-import Image from "next/image";
+import { getEvents } from "@/utils/getEvents";
+import Link from "next/link";
 import React from "react";
-
-const EventCard = ({
-  event,
-  className,
-}: {
-  event: GameEvent;
-  className?: string;
-}) => {
-  const dateFormatter = new Intl.DateTimeFormat("en-US", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-
-  const dateStart = dateFormatter.format(new Date(event.start));
-  const dateEnd = dateFormatter.format(new Date(event.end));
-
-  return (
-    <Card
-      className={cn(
-        "w-full lg:w-72 lg:shrink-0 transition-shadow hover:shadow-lg flex flex-row lg:flex-col overflow-hidden",
-        className
-      )}
-    >
-      {/* Image Container */}
-      {event.image && (
-        <div className="relative lg:w-full shrink-0 order-2 lg:order-1">
-          <Image
-            src={event.image}
-            alt={event.name}
-            width={1000}
-            height={0}
-            className="w-full h-full object-cover not-lg:max-h-28 not-lg:max-w-44 lg:h-36"
-          />
-          {/* Gradient fade for mobile only */}
-          <div className="absolute inset-0 bg-linear-to-r from-card to-50% lg:hidden" />
-        </div>
-      )}
-
-      {/* Content Container */}
-      <div className="flex flex-col justify-center not-lg:grow order-1 lg:order-2">
-        {event.eventType && (
-          <Badge
-            variant="secondary"
-            className="ml-2 mb-2 text-xs not-lg:hidden"
-          >
-            {event.eventType}
-          </Badge>
-        )}
-        <CardHeader className="pt-3 px-4 lg:pt-0">
-          <CardTitle className="text-base lg:text-base leading-tight not-lg:truncate">
-            {event.name}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-4 pb-3 lg:pb-6">
-          {event.status === "live" ? (
-            <EventEndingCountdown eventEnd={dateEnd} />
-          ) : event.status === "upcoming" ? (
-            <div className="text-xs text-muted-foreground space-y-1">
-              <p>
-                <strong>Starts:</strong> {dateStart}
-              </p>
-              <p>
-                <strong>Ends:</strong> {dateEnd}
-              </p>
-            </div>
-          ) : (
-            <div className="text-xs text-muted-foreground space-y-1">
-              <p>
-                <strong>Completed on:</strong> {dateEnd}
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </div>
-    </Card>
-  );
-};
 
 const EventSection = ({
   title,
@@ -108,9 +28,9 @@ const EventSection = ({
       <div className="flex items-center mb-3 gap-x-4 w-full">
         <h2 className="text-3xl font-bold">{title}</h2>
         {hasMoreThanThree && events[0].status !== "live" && (
-          <Button variant="outline">
-            View {events.length} More
-          </Button>
+          <Link href={"/events/" + events[0].status}>
+            <Button variant="outline">View {events.length} More</Button>
+          </Link>
         )}
       </div>
 
@@ -118,7 +38,7 @@ const EventSection = ({
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 lg:overflow-x-auto lg:pb-4 lg:-mb-4">
         {events.length > 0 ? (
           events.map((event, index) => (
-            <EventCard
+            <CalendarPageCard
               key={event.eventID}
               event={event}
               className={index >= 3 && event.status !== "live" ? "hidden" : ""}
@@ -135,9 +55,11 @@ const EventSection = ({
 };
 
 const EventsPage = async () => {
+  const { liveEvents, upcomingEvents, completedEvents } = await getEvents();
+  
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
-      <div className="mb-12">
+      <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">Events Calendar</h1>
         <p className="text-lg text-muted-foreground">
           Stay up to date with live, upcoming, and past events.

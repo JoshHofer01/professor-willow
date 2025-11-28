@@ -31,7 +31,7 @@ const Item = ({ text, icon: ItemIcon }: ItemProps) => {
 
 const PageFooter = () => {
   return (
-    <div className="pl-7 not-md:pl-4 pt-2 pb-4 flex flex-col">
+    <div className="ml-4 md:ml-6 pt-2 pb-4 flex flex-col">
       <div className=" text-muted-foreground text-sm">
         <p>ProfessorWillow is not affiliated with Scopely</p>
         <p>
