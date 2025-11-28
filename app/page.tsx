@@ -3,6 +3,7 @@ import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import { Button } from "@/components/ui/button";
 import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
+import Link from "next/link";
 export default async function DashboardPage() {
   const { liveEvents } = await getEvents();
   return (
@@ -20,7 +21,14 @@ export default async function DashboardPage() {
         </DashboardCard>
 
         {/* Current Events Carousel */}
-        <DashboardCard title="Current Events">
+        <DashboardCard title="Current Events"
+        action={
+          <Link href={'events/live'}>
+            <Button variant="ghost" size="sm">
+              View All
+            </Button>
+          </Link>
+          }>
           <CurrentEventsCarousel eventData={liveEvents} />
         </DashboardCard>
 

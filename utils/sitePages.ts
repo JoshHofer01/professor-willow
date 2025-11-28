@@ -1,6 +1,20 @@
-import { Calculator, Calendar, Inbox, Settings } from "lucide-react";
+import { Calculator, Calendar, Inbox, LucideIcon, Settings } from "lucide-react";
 
-export const pages = [
+interface PageProps {
+  title: string,
+  href: string,
+  icon: LucideIcon,
+  hasMenu: boolean,
+  components?: {
+    title: string;
+    href: string;
+    description: string;
+  }[],
+  hidesAt: string,
+  showsOnSidebar: boolean
+}
+
+export const pages: PageProps[] = [
   {
     title: "Events",
     href: "/events",
@@ -32,8 +46,35 @@ export const pages = [
           "",
       },
     ],
+    hidesAt: "",
+    showsOnSidebar: true
   },
   {
+    title: "Pokedex",
+    href: "/pokemon",
+    icon: Inbox,
+    hasMenu: false,
+    hidesAt: "hidden sm:block",
+    showsOnSidebar: true
+  },
+  {
+    title: "IV Calculator",
+    href: "/",
+    icon: Calculator,
+    hasMenu: false,
+    hidesAt: "hidden sm:block",
+    showsOnSidebar: true
+    
+  },
+  {
+    title: "Settings",
+    href: "/settings",
+    icon: Settings,
+    hasMenu: false,
+    hidesAt: "hidden sm:block",
+    showsOnSidebar: true
+  },
+    {
     title: "More",
     href: "/",
     icon: Calendar,
@@ -43,13 +84,13 @@ export const pages = [
         title: "Pokedex",
         href: "/pokemon",
         description:
-          "",
+          "View a list of all 1,025 Pokemon that includes variants, species differences, and special forms",
       },
       {
         title: "IV Calculator",
         href: "/",
         description:
-          "",
+          "Assess the precise IV percentage of each of your Pokemon",
       },
       {
         title: "Settings",
@@ -59,23 +100,6 @@ export const pages = [
       },
     ],
     hidesAt: "block sm:hidden",
-  },
-  {
-    title: "Pokedex",
-    href: "/pokemon",
-    icon: Inbox,
-    hidesAt: "hidden sm:block",
-  },
-  {
-    title: "IV Calculator",
-    href: "/",
-    icon: Calculator,
-    hidesAt: "hidden sm:block",
-  },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
-    hidesAt: "hidden sm:block",
+    showsOnSidebar: false
   },
 ];

@@ -40,7 +40,7 @@ const TopNav = () => {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {page.components.map((component) => (
+                    {page.components?.map((component) => (
                       <ListItem
                         key={component.title}
                         title={component.title}
