@@ -26,10 +26,17 @@ const TopNav = () => {
         </NavigationMenuItem>
         {pages.map((page) => (
           <NavigationMenuItem key={page.title} className={cn("my-1 mx-3 min-w-fit", page.hidesAt)}>
-            {!page.hasMenu ? (
+            {!page.showsAtMin && !page.hasMenu ? (
               <NavigationMenuLink
                 href={page.href}
-                className="hidden sm:block font-semibold flex-row data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50"
+                className="hidden sm:block flex-row data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50"
+              >
+                {page.title}
+              </NavigationMenuLink>
+            ) : page.showsAtMin && !page.hasMenu ? (
+              <NavigationMenuLink
+                href={page.href}
+                className="flex-row data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50"
               >
                 {page.title}
               </NavigationMenuLink>

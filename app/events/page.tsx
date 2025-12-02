@@ -56,7 +56,7 @@ const EventSection = ({
 
 const EventsPage = async () => {
   const { liveEvents, upcomingEvents, completedEvents } = await getEvents();
-  
+
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
       <div className="mb-8">

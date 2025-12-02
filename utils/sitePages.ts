@@ -12,6 +12,7 @@ interface PageProps {
   }[],
   hidesAt: string,
   showsOnSidebar: boolean
+  showsAtMin: boolean
 }
 
 export const pages: PageProps[] = [
@@ -47,15 +48,17 @@ export const pages: PageProps[] = [
       },
     ],
     hidesAt: "",
-    showsOnSidebar: true
+    showsOnSidebar: true,
+    showsAtMin: true
   },
   {
     title: "Pokedex",
     href: "/pokemon",
     icon: Inbox,
     hasMenu: false,
-    hidesAt: "hidden sm:block",
-    showsOnSidebar: true
+    hidesAt: "",
+    showsOnSidebar: true,
+    showsAtMin: true
   },
   {
     title: "IV Calculator",
@@ -63,7 +66,8 @@ export const pages: PageProps[] = [
     icon: Calculator,
     hasMenu: false,
     hidesAt: "hidden sm:block",
-    showsOnSidebar: true
+    showsOnSidebar: true,
+    showsAtMin: false
     
   },
   {
@@ -72,7 +76,8 @@ export const pages: PageProps[] = [
     icon: Settings,
     hasMenu: false,
     hidesAt: "hidden sm:block",
-    showsOnSidebar: true
+    showsOnSidebar: true,
+    showsAtMin: false
   },
     {
     title: "More",
@@ -100,6 +105,7 @@ export const pages: PageProps[] = [
       },
     ],
     hidesAt: "block sm:hidden",
-    showsOnSidebar: false
+    showsOnSidebar: false,
+    showsAtMin: true
   },
 ];

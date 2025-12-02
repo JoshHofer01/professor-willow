@@ -2,8 +2,8 @@ import { GameEvent } from "@/interfaces/interfaces";
 
 export async function getEvents() {
   const response = await fetch(
-    "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.min.json",
-    { next: { revalidate: 60 } }
+    "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.json",
+    { next: { revalidate: 180 } }
   );
   const eventsData: GameEvent[] = await response.json();
 
@@ -43,5 +43,5 @@ export async function getEvents() {
     (a, b) => new Date(b.end).getTime() - new Date(a.end).getTime()
   );
 
-  return { liveEvents, upcomingEvents, completedEvents };
+  return { liveEvents, upcomingEvents, completedEvents, eventsData };
 }

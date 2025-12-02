@@ -9,19 +9,9 @@ export default async function DashboardPage() {
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
-        {/* Welcome */}
-        <DashboardCard
-          title="Welcome to ProfessorWillow"
-          description="ProfessorWillow is a web app that tracks current and recent Pokémon GO events, with built-in tools like an IV calculator and GBL build guides to help you play more efficiently."
-          size="wide"
-        >
-          <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
-            <span className="text-4xl">🎲</span>
-          </div>
-        </DashboardCard>
-
-        {/* Current Events Carousel */}
+                {/* Current Events Carousel */}
         <DashboardCard title="Current Events"
+        size="wide"
         action={
           <Link href={'events/live'}>
             <Button variant="ghost" size="sm">
@@ -30,6 +20,16 @@ export default async function DashboardPage() {
           </Link>
           }>
           <CurrentEventsCarousel eventData={liveEvents} />
+        </DashboardCard>
+        
+        {/* Welcome */}
+        <DashboardCard
+          title="Welcome to ProfessorWillow"
+          description="ProfessorWillow is a web app that tracks current and recent Pokémon GO events, with built-in tools like an IV calculator and GBL build guides to help you play more efficiently."
+        >
+          <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
+            <span className="text-4xl">🎲</span>
+          </div>
         </DashboardCard>
 
         {/* All Events */}
