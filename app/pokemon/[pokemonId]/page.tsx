@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardContent,
@@ -11,7 +10,14 @@ import { Separator } from "@/components/ui/separator";
 
 import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
-import { MovesDisplay, NextMonDisplay, PokemonDisplay, PrevMonDisplay, StatsDisplay, TypeBadgesDisplay } from "@/components/PokemonIdDisplays";
+import {
+  MovesDisplay,
+  NextMonDisplay,
+  PokemonDisplay,
+  PrevMonDisplay,
+  StatsDisplay,
+  TypeBadgesDisplay,
+} from "@/components/PokemonIdDisplays";
 
 type Props = { params: Promise<{ pokemonId: string }> };
 
@@ -28,6 +34,8 @@ const PokemonDetails = async ({ params }: Props) => {
   if (pokemon == undefined) {
     return <ErrorPage message="asd" />;
   }
+
+  console.log(pokemon.assets.shinyImage)
 
   return (
     <div className="container mx-auto p-4 justify-center flex">
@@ -50,13 +58,14 @@ const PokemonDetails = async ({ params }: Props) => {
         <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <PokemonDisplay pokemon={pokemon} />
           <div className="md:col-span-2">
-
-            {pokemon?.secondaryType ? (<TypeBadgesDisplay
-              primary={pokemon?.primaryType}
-              secondary={pokemon?.secondaryType}
-            />) : (<TypeBadgesDisplay
-              primary={pokemon?.primaryType}
-            />)}
+            {pokemon?.secondaryType ? (
+              <TypeBadgesDisplay
+                primary={pokemon?.primaryType}
+                secondary={pokemon?.secondaryType}
+              />
+            ) : (
+              <TypeBadgesDisplay primary={pokemon?.primaryType} />
+            )}
 
             <Separator className="my-4" />
             <StatsDisplay pokemon={pokemon} />

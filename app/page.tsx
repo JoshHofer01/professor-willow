@@ -1,27 +1,31 @@
+import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import { Button } from "@/components/ui/button";
 import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
 import Link from "next/link";
+
 export default async function DashboardPage() {
   const { liveEvents } = await getEvents();
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
-                {/* Current Events Carousel */}
-        <DashboardCard title="Current Events"
-        size="wide"
-        action={
-          <Link href={'events/live'}>
-            <Button variant="ghost" size="sm">
-              View All
-            </Button>
-          </Link>
-          }>
+        {/* Current Events Carousel */}
+        <DashboardCard
+          title="Current Events"
+          size="wide"
+          action={
+            <Link href={"events/live"}>
+              <Button variant="ghost" size="sm">
+                View All
+              </Button>
+            </Link>
+          }
+        >
           <CurrentEventsCarousel eventData={liveEvents} />
         </DashboardCard>
-        
+
         {/* Welcome */}
         <DashboardCard
           title="Welcome to ProfessorWillow"
@@ -57,11 +61,7 @@ export default async function DashboardPage() {
             </Button>
           }
         >
-          <div className="grid grid-cols-4 gap-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} className="aspect-square bg-muted rounded" />
-            ))}
-          </div>
+          <BoostedShinies />
         </DashboardCard>
 
         {/* GBL Builds */}
