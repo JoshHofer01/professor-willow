@@ -171,22 +171,36 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
 export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
   return (
     <div className="md:col-span-1 flex flex-row md:flex-col items-center justify-center space-y-4 mt-4 gap-x-4 gap-y-2">
-      <Image
-        src={pokemon?.assets?.image}
-        alt={pokemon?.names?.English ?? pokemon?.id}
-        width={256}
-        height={256}
-        className="max-w-44 max-h-44 object-scale-down"
-      />
+      <Tooltip>
+          <TooltipTrigger asChild>
+            <Image
+              src={pokemon?.assets.image}
+              alt={pokemon.names.English}
+              width={256}
+              height={256}
+              className="max-w-40 max-h-40 object-scale-down"
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Regular {pokemon.names.English}</p>
+          </TooltipContent>
+        </Tooltip>
 
       {pokemon?.assets?.shinyImage && (
-        <Image
-          src={pokemon?.assets.shinyImage}
-          alt={`Shiny ${pokemon?.names?.English ?? pokemon?.id}`}
-          width={256}
-          height={256}
-          className="max-w-30 max-h-30 object-scale-down"
-        />
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Image
+              src={pokemon?.assets.shinyImage}
+              alt={`Shiny ${pokemon?.names?.English ?? pokemon?.id}`}
+              width={256}
+              height={256}
+              className="max-w-40 max-h-40 object-scale-down"
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Shiny {pokemon.names.English}</p>
+          </TooltipContent>
+        </Tooltip>
       )}
     </div>
   );

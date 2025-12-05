@@ -1,34 +1,61 @@
-import { PokedexDisplay } from "@/components/ClientComponents/PokedexDisplay";
-import ErrorPage from "@/components/ErrorPage";
-import { Card } from "@/components/ui/card";
-import { getAllPokemon, getPokemonByGeneration } from "@/utils/getPokemon";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+"use client";
 
-const Pokemon = async () => {
-  const result = await getPokemonByGeneration('1');
-  if (!result) {
-    return <ErrorPage message="Test" />;
+import { PokedexDisplay } from "@/components/PokedexDisplay";
+import pokemonData from "@/data/pokemonIndex.json";
+import { PokemonDataMin } from "@/interfaces/interfaces";
+import { FilterBox } from "@/components/ClientComponents/SearchFilterBox";
+import { useEffect, useState } from "react";
+
+function filterPokedex(
+  data: PokemonDataMin[],
+  filterType: string,
+  filterGeneration: string
+) {
+  if (filterType && filterGeneration) {
+    return data.filter(
+      (p) =>
+        (p.primaryType === filterType || p.secondaryType === filterType) &&
+        p.generation.toString() === filterGeneration
+    );
+  } else if (filterType && !filterGeneration) {
+    return data.filter((p) => p.primaryType === filterType);
+  } else if (!filterType && filterGeneration) {
+    return data.filter((p) => p.generation.toString() === filterGeneration);
   }
+  return data;
+}
 
-  const { pokemonData } = result;
+const Pokemon = () => {
+  const data: PokemonDataMin[] = pokemonData;
+  const [filterGeneration, setFilterGeneration] = useState("");
+  const [filterType, setFilterType] = useState("");
+
+  const pokedex = filterPokedex(data, filterType, filterGeneration);
+
+  useEffect(() => {
+    console.log(filterType);
+  }, [filterType]);
 
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">Pokedex</h1>
         <p className="text-lg text-muted-foreground">
-          Stay up to date with live, upcoming, and past events.
+          Entire Pokedex of Pokemon currently available in Pokemon GO
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Use filters for a refined search, or navigate to more detailed stats
+          by selecting a Pokemon.
         </p>
       </div>
-      <div>
-        SEARCH AND FILTER AREA
-        <p>Search</p>
-        <p>Filter by Generation</p>
-        <p>Filter by Type</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        <p className="text-lg font-semibold">Filter by:</p>
+        <FilterBox dataType="type" setFilter={setFilterType} />
+        <FilterBox dataType="generation" setFilter={setFilterGeneration} />
       </div>
-      <PokedexDisplay data={pokemonData} />
+      <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-2 max-w-[1400px] mx-auto">
+        {pokedex && <PokedexDisplay data={pokedex} />}
+      </div>
     </main>
   );
 };

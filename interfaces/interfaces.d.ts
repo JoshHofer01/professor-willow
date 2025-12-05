@@ -10,6 +10,15 @@ export interface GameEvent {
   status?: "live" | "upcoming" | "completed";
 }
 
+export interface PokemonDataMin {
+  dexNr: number;
+  generation: number;
+  name: string,
+  primaryType: string;
+  secondaryType?: string | null;
+  image?: string | null;
+}
+
 export interface PokemonData {
   id: string;
   formId?: string;
@@ -119,4 +128,3 @@ export interface MegaEvolution {
   secondaryType?: PokemonType | null;
   assets: Assets;
 }
-

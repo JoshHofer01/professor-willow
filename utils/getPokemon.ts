@@ -99,10 +99,8 @@ export async function getPokemonByName(pokemonName: string) {
 }
 
 function fixNullAssets(pokemonData: PokemonData): PokemonData {
-  if (pokemonData.assets !== null) return pokemonData;
-
-  const fallbackAsset =
-    "/QuestionMark.png";
+  const fallbackAsset = "/QuestionMark.png";
+  if (pokemonData.assets !== null) { return pokemonData }
 
   try {
     return {
