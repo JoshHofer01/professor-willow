@@ -78,11 +78,11 @@ export default async function DashboardPage() {
             <div className="flex-1 bg-muted rounded-lg flex items-center justify-center">
               <span className="text-4xl py-2">⚔️</span>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            {/* <div className="grid grid-cols-3 gap-2">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="aspect-square bg-muted rounded" />
               ))}
-            </div>
+            </div> */}
           </div>
         </DashboardCard>
 
