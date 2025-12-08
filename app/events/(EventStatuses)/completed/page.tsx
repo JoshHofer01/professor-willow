@@ -1,4 +1,5 @@
-import EventDisplay from "@/components/EventDisplay";
+
+import EventDisplay from "@/components/EventsGroup/EventDisplay";
 import { getEvents } from "@/utils/getEvents";
 import React from "react";
 

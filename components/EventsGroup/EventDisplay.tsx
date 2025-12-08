@@ -1,6 +1,6 @@
 import React from 'react'
 import { GameEvent } from '@/interfaces/interfaces'
-import { EventPageCard } from './CustomCards/EventCards';
+import { EventPageCard } from '../CustomCards/EventCards'
 
 
 const EventDisplay = ({ events, pageType }: {events: GameEvent[], pageType: string}) => {

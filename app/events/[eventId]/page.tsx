@@ -1,4 +1,5 @@
-import EventDetails from "@/components/EventDetails";
+
+import EventDetails from "@/components/EventsGroup/EventDetails";
 import React from "react";
 
 type Props = { 

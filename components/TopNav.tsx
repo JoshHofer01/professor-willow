@@ -5,7 +5,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/components/shadcn/navigation-menu";
 import { cn } from "@/lib/utils";
 import { pages } from "@/utils/sitePages";
 import Link from "next/link";

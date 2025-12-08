@@ -4,9 +4,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/shadcn/card";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/shadcn/separator";
 
 import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
@@ -17,7 +17,7 @@ import {
   PrevMonDisplay,
   StatsDisplay,
   TypeBadgesDisplay,
-} from "@/components/PokemonIdDisplays";
+} from "@/components/PokemonGroup/PokemonIdDisplays";
 
 type Props = { params: Promise<{ pokemonId: string }> };
 

@@ -6,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/shadcn/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { ArrowRight, LucideIcon } from "lucide-react";
+import { Button } from "../shadcn/button";
 
 export type CardSize = "default" | "wide" | "tall" | "large" | "xlWide" | "xlTall";
 

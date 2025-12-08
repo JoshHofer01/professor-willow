@@ -1,7 +1,7 @@
 import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
 import Link from "next/link";
@@ -29,7 +29,7 @@ export default async function DashboardPage() {
         {/* Welcome */}
         <DashboardCard
           title="Welcome to ProfessorWillow"
-          description="ProfessorWillow is a web app that tracks current and recent Pokémon GO events, with built-in tools like an IV calculator and GBL build guides to help you play more efficiently."
+          description="ProfessorWillow will become your best Pokemon GO companion, helping you plan for upcoming events, and finding out the information you want at a glance!"
         >
           <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
             <span className="text-4xl">🎲</span>
@@ -48,17 +48,15 @@ export default async function DashboardPage() {
           }}
         >
           <div className="flex flex-col items-center justify-center h-full gap-2">
-            <span className="text-4xl">&#128197;</span>
+            <span className="text-4xl p-2">&#128197;</span>
           </div>
         </DashboardCard>
 
         {/* Boosted Shiny Spawns */}
         <DashboardCard
-          title="Boosted Shinies Today"
+          title="Boosted Shinies"
           action={
-            <Button variant="ghost" size="sm">
-              View All
-            </Button>
+            <p className="text-sm mt-1">Updated 8th Dec</p>
           }
         >
           <BoostedShinies />
@@ -70,7 +68,7 @@ export default async function DashboardPage() {
           description="Recommended builds for GO Battle League"
           action={
             <Button variant="ghost" size="sm">
-              View More
+              Coming soon
             </Button>
           }
         >
@@ -87,14 +85,14 @@ export default async function DashboardPage() {
         </DashboardCard>
 
         {/* IV Calculator */}
-        <DashboardCard
+        {/* <DashboardCard
           title="IV Calculator"
           description="Precisely assess your Pokemon"
         >
           <div className="flex items-center justify-center h-24 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-lg">
             <span className="text-3xl">🧮</span>
           </div>
-        </DashboardCard>
+        </DashboardCard> */}
 
         {/* Discord */}
         <DashboardCard

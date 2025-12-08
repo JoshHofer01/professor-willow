@@ -7,8 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/shadcn/card";
+import { Button } from "@/components/shadcn/button";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";

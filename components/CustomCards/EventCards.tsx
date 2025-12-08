@@ -1,10 +1,10 @@
 import { GameEvent } from "@/interfaces/interfaces";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import Image from "next/image";
 import { EventEndingCountdown } from "../ClientComponents/EventEndingCountdown";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import EventTypeBadge from "../EventTypeBadge";
+import { Card, CardContent, CardHeader, CardTitle } from "../shadcn/card";
+import EventTypeBadge from "../EventsGroup/EventTypeBadge";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",

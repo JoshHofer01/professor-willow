@@ -1,6 +1,6 @@
 "use client";
 
-import { PokedexDisplay } from "@/components/PokedexDisplay";
+import { PokedexDisplay } from "@/components/PokemonGroup/PokedexDisplay";
 import pokemonData from "@/data/pokemonIndex.json";
 import { PokemonDataMin } from "@/interfaces/interfaces";
 import { FilterBox } from "@/components/ClientComponents/SearchFilterBox";

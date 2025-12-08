@@ -1,4 +1,4 @@
-import { Calculator, Calendar, Inbox, LucideIcon, Settings } from "lucide-react";
+import { Calendar, Inbox, LucideIcon, Settings } from "lucide-react";
 
 interface PageProps {
   title: string,
@@ -26,7 +26,7 @@ export const pages: PageProps[] = [
         title: "Calendar",
         href: "/events",
         description:
-          "Overview of live, upcoming, and completed events currently in {GO} database",
+          "Overview of live, upcoming, and completed events currently in LeekDuck database",
       },
       {
         title: "Live Events",
@@ -60,7 +60,7 @@ export const pages: PageProps[] = [
     showsOnSidebar: true,
     showsAtMin: true
   },
-  {
+  /* {
     title: "IV Calculator",
     href: "/",
     icon: Calculator,
@@ -69,7 +69,7 @@ export const pages: PageProps[] = [
     showsOnSidebar: true,
     showsAtMin: false
     
-  },
+  }, */
   {
     title: "Settings",
     href: "/settings",

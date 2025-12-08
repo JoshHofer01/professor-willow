@@ -1,6 +1,6 @@
 // app/events/page.tsx
 import { CalendarPageCard } from "@/components/CustomCards/EventCards";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { GameEvent } from "@/interfaces/interfaces";
 import { getEvents } from "@/utils/getEvents";
 import Link from "next/link";

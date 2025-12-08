@@ -10,15 +10,11 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar";
+} from "@/components/shadcn/sidebar";
 import Link from "next/link";
 import { pages } from "@/utils/sitePages";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./ui/collapsible";
 import { ChevronDownIcon, Minus } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./shadcn/collapsible";
 
 export function AppSidebar() {
   return (

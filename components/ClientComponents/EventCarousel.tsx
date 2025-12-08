@@ -6,7 +6,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@/components/shadcn/carousel";
 import { GameEvent } from "@/interfaces/interfaces";
 import Image from "next/image";
 import Link from "next/link";
