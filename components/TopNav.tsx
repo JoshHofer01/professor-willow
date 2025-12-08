@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const TopNav = () => {
   return (
-    <NavigationMenu className="bg-sidebar md:hidden">
+    <NavigationMenu className="bg-nav md:hidden">
       <NavigationMenuList className="flex-wrap">
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
@@ -29,24 +29,24 @@ const TopNav = () => {
             {!page.showsAtMin && !page.hasMenu ? (
               <NavigationMenuLink
                 href={page.href}
-                className="hidden sm:block flex-row data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50"
+                className="flex-row data-[active=true]:focus:bg-nav-accent data-[active=true]:hover:bg-nav-accent data-[active=true]:nav-accent/50 hover:bg-nav-accent focus:bg-nav-accent focus:text-nav-accent-foreground focus-visible:ring-ring/50"
               >
                 {page.title}
               </NavigationMenuLink>
             ) : page.showsAtMin && !page.hasMenu ? (
               <NavigationMenuLink
                 href={page.href}
-                className="flex-row data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50"
+                className="flex-row data-[active=true]:focus:bg-nav-accent data-[active=true]:hover:bg-nav-accent data-[active=true]:nav-accent/50 hover:bg-nav-accent focus:bg-nav-accent focus:text-nav-accent-foreground focus-visible:ring-ring/50"
               >
                 {page.title}
               </NavigationMenuLink>
             ) : (
               <>
-                <NavigationMenuTrigger>
+                <NavigationMenuTrigger className="flex-row data-[active=true]:focus:bg-nav-accent data-[active=true]:hover:bg-nav-accent data-[active=true]:nav-accent/50 hover:bg-nav-accent focus:bg-nav-accent focus:text-nav-accent-foreground focus-visible:ring-ring/50">
                   {page.title}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                     {page.components?.map((component) => (
                       <ListItem
                         key={component.title}

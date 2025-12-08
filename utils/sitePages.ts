@@ -56,9 +56,9 @@ export const pages: PageProps[] = [
     href: "/pokemon",
     icon: Inbox,
     hasMenu: false,
-    hidesAt: "",
+    hidesAt: "hidden sm:block",
     showsOnSidebar: true,
-    showsAtMin: true
+    showsAtMin: false
   },
   /* {
     title: "IV Calculator",

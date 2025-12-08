@@ -26,21 +26,10 @@ export default async function DashboardPage() {
           <CurrentEventsCarousel eventData={liveEvents} />
         </DashboardCard>
 
-        {/* Welcome */}
-        <DashboardCard
-          title="Welcome to ProfessorWillow"
-          description="ProfessorWillow will become your best Pokemon GO companion, helping you plan for upcoming events, and finding out the information you want at a glance!"
-        >
-          <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
-            <span className="text-4xl">🎲</span>
-          </div>
-        </DashboardCard>
-
         {/* All Events */}
         <DashboardCard
           title="All Events"
           description="Overview of live, upcoming, and recent events in Pokemon GO"
-          className=""
           button={{
             text: "View Events",
             href: "/events",
@@ -49,6 +38,16 @@ export default async function DashboardPage() {
         >
           <div className="flex flex-col items-center justify-center h-full gap-2">
             <span className="text-4xl p-2">&#128197;</span>
+          </div>
+        </DashboardCard>
+
+        {/* Welcome */}
+        <DashboardCard
+          title="Welcome to ProfessorWillow"
+          description="ProfessorWillow will become your best Pokemon GO companion, helping you plan for upcoming events, and finding out the information you want at a glance!"
+        >
+          <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
+            <span className="text-4xl p-3">🎲</span>
           </div>
         </DashboardCard>
 

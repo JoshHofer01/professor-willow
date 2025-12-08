@@ -22,10 +22,10 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <Link href="/">
-            <SidebarGroupLabel className="text-3xl mt-2">
+            <SidebarGroupLabel className="text-3xl mt-2 text-foreground">
               Professor
             </SidebarGroupLabel>
-            <SidebarGroupLabel className="text-4xl">Willow</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-4xl text-foreground">Willow</SidebarGroupLabel>
           </Link>
           <SidebarGroupContent>
             <SidebarMenu className="mt-5">
