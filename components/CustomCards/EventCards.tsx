@@ -1,6 +1,6 @@
 import { GameEvent } from "@/interfaces/interfaces";
 import Image from "next/image";
-import { EventEndingCountdown } from "../ClientComponents/EventEndingCountdown";
+import { EventDiffToNow } from "../ClientComponents/EventDiffToNow";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "../shadcn/card";
@@ -10,6 +10,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
   timeStyle: "short",
 });
+
 export const EventPageCard = ({ event }: { event: GameEvent }) => {
   return (
     <Card className="gap-2">
@@ -25,7 +26,10 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
               className="w-full h-36 object-cover"
             />
             {event.eventType && (
-              <EventTypeBadge eventType={event.eventType} className="ml-2 mt-2 mb-1 text-xs" />
+              <EventTypeBadge
+                eventType={event.eventType}
+                className="ml-2 mt-2 mb-1 text-xs"
+              />
             )}
           </div>
         )}
@@ -79,7 +83,10 @@ export const CalendarPageCard = ({
         {/* Content Container */}
         <div className="flex flex-col justify-center not-lg:grow order-1 lg:order-2">
           {event.eventType && (
-            <EventTypeBadge eventType={event.eventType} className="ml-2 mb-2 text-xs not-lg:hidden" />
+            <EventTypeBadge
+              eventType={event.eventType}
+              className="ml-2 mb-2 text-xs not-lg:hidden"
+            />
           )}
           <CardHeader className="pt-3 px-4 lg:pt-0">
             <CardTitle className="text-base lg:text-base leading-tight not-lg:truncate">
@@ -96,25 +103,35 @@ export const CalendarPageCard = ({
 };
 
 const CardTimings = ({ event }: { event: GameEvent }) => {
-  const dateStart = dateFormatter.format(new Date(event.start));
-  const dateEnd = dateFormatter.format(new Date(event.end));
+  const endFormatted = dateFormatter.format(new Date(event.end));
   return (
     <>
       {event.status === "live" ? (
-        <EventEndingCountdown eventEnd={dateEnd} />
+                <div className="text-xs text-muted-foreground space-y-1 ">
+          <div className="flex flex-row space-x-1">
+            <p>
+              <strong>Ends in:</strong>
+            </p>
+            <EventDiffToNow eventEnd={event.end} />
+          </div>
+          <p>({endFormatted})</p>
+        </div>
       ) : event.status === "upcoming" ? (
-        <div className="text-xs text-muted-foreground space-y-1">
+        <div className="text-xs text-muted-foreground space-y-1 ">
+          <div className="flex flex-row space-x-1">
+            <p>
+              <strong>Starts in:</strong>
+            </p>
+            <EventDiffToNow eventEnd={event.start} />
+          </div>
           <p>
-            <strong>Starts:</strong> {dateStart}
-          </p>
-          <p>
-            <strong>Ends:</strong> {dateEnd}
+            <strong>Ends:</strong> {endFormatted}
           </p>
         </div>
       ) : (
         <div className="text-xs text-muted-foreground space-y-1">
           <p>
-            <strong>Completed on:</strong> {dateEnd}
+            <strong>Completed on:</strong> {event.end}
           </p>
         </div>
       )}

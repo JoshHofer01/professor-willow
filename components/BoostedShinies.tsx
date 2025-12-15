@@ -9,18 +9,6 @@ interface ShiniesProps {
 }
 export const BoostedShinies = () => {
   const boostedPokemon: ShiniesProps[] = [
-    {
-      dexNr: 246,
-      name: "Larvitar",
-      image:
-        "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon/Addressable%20Assets/pm246.s.icon.png",
-    },
-    {
-      dexNr: 371,
-      name: "Bagon",
-      image:
-        "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon/Addressable%20Assets/pm371.s.icon.png",
-    },
   ];
 
   return (
@@ -58,7 +46,7 @@ export const BoostedShinies = () => {
           ))}
         </div>
       ) : (
-        <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
+        <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-foreground/20 to-background/20 rounded-lg">
           <span className="text-xl font-semibold">No Boosted Shinies</span>
         </div>
       )}

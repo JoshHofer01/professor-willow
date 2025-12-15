@@ -1,6 +1,7 @@
 import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
+import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash";
 import { Button } from "@/components/shadcn/button";
 import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
@@ -14,7 +15,7 @@ export default async function DashboardPage() {
         {/* Current Events Carousel */}
         <DashboardCard
           title="Current Events"
-          size="wide"
+          size="large"
           action={
             <Link href={"events/live"}>
               <Button variant="ghost" size="sm">
@@ -28,17 +29,15 @@ export default async function DashboardPage() {
 
         {/* All Events */}
         <DashboardCard
-          title="All Events"
-          description="Overview of live, upcoming, and recent events in Pokemon GO"
+          title="Happening soon"
+          description="Nearest upcoming events at a glance"
           button={{
-            text: "View Events",
-            href: "/events",
+            text: "See more",
+            href: "/events/upcoming",
             icon: CalendarDays,
           }}
         >
-          <div className="flex flex-col items-center justify-center h-full gap-2">
-            <span className="text-4xl p-2">&#128197;</span>
-          </div>
+          <UpcomingEventsDashboard />
         </DashboardCard>
 
         {/* Welcome */}
@@ -51,11 +50,29 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard>
 
+        {/* Discord */}
+        <DashboardCard
+          title="Discord"
+          size="xlWide"
+          button={{
+            text: "Register",
+            href: "/",
+            className: "w-full",
+          }}
+        >
+          <div className="flex flex-col items-center justify-center h-full gap-2">
+            <span className="text-4xl">💬</span>
+            <p className="text-sm text-muted-foreground text-center">
+              Register interest for ProfessorWillow community server
+            </p>
+          </div>
+        </DashboardCard>
+
         {/* Boosted Shiny Spawns */}
         <DashboardCard
           title="Boosted Shinies"
           action={
-            <p className="text-sm mt-1">Updated 8th Dec</p>
+            <p className="text-sm mt-1">Updated 12th Dec</p>
           }
         >
           <BoostedShinies />
@@ -92,24 +109,6 @@ export default async function DashboardPage() {
             <span className="text-3xl">🧮</span>
           </div>
         </DashboardCard> */}
-
-        {/* Discord */}
-        <DashboardCard
-          title="Discord"
-          size="xlWide"
-          button={{
-            text: "Register",
-            href: "/",
-            className: "w-full",
-          }}
-        >
-          <div className="flex flex-col items-center justify-center h-full gap-2">
-            <span className="text-4xl">💬</span>
-            <p className="text-sm text-muted-foreground text-center">
-              Register interest for ProfessorWillow community server
-            </p>
-          </div>
-        </DashboardCard>
       </div>
     </main>
   );

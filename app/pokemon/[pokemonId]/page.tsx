@@ -35,8 +35,6 @@ const PokemonDetails = async ({ params }: Props) => {
     return <ErrorPage message="asd" />;
   }
 
-  console.log(pokemon.assets.shinyImage)
-
   return (
     <div className="container mx-auto p-4 justify-center flex">
       <Card className="py-4 max-w-[1000px]">
