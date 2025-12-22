@@ -1,5 +1,6 @@
 import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
+import LastPageUpdate from "@/components/ClientComponents/LastPageUpdate";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash";
 import { Button } from "@/components/shadcn/button";
@@ -14,12 +15,12 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
         {/* Current Events Carousel */}
         <DashboardCard
-          title="Current Events"
+          title={`Live Events`}
           size="large"
           action={
             <Link href={"events/live"}>
               <Button variant="ghost" size="sm">
-                View All
+                View Grid
               </Button>
             </Link>
           }
@@ -29,7 +30,7 @@ export default async function DashboardPage() {
 
         {/* All Events */}
         <DashboardCard
-          title="Happening soon"
+          title="Happening soon!"
           description="Nearest upcoming events at a glance"
           button={{
             text: "See more",
@@ -50,6 +51,24 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard>
 
+        {/* Boosted Shiny Spawns */}
+        <DashboardCard
+          title="Boosted Shinies"
+          action={<div className="flex flex-col text-sm text-right"><p>Last edit:</p><p className="font-semibold">22nd Dec</p></div>}
+        >
+          <BoostedShinies />
+        </DashboardCard>
+
+        {/* Boosted Spawns */}
+        {/* <DashboardCard
+          title="Boosted Spawns"
+          action={<div className="flex flex-col text-sm text-right"><p>Last edit:</p><p className="font-semibold">22nd Dec</p></div>}
+        >
+          <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-foreground/20 to-background/20 rounded-lg">
+            <span className="text-xl font-semibold">Coming soon</span>
+          </div>
+        </DashboardCard> */}
+
         {/* Discord */}
         <DashboardCard
           title="Discord"
@@ -68,16 +87,6 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard>
 
-        {/* Boosted Shiny Spawns */}
-        <DashboardCard
-          title="Boosted Shinies"
-          action={
-            <p className="text-sm mt-1">Updated 12th Dec</p>
-          }
-        >
-          <BoostedShinies />
-        </DashboardCard>
-
         {/* GBL Builds */}
         <DashboardCard
           title="GBL Builds"
@@ -92,11 +101,6 @@ export default async function DashboardPage() {
             <div className="flex-1 bg-muted rounded-lg flex items-center justify-center">
               <span className="text-4xl py-2">⚔️</span>
             </div>
-            {/* <div className="grid grid-cols-3 gap-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-square bg-muted rounded" />
-              ))}
-            </div> */}
           </div>
         </DashboardCard>
 
@@ -110,6 +114,7 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
       </div>
+              <LastPageUpdate />
     </main>
   );
 }

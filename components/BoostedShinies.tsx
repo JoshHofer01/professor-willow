@@ -8,6 +8,7 @@ interface ShiniesProps {
   image: string;
 }
 export const BoostedShinies = () => {
+  //? REMEMBER: Update the 'Updated on' date on dashboard card
   const boostedPokemon: ShiniesProps[] = [
   ];
 

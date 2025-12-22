@@ -29,6 +29,8 @@ const UpcomingEventsDashboard = async () => {
     return <ErrorPage message="Error getting upcoming events" />;
   }
 
+
+  // Modify latter number to change amount of pills shown
   const slicedEvents = upcomingEvents.slice(0, 4);
 
   return (
