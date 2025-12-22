@@ -7,7 +7,6 @@ import { Avatar, AvatarImage } from "@/components/shadcn/avatar";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/shadcn/tooltip";
 import { getPokemonByDexNr } from "@/utils/getPokemon";
@@ -36,7 +35,7 @@ export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
       )}
       <Link href={`/pokemon/${nextMon?.dexNr}`}>
         <div className="transition-transform duration-200 hover:scale-110">
-          <TooltipProvider>
+          <>
             <Tooltip>
               <TooltipTrigger>
                 <Avatar>
@@ -51,7 +50,7 @@ export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
                 <p>{nextMon?.names.English}</p>
               </TooltipContent>
             </Tooltip>
-          </TooltipProvider>
+          </>
         </div>
       </Link>
     </div>
@@ -73,22 +72,20 @@ export const PrevMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
       <p className="text-xs">Previous Pokemon:</p>
       <Link href={`${prevMon?.dexNr}`}>
         <div className="transition-transform duration-200 hover:scale-110">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Avatar>
-                  <AvatarImage
-                    src={prevMon?.assets.image}
-                    alt={prevMon?.id}
-                    className="object-scale-down"
-                  />
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{prevMon?.names.English}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Avatar>
+                <AvatarImage
+                  src={prevMon?.assets.image}
+                  alt={prevMon?.id}
+                  className="object-scale-down"
+                />
+              </Avatar>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{prevMon?.names.English}</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </Link>
     </div>
@@ -99,71 +96,69 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
   return (
     <div>
       <h3 className="text-lg font-semibold">Stats</h3>
-      <TooltipProvider>
-        <div className="space-y-2 mt-2">
-          <Tooltip>
-            <TooltipTrigger className="w-full">
-              <div className="grid grid-cols-4 items-center">
-                <span className="font-medium">Stamina</span>
-                <Progress
-                  value={Math.round((pokemon?.stats?.stamina / 420) * 100)}
-                  className={
-                    Math.round((pokemon?.stats?.stamina / 420) * 100) < 33
-                      ? "bg-red-500"
-                      : Math.round((pokemon?.stats?.stamina / 420) * 100) > 66
-                      ? "bg-green-500"
-                      : "bg-amber-500"
-                  }
-                />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{pokemon?.stats?.stamina}</p>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger className="w-full">
-              <div className="grid grid-cols-4 items-center">
-                <span className="font-medium">Attack</span>
-                <Progress
-                  value={Math.round((pokemon?.stats?.attack / 360) * 100)}
-                  className={
-                    Math.round((pokemon?.stats?.attack / 360) * 100) < 33
-                      ? "bg-red-500"
-                      : Math.round((pokemon?.stats?.attack / 360) * 100) > 66
-                      ? "bg-green-500"
-                      : "bg-amber-500"
-                  }
-                />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{pokemon?.stats?.attack}</p>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger className="w-full">
-              <div className="grid grid-cols-4 items-center">
-                <span className="font-medium">Defense</span>
-                <Progress
-                  value={Math.round((pokemon?.stats?.defense / 350) * 100)}
-                  max={255}
-                  className={
-                    Math.round((pokemon?.stats?.defense / 350) * 100) < 33
-                      ? "bg-red-500"
-                      : Math.round((pokemon?.stats?.defense / 350) * 100) > 66
-                      ? "bg-green-500"
-                      : "bg-amber-500"
-                  }
-                />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{pokemon?.stats?.defense}</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </TooltipProvider>
+      <div className="space-y-2 mt-2">
+        <Tooltip>
+          <TooltipTrigger className="w-full">
+            <div className="grid grid-cols-4 items-center">
+              <span className="font-medium">Stamina</span>
+              <Progress
+                value={Math.round((pokemon?.stats?.stamina / 420) * 100)}
+                className={
+                  Math.round((pokemon?.stats?.stamina / 420) * 100) < 33
+                    ? "bg-red-500"
+                    : Math.round((pokemon?.stats?.stamina / 420) * 100) > 66
+                    ? "bg-green-500"
+                    : "bg-amber-500"
+                }
+              />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{pokemon?.stats?.stamina}</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger className="w-full">
+            <div className="grid grid-cols-4 items-center">
+              <span className="font-medium">Attack</span>
+              <Progress
+                value={Math.round((pokemon?.stats?.attack / 360) * 100)}
+                className={
+                  Math.round((pokemon?.stats?.attack / 360) * 100) < 33
+                    ? "bg-red-500"
+                    : Math.round((pokemon?.stats?.attack / 360) * 100) > 66
+                    ? "bg-green-500"
+                    : "bg-amber-500"
+                }
+              />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{pokemon?.stats?.attack}</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger className="w-full">
+            <div className="grid grid-cols-4 items-center">
+              <span className="font-medium">Defense</span>
+              <Progress
+                value={Math.round((pokemon?.stats?.defense / 350) * 100)}
+                max={255}
+                className={
+                  Math.round((pokemon?.stats?.defense / 350) * 100) < 33
+                    ? "bg-red-500"
+                    : Math.round((pokemon?.stats?.defense / 350) * 100) > 66
+                    ? "bg-green-500"
+                    : "bg-amber-500"
+                }
+              />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{pokemon?.stats?.defense}</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
     </div>
   );
 };
@@ -172,19 +167,19 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
   return (
     <div className="md:col-span-1 flex flex-row md:flex-col items-center justify-center space-y-4 mt-4 gap-x-4 gap-y-2">
       <Tooltip>
-          <TooltipTrigger asChild>
-            <Image
-              src={pokemon?.assets.image}
-              alt={pokemon.names.English}
-              width={256}
-              height={256}
-              className="max-w-40 max-h-40 object-scale-down"
-            />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Regular {pokemon.names.English}</p>
-          </TooltipContent>
-        </Tooltip>
+        <TooltipTrigger asChild>
+          <Image
+            src={pokemon?.assets.image}
+            alt={pokemon.names.English}
+            width={256}
+            height={256}
+            className="max-w-40 max-h-40 object-scale-down"
+          />
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Regular {pokemon.names.English}</p>
+        </TooltipContent>
+      </Tooltip>
 
       {pokemon?.assets?.shinyImage && (
         <Tooltip>
