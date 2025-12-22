@@ -1,9 +1,12 @@
 import { Calendar, LucideIcon, Twitter } from "lucide-react";
+import { Url } from "next/dist/shared/lib/router/router";
+import Link from "next/link";
 import React from "react";
 
 interface ItemProps {
   text: string;
   icon?: LucideIcon;
+  href: Url;
 }
 
 interface ItemGroupProps {
@@ -20,12 +23,14 @@ const ItemGroup = ({ titleText, children }: ItemGroupProps) => {
   );
 };
 
-const Item = ({ text, icon: ItemIcon }: ItemProps) => {
+const Item = ({ text, icon: ItemIcon, href }: ItemProps) => {
   return (
-    <div className="flex flex-row gap-1">
-      {ItemIcon && <ItemIcon size={18} />}
-      <p className="text-sm">{text}</p>
-    </div>
+    <Link href={href}>
+      <div className="flex flex-row gap-1">
+        {ItemIcon && <ItemIcon size={18} />}
+        <p className="text-sm">{text}</p>
+      </div>
+    </Link>
   );
 };
 
@@ -33,23 +38,28 @@ const PageFooter = () => {
   return (
     <div className="ml-4 md:ml-6 pt-2 pb-4 flex flex-col">
       <div className=" text-muted-foreground text-sm">
-        <p>ProfessorWillow is not affiliated with Scopely</p>
+        <p>
+          ProfessorWillow is not affiliated with Nintendo, The Pokémon Company,
+          Scopely,
+        </p>
         <p>
           Pokemon GO, game content, and materials, are trademarks and copyrights
-          of Scopely
+          of Nintendo, The Pokémon Company, and Scopely.
         </p>
       </div>
       <div className="flex mt-4 md:flex-row md:gap-10 flex-col gap-4">
         <ItemGroup titleText="Community Links">
-          <Item text="Discord" />
+          <Item
+            text="Discord (Coming soon)"
+            href="/"
+          />
         </ItemGroup>
         <ItemGroup titleText="Project Links">
-          <Item text="Github" icon={Calendar} />
-          <Item text="X (Formerly Twitter)" icon={Twitter} />
+          <Item text="Github" icon={Calendar} href="https://github.com/JoshHofer01/professor-willow" />
+          <Item text="X (Formerly Twitter) (Coming soon)" icon={Twitter} href="/" />
         </ItemGroup>
         <ItemGroup titleText="Site Info">
-          <Item text="Privacy Policy" />
-          <Item text="Cookie Settings" />
+          <Item text="Legal Information" href="/legal" />
         </ItemGroup>
       </div>
     </div>
