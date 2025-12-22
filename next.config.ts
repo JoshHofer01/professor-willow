@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'raw.githubusercontent.com',
-        pathname: '/PokeMiners/pogo_assets/master/Images/Pokemon/**',
+        pathname: '/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/**',
       },
     ],
   },
