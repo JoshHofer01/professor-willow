@@ -6,19 +6,18 @@ import { EventDiffToNow } from "../ClientComponents/EventDiffToNow";
 import Link from "next/link";
 import { eventTypeColorMap } from "./EventTypeBadge";
 
-
 const EventPill = ({ event }: { event: GameEvent }) => {
   const color = eventTypeColorMap[event.eventType] ?? "to-gray-400";
   return (
     <Link href={`events/${event.eventID}`}>
-    <div
-      className={`${color} my-1 rounded-lg flex flex-1 justify-between`}
-    >
-      <p className="px-2 py-2 truncate text-xs font-bold text-black">{event.name}</p>
-      <div className="bg-nav-accent my-1 mr-1 rounded-lg text-xs items-center flex px-2">
-        <EventDiffToNow eventEnd={event.start} short />
+      <div className={`${color} my-1 rounded-lg flex flex-1 justify-between`}>
+        <p className="px-2 py-2 truncate text-xs font-bold text-black">
+          {event.name}
+        </p>
+        <div className="bg-nav-accent my-1 mr-1 rounded-lg text-xs items-center flex px-2">
+          <EventDiffToNow eventEnd={event.start} short />
+        </div>
       </div>
-    </div>
     </Link>
   );
 };
@@ -33,10 +32,10 @@ const UpcomingEventsDashboard = async () => {
   const slicedEvents = upcomingEvents.slice(0, 4);
 
   return (
-      <div className="grid grid-cols-1 overflow-hidden xl:gap-y-1 2xl:gap-y-3">
-      {slicedEvents.map((event, index) =>
+    <div className="grid grid-cols-1 overflow-hidden xl:gap-y-1 2xl:gap-y-3">
+      {slicedEvents.map((event) => (
         <EventPill key={event.eventID} event={event} />
-      )}
+      ))}
     </div>
   );
 };
