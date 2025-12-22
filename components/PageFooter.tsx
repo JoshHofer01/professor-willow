@@ -39,11 +39,10 @@ const PageFooter = () => {
     <div className="ml-4 md:ml-6 pt-2 pb-4 flex flex-col">
       <div className=" text-muted-foreground text-sm">
         <p>
-          ProfessorWillow is not affiliated with Nintendo, The Pokémon Company,
-          Scopely,
+          ProfessorWillow is an unaffiliated fan project designed for creative and educational purposes.
         </p>
         <p>
-          Pokemon GO, game content, and materials, are trademarks and copyrights
+          Pokemon GO, game content, and materials are trademarks and copyrights
           of Nintendo, The Pokémon Company, and Scopely.
         </p>
       </div>
