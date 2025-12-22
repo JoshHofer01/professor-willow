@@ -45,7 +45,7 @@ export default async function DashboardPage() {
           title="Welcome to ProfessorWillow"
           description="ProfessorWillow will become your best Pokemon GO companion, helping you plan for upcoming events, and finding out the information you want at a glance!"
         >
-          <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
+          <div className="flex items-center justify-center h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
             <span className="text-4xl p-3">🎲</span>
           </div>
         </DashboardCard>
