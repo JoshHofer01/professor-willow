@@ -12,11 +12,10 @@ export default async function DashboardPage() {
   const { liveEvents } = await getEvents();
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6 ">
         {/* Current Events Carousel */}
         <DashboardCard
           title={`Live Events`}
-          size="large"
           action={
             <Link href={"events/live"}>
               <Button variant="ghost" size="sm">
@@ -24,6 +23,7 @@ export default async function DashboardPage() {
               </Button>
             </Link>
           }
+          className="md:col-span-2 md:row-span-2 xl:row-span-1 2xl:row-span-2"
         >
           <CurrentEventsCarousel eventData={liveEvents} />
         </DashboardCard>
@@ -37,6 +37,7 @@ export default async function DashboardPage() {
             href: "/events/upcoming",
             icon: CalendarDays,
           }}
+          className="md:col-span-2 lg:col-span-1 xl:col-span-1"
         >
           <UpcomingEventsDashboard />
         </DashboardCard>
@@ -45,6 +46,7 @@ export default async function DashboardPage() {
         <DashboardCard
           title="Welcome to ProfessorWillow"
           description="ProfessorWillow will become your best Pokemon GO companion, helping you plan for upcoming events, and finding out the information you want at a glance!"
+          className="row-span-1"
         >
           <div className="flex items-center justify-center h-full bg-linear-to-br from-green-500/20 to-blue-500/20 rounded-lg">
             <span className="text-4xl p-3">🎲</span>
@@ -54,7 +56,13 @@ export default async function DashboardPage() {
         {/* Boosted Shiny Spawns */}
         <DashboardCard
           title="Boosted Shinies"
-          action={<div className="flex flex-col text-sm text-right"><p>Last edit:</p><p className="font-semibold">22nd Dec</p></div>}
+          action={
+            <div className="flex flex-col text-sm text-right">
+              <p>Last edit:</p>
+              <p className="font-semibold">22nd Dec</p>
+            </div>
+          }
+          className="2xl:col-span-2"
         >
           <BoostedShinies />
         </DashboardCard>
@@ -72,12 +80,12 @@ export default async function DashboardPage() {
         {/* Discord */}
         <DashboardCard
           title="Discord"
-          size="xlWide"
           button={{
             text: "Register",
             href: "/",
             className: "w-full",
           }}
+          className="xl:col-span-1 2xl:col-span-2"
         >
           <div className="flex flex-col items-center justify-center h-full gap-2">
             <span className="text-4xl">💬</span>
@@ -114,7 +122,7 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
       </div>
-              <LastPageUpdate />
+      <LastPageUpdate />
     </main>
   );
 }

@@ -14,19 +14,9 @@ import { Button } from "../shadcn/button";
 
 export type CardSize = "default" | "wide" | "tall" | "large" | "xlWide" | "xlTall";
 
-const sizeClasses: Record<CardSize, string> = {
-  default: "",
-  wide: "md:col-span-2",
-  tall: "md:row-span-2",
-  large: "md:col-span-2 md:row-span-2",
-  xlWide: "xl:col-span-2",
-  xlTall: "xl:row-span-2"
-};
-
 export interface DashboardCardProps {
   title: string;
   description?: string;
-  size?: CardSize;
   children?: React.ReactNode;
   action?: React.ReactNode;
   className?: string;
@@ -41,14 +31,13 @@ export interface DashboardCardProps {
 export function DashboardCard({
   title,
   description,
-  size = "default",
   children,
   action,
   className,
   button,
 }: DashboardCardProps) {
   return (
-    <Card className={cn("flex flex-col py-6", sizeClasses[size], className)}>
+    <Card className={cn("flex flex-col py-6", className)}>
       <CardHeader className="">
         <div className="flex items-start justify-between gap-2">
           <div className="space-y-1">
