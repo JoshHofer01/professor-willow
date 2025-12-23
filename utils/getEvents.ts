@@ -1,4 +1,5 @@
 import { GameEvent } from "@/interfaces/interfaces";
+import * as Sentry from "@sentry/nextjs";
 
 export async function getEvents() {
   const response = await fetch(
@@ -29,6 +30,8 @@ export async function getEvents() {
     } catch (err) {
       if (process.env.NODE_ENV !== "production") {
         console.error("Invalid event:", event, err);
+      } else {
+        Sentry.captureException(err);
       }
     }
   });

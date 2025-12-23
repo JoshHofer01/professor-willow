@@ -1,4 +1,5 @@
 import { PokemonData } from "@/interfaces/interfaces";
+import * as Sentry from "@sentry/nextjs";
 
 export async function getPokemonByGeneration(genNumber: string) {
   try {
@@ -13,12 +14,13 @@ export async function getPokemonByGeneration(genNumber: string) {
 
     const pokemonData: PokemonData[] = await response.json();
     pokemonData.map((mon) => {
-        try {
-            fixNullAssets(mon);
-        } catch (error) {
-            console.log(error);
-        }
-    })
+      try {
+        fixNullAssets(mon);
+      } catch (error) {
+        Sentry.captureException(error);
+        console.log(error);
+      }
+    });
 
     return { pokemonData };
   } catch (error) {
@@ -41,16 +43,18 @@ export async function getAllPokemon() {
     const data: PokemonData[] = await response.json();
 
     const pokemonData = data.map((mon) => {
-        try {
-            return fixNullAssets(mon);
-        } catch (error) {
-            console.log(error);
-            return mon;
-        }
-    })
+      try {
+        return fixNullAssets(mon);
+      } catch (error) {
+        Sentry.captureException(error);
+        console.log(error);
+        return mon;
+      }
+    });
 
     return { pokemonData };
   } catch (error) {
+    Sentry.captureException(error);
     console.error("Error fetching pokemon", error);
     return null;
   }
@@ -72,6 +76,7 @@ export async function getPokemonByDexNr(dexNr: string) {
 
     return { pokemon };
   } catch (error) {
+    Sentry.captureException(error);
     console.error("Error fetching pokemon", error);
     return null;
   }
@@ -93,6 +98,7 @@ export async function getPokemonByName(pokemonName: string) {
 
     return { pokemon };
   } catch (error) {
+    Sentry.captureException(error);
     console.error("Error fetching pokemon", error);
     return null;
   }
@@ -100,7 +106,9 @@ export async function getPokemonByName(pokemonName: string) {
 
 function fixNullAssets(pokemonData: PokemonData): PokemonData {
   const fallbackAsset = "/QuestionMark.png";
-  if (pokemonData.assets !== null) { return pokemonData }
+  if (pokemonData.assets !== null) {
+    return pokemonData;
+  }
 
   try {
     return {
@@ -113,6 +121,8 @@ function fixNullAssets(pokemonData: PokemonData): PokemonData {
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
       console.error("Invalid Pokémon:", pokemonData.id, err);
+    } else {
+      Sentry.captureException(err);
     }
     return pokemonData;
   }
