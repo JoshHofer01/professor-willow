@@ -7,7 +7,6 @@ import {
 } from "@/components/shadcn/card";
 
 import { Separator } from "@/components/shadcn/separator";
-
 import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
 import {
@@ -32,7 +31,7 @@ const PokemonDetails = async ({ params }: Props) => {
   const { pokemon } = result;
 
   if (pokemon == undefined) {
-    return <ErrorPage message="asd" />;
+    return <ErrorPage />;
   }
 
   return (
