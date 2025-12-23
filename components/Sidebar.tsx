@@ -27,6 +27,7 @@ export function AppSidebar() {
             </SidebarGroupLabel>
             <SidebarGroupLabel className="text-4xl text-foreground">Willow</SidebarGroupLabel>
           </Link>
+          <div className="w-27 h-1 bg-accent mx-auto mt-2"></div>
           <SidebarGroupContent>
             <SidebarMenu className="mt-5">
               <SidebarGroup>

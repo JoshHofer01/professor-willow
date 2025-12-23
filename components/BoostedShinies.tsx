@@ -47,8 +47,8 @@ export const BoostedShinies = () => {
           ))}
         </div>
       ) : (
-        <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-foreground/20 to-background/20 rounded-lg">
-          <span className="text-xl font-semibold">No Boosted Shinies</span>
+        <div className="flex items-center justify-center h-32 bg-linear-to-br from-foreground/20 to-background/20 rounded-lg">
+          <span className="text-lg px-1 font-semibold">No Boosted Shinies</span>
         </div>
       )}
     </>

@@ -19,6 +19,7 @@ const TopNav = () => {
             <Link href="/">
               <div className="items-center flex flex-col ml-8 mr-3">
                 <h1 className="text-sm font-bold">HOME</h1>
+                <div className="w-11 h-0.5 bg-accent mx-auto"></div>
                 {/* <h1 className="text-xl font-bold">Willow</h1> */}
               </div>
             </Link>

@@ -29,12 +29,11 @@ const UpcomingEventsDashboard = async () => {
     return <ErrorPage message="Error getting upcoming events" />;
   }
 
-
   // Modify latter number to change amount of pills shown
-  const slicedEvents = upcomingEvents.slice(0, 4);
+  const slicedEvents = upcomingEvents.slice(0, 5);
 
   return (
-    <div className="grid grid-cols-1 overflow-hidden xl:gap-y-1 2xl:gap-y-3">
+    <div className="grid grid-cols-1 overflow-hidden">
       {slicedEvents.map((event) => (
         <EventPill key={event.eventID} event={event} />
       ))}
