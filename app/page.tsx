@@ -1,6 +1,5 @@
 import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
-import LastPageUpdate from "@/components/ClientComponents/LastPageUpdate";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash";
 import { Button } from "@/components/shadcn/button";
@@ -19,7 +18,7 @@ export default async function DashboardPage() {
           action={
             <Link href={"events/live"}>
               <Button variant="ghost" size="sm">
-                View Grid
+                View All
               </Button>
             </Link>
           }
@@ -122,7 +121,6 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
       </div>
-      <LastPageUpdate />
     </main>
   );
 }
