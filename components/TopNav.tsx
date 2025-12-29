@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const TopNav = () => {
   return (
-    <NavigationMenu className="bg-nav md:hidden">
+    <NavigationMenu className="bg-nav md:hidden w-full z-10 sticky top-0">
       <NavigationMenuList className="flex-wrap">
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
