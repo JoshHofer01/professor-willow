@@ -93,6 +93,14 @@ export const PrevMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
 };
 
 export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
+  function getStatusColor(statValue: number, statTotal: number) {
+    return Math.round((statValue / statTotal) * 100) < 33
+      ? "bg-red-500"
+      : Math.round((statValue / statTotal) * 100) > 66
+      ? "bg-green-500"
+      : "bg-amber-500";
+  }
+
   return (
     <div>
       <h3 className="text-lg font-semibold">Stats</h3>
@@ -103,13 +111,7 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
               <span className="font-medium">Stamina</span>
               <Progress
                 value={Math.round((pokemon?.stats?.stamina / 420) * 100)}
-                className={
-                  Math.round((pokemon?.stats?.stamina / 420) * 100) < 33
-                    ? "bg-red-500"
-                    : Math.round((pokemon?.stats?.stamina / 420) * 100) > 66
-                    ? "bg-green-500"
-                    : "bg-amber-500"
-                }
+                className={getStatusColor(pokemon?.stats?.stamina, 420)}
               />
             </div>
           </TooltipTrigger>
@@ -123,13 +125,7 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
               <span className="font-medium">Attack</span>
               <Progress
                 value={Math.round((pokemon?.stats?.attack / 360) * 100)}
-                className={
-                  Math.round((pokemon?.stats?.attack / 360) * 100) < 33
-                    ? "bg-red-500"
-                    : Math.round((pokemon?.stats?.attack / 360) * 100) > 66
-                    ? "bg-green-500"
-                    : "bg-amber-500"
-                }
+                className={getStatusColor(pokemon?.stats?.attack, 360)}
               />
             </div>
           </TooltipTrigger>
@@ -144,13 +140,7 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
               <Progress
                 value={Math.round((pokemon?.stats?.defense / 350) * 100)}
                 max={255}
-                className={
-                  Math.round((pokemon?.stats?.defense / 350) * 100) < 33
-                    ? "bg-red-500"
-                    : Math.round((pokemon?.stats?.defense / 350) * 100) > 66
-                    ? "bg-green-500"
-                    : "bg-amber-500"
-                }
+                className={getStatusColor(pokemon?.stats?.defense, 350)}
               />
             </div>
           </TooltipTrigger>
@@ -171,8 +161,8 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
           <Image
             src={pokemon?.assets.image}
             alt={pokemon.names.English}
-            width={256}
-            height={256}
+            width={500}
+            height={500}
             className="max-w-40 max-h-40 object-scale-down"
           />
         </TooltipTrigger>
@@ -187,8 +177,8 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
             <Image
               src={pokemon?.assets.shinyImage}
               alt={`Shiny ${pokemon?.names?.English ?? pokemon?.id}`}
-              width={256}
-              height={256}
+              width={500}
+              height={500}
               className="max-w-40 max-h-40 object-scale-down"
             />
           </TooltipTrigger>

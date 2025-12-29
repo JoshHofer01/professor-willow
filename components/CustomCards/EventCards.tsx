@@ -21,8 +21,8 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
             <Image
               src={event.image}
               alt={event.name}
-              width={1000}
-              height={0}
+              width={750}
+              height={750}
               className="w-full h-36 object-cover"
             />
             {event.eventType && (
@@ -71,8 +71,8 @@ export const CalendarPageCard = ({
             <Image
               src={event.image}
               alt={event.name}
-              width={1000}
-              height={0}
+              width={750}
+              height={750}
               className="w-full h-full object-cover not-lg:max-h-28 not-lg:max-w-44 lg:h-36"
             />
             {/* Gradient fade for mobile only */}

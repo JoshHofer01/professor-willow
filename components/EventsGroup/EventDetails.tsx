@@ -28,8 +28,8 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
         <Image
           src={event.image}
           alt={event.name}
-          width={2500}
-          height={2500}
+          width={1000}
+          height={1000}
           className="max-h-[450px] w-full object-contain rounded-lg"
           loading="lazy"
         />

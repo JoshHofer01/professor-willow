@@ -15,11 +15,10 @@ export const PokedexDisplay = ({ data }: { data: PokemonDataMin[]}) => {
             <div className="items-center max-w-28 border-b-2 rounded-lg">
               <Image
                 src={pokemon.image}
-                alt=""
-                width={1000}
-                height={50}
+                alt={pokemon.name}
+                width={300}
+                height={300}
                 className="overflow-hidden h-20 object-scale-down p-1"
-                loading="eager"
               />
               <div className="text-xs flex flex-col gap-1 m-2 min-w-fit truncate text-center">
                 <p className="text-muted-foreground">#{pokemon.dexNr}</p>

@@ -38,9 +38,9 @@ export function CurrentEventsCarousel({
                       src={event.image}
                       alt={event.name}
                       className="rounded-lg object-cover"
-                      width={1000}
-                      height={0}
+                      fill
                       loading="eager"
+                      priority
                     />
                   </div>
                   <div className="text-white flex flex-col md:text-base text-sm font-semibold mt-2 text-center">
