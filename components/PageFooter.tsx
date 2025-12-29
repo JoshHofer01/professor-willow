@@ -36,6 +36,12 @@ const Item = ({ text, icon: ItemIcon, href }: ItemProps) => {
 
 const PageFooter = () => {
   return (
+    <>
+    <div className="flex flex-col mt-4 text-xs mx-auto text-muted-foreground text-center">
+        <span>
+          If data on this page is incorrect or not up-to-date, please refresh page to force an update.
+        </span>
+      </div>
     <div className="ml-4 md:ml-6 pt-2 pb-4 flex flex-col">
       <div className=" text-muted-foreground text-sm">
         <p>
@@ -62,6 +68,7 @@ const PageFooter = () => {
         </ItemGroup>
       </div>
     </div>
+    </>
   );
 };
 
