@@ -1,4 +1,4 @@
-import { Calendar, Inbox, LucideIcon, Settings } from "lucide-react";
+import { Calendar, Inbox, LucideIcon } from "lucide-react";
 
 interface PageProps {
   title: string,
@@ -70,7 +70,7 @@ export const pages: PageProps[] = [
     showsAtMin: false
     
   }, */
-  {
+  /* {
     title: "Settings",
     href: "/settings",
     icon: Settings,
@@ -78,7 +78,7 @@ export const pages: PageProps[] = [
     hidesAt: "hidden sm:block",
     showsOnSidebar: true,
     showsAtMin: false
-  },
+  }, */
     {
     title: "More",
     href: "/",

@@ -20,6 +20,7 @@ export async function getEvents() {
       if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
         return;
       }
+      event.eventType = event.eventType.split(" ")[0]
       if (now >= startDate && now <= endDate) {
         liveEvents.push({ ...event, status: "live" });
       } else if (now < startDate) {
