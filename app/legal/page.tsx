@@ -66,7 +66,7 @@ const Legal = () => {
               </p>
               <p>
                 We believe professorwillow.me constitutes a fair use of any such
-                copyrighted material due to he material on this site being
+                copyrighted material due to the material on this site being
                 distributed without profit to those who have expressed a prior
                 interest in receiving the included information for research and
                 educational purposes.
@@ -104,7 +104,7 @@ const Legal = () => {
               <p>
                 If you have any questions or concerns about the content on this
                 site, or if you are a copyright holder and believe your material
-                has been used inappropriately, please contact us.
+                has been used inappropriately, please contact us at josh@professorwillow.me
               </p>
             </ContentSection>
 
