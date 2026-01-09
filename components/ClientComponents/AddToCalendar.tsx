@@ -16,7 +16,7 @@ function AddToCalendar({ eventDetails }: { eventDetails: GameEvent }) {
       buttonStyle="round"
       hideCheckmark
       hideBranding
-      size="6|5"
+      size="6|4|5"
       organizer="ProfessorWillow|josh@professorwillow.me"
     ></AddToCalendarButton>
   );
