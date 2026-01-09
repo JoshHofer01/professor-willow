@@ -13,8 +13,8 @@ const EventDisplay = ({ events, pageType }: {events: GameEvent[], pageType: stri
         {events.length > 0 ? events.map((events) => (
             <EventPageCard key={events.eventID} event={events} />
         )) : <div>No {pageType.toLowerCase()} events found.</div>}
-        
       </div>
+      {pageType == "Completed" && <div>Completed events are only stored for a short amount of time.</div>}
     </main>
   )
 }

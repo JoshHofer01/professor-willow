@@ -8,11 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import { Button } from "@/components/shadcn/button";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import EventTypeBadge from "./EventTypeBadge";
+import AddToCalendar from "../ClientComponents/AddToCalendar";
+import { cn } from "@/lib/utils";
 
 const EventDetails = async ({ eventId }: { eventId: string }) => {
   const { eventsData } = await getEvents();
@@ -24,7 +25,7 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col">
-      <div className="pb-8">
+      <div className="pb-6">
         <Image
           src={event.image}
           alt={event.name}
@@ -34,10 +35,21 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
           loading="lazy"
         />
       </div>
+
       <Card className="overflow-hidden mx-auto">
-        <CardHeader>
-          <CardTitle className="pt-4 text-2xl">{event.name}</CardTitle>
-          <CardDescription><EventTypeBadge eventType={event.eventType}/></CardDescription>
+        <div className={cn("flex mx-autow-full justify-center")}>
+          <EventTypeBadge
+            eventType={event.eventType}
+            eventHeading={event.heading}
+          />
+        </div>
+        <CardHeader className="grid-cols-1 md:grid-cols-2">
+          <CardTitle className="pt-2 md:pt-4 text-2xl">{event.name}</CardTitle>
+          {new Date() < new Date(event.start) ? (
+            <CardDescription className="md:pt-4 md:flex-1 md:ml-auto">
+              <AddToCalendar eventDetails={event} />
+            </CardDescription>
+          ) : null}
         </CardHeader>
         <CardContent className="space-y-4 py-4">
           <div>
@@ -55,24 +67,22 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
         </CardContent>
         <CardFooter className="flex flex-col items-start space-y-4 py-4 border-t">
           <div className="text-sm text-gray-600">
-            <h3 className="text-lg font-semibold pb-2">
-              LeekDuck may contain more information about {event.name}
-            </h3>
-            <div className="flex flex-row">
+            <div className="flex-col">
+              <h3 className="text-lg font-semibold pb-2">
+                LeekDuck may contain more information about {event.name}
+              </h3>
               <p>
                 For additional details, dates, and region-specific information,
-                please visit the official LeekDuck event page.
-              </p>
-              <Button asChild>
+                please visit the{" "}
                 <Link
                   href={event.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-5"
+                  className="hover:underline underline-offset-4 text-primary"
                 >
-                  Visit LeekDuck
+                  official LeekDuck event page.
                 </Link>
-              </Button>
+              </p>
             </div>
           </div>
         </CardFooter>

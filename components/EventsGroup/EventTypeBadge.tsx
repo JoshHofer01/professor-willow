@@ -44,12 +44,14 @@ export const eventTypeColorMap: Record<string, string> = {
 
 const EventTypeBadge = ({
   eventType,
+  eventHeading,
   className,
 }: {
   eventType: string;
+  eventHeading?: string
   className?: string;
 }) => {
   const color = eventTypeColorMap[eventType] ?? "bg-gray-400";
-  return <Badge className={cn(`${color}`, className, "font-semibold text-black")}>{eventType}</Badge>;
+  return <Badge className={cn(`${color}`, className, "font-semibold text-black w-full")}>{eventHeading ? eventHeading : eventType}</Badge>;
 };
 export default EventTypeBadge;

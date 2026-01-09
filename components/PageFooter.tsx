@@ -38,7 +38,7 @@ const PageFooter = () => {
   return (
     <>
     <div className="flex flex-col mt-4 text-xs mx-auto text-muted-foreground text-center">
-        <span>
+        <span className="mx-2">
           If data on this page is incorrect or not up-to-date, please refresh page to force an update.
         </span>
       </div>
