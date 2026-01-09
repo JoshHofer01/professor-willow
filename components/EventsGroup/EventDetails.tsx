@@ -2,7 +2,6 @@ import { getEvents } from "@/utils/getEvents";
 import React from "react";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -14,6 +13,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import EventTypeBadge from "./EventTypeBadge";
 import AddToCalendar from "../ClientComponents/AddToCalendar";
+import { cn } from "@/lib/utils";
 
 const EventDetails = async ({ eventId }: { eventId: string }) => {
   const { eventsData } = await getEvents();
@@ -25,7 +25,7 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col">
-      <div className="pb-8">
+      <div className="pb-6">
         <Image
           src={event.image}
           alt={event.name}
@@ -35,15 +35,21 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
           loading="lazy"
         />
       </div>
+
       <Card className="overflow-hidden mx-auto">
-        <CardHeader>
-          <CardTitle className="pt-4 text-2xl">{event.name}</CardTitle>
-          <CardAction className="pt-4 pl-4">
-            <AddToCalendar eventDetails={event}/>
-          </CardAction>
-          <CardDescription>
-            <EventTypeBadge eventType={event.eventType} />
-          </CardDescription>
+        <div className={cn("flex mx-autow-full justify-center")}>
+          <EventTypeBadge
+            eventType={event.eventType}
+            eventHeading={event.heading}
+          />
+        </div>
+        <CardHeader className="grid-cols-1 md:grid-cols-2">
+          <CardTitle className="pt-2 md:pt-4 text-2xl">{event.name}</CardTitle>
+          {new Date() < new Date(event.start) ? (
+            <CardDescription className="md:pt-4 md:flex-1 md:ml-auto">
+              <AddToCalendar eventDetails={event} />
+            </CardDescription>
+          ) : null}
         </CardHeader>
         <CardContent className="space-y-4 py-4">
           <div>

@@ -17,7 +17,7 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
       <Link href={`${event.eventID}`}>
         {/* Image Container */}
         {event.image && (
-          <div className="relative lg:w-full">
+          <div className="flex flex-col lg:w-full">
             <Image
               src={event.image}
               alt={event.name}
@@ -28,7 +28,8 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
             {event.eventType && (
               <EventTypeBadge
                 eventType={event.eventType}
-                className="ml-2 mt-2 mb-1 text-xs"
+                eventHeading={event.heading}
+                className="mb-2 text-xs"
               />
             )}
           </div>
@@ -63,7 +64,7 @@ export const CalendarPageCard = ({
     >
       <Link
         href={`events/${event.eventID}`}
-        className="w-full lg:w-72 flex flex-row lg:flex-col gap-6"
+        className="w-full lg:w-72 flex flex-row lg:flex-col"
       >
         {/* Image Container */}
         {event.image && (
@@ -85,7 +86,8 @@ export const CalendarPageCard = ({
           {event.eventType && (
             <EventTypeBadge
               eventType={event.eventType}
-              className="ml-2 mb-2 text-xs not-lg:hidden"
+              eventHeading={event.heading}
+              className="mb-2 text-xs not-lg:hidden"
             />
           )}
           <CardHeader className="pt-3 px-4 lg:pt-0">
@@ -107,14 +109,14 @@ const CardTimings = ({ event }: { event: GameEvent }) => {
   return (
     <>
       {event.status === "live" ? (
-                <div className="text-xs text-muted-foreground space-y-1 ">
+        <div className="text-xs text-muted-foreground space-y-1 ">
           <div className="flex flex-row space-x-1">
             <p>
               <strong>Ends in:</strong>
             </p>
             <EventDiffToNow eventEnd={event.end} />
           </div>
-          <p>({endFormatted})</p>
+          <p className="hidden sm:block">({endFormatted})</p>
         </div>
       ) : event.status === "upcoming" ? (
         <div className="text-xs text-muted-foreground space-y-1 ">
@@ -124,7 +126,7 @@ const CardTimings = ({ event }: { event: GameEvent }) => {
             </p>
             <EventDiffToNow eventEnd={event.start} />
           </div>
-          <p>
+          <p className="hidden sm:block">
             <strong>Ends:</strong> {endFormatted}
           </p>
         </div>
