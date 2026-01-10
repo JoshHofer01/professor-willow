@@ -1,4 +1,4 @@
-import { Calendar, LucideIcon, Twitter } from "lucide-react";
+import { Calendar, LucideIcon, Mail } from "lucide-react";
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 import React from "react";
@@ -25,7 +25,7 @@ const ItemGroup = ({ titleText, children }: ItemGroupProps) => {
 
 const Item = ({ text, icon: ItemIcon, href }: ItemProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} target="_blank">
       <div className="flex flex-row gap-1">
         {ItemIcon && <ItemIcon size={18} />}
         <p className="text-sm">{text}</p>
@@ -61,7 +61,7 @@ const PageFooter = () => {
         </ItemGroup>
         <ItemGroup titleText="Project Links">
           <Item text="Github" icon={Calendar} href="https://github.com/JoshHofer01/professor-willow" />
-          <Item text="X (Formerly Twitter) (Coming soon)" icon={Twitter} href="/" />
+          <Item text="Email Me" icon={Mail} href="mailto:professorwillow.me" />
         </ItemGroup>
         <ItemGroup titleText="Site Info">
           <Item text="Legal Information" href="/legal" />
