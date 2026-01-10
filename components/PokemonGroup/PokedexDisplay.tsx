@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PokemonDataMin } from "@/interfaces/interfaces";
+import { weServTransformURL } from "@/utils/weServTransform";
 
 export const PokedexDisplay = ({ data }: { data: PokemonDataMin[]}) => {
   return (
@@ -14,10 +15,10 @@ export const PokedexDisplay = ({ data }: { data: PokemonDataMin[]}) => {
           >
             <div className="items-center max-w-28 border-b-2 rounded-lg">
               <Image
-                src={pokemon.image}
+                src={weServTransformURL(pokemon.image, "pokedexImage")}
                 alt={pokemon.name}
-                width={300}
-                height={300}
+                width={100}
+                height={100}
                 className="overflow-hidden h-20 object-scale-down p-1"
               />
               <div className="text-xs flex flex-col gap-1 m-2 min-w-fit truncate text-center">

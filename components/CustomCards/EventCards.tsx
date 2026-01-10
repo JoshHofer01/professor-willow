@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "../shadcn/card";
 import EventTypeBadge from "../EventsGroup/EventTypeBadge";
+import { weServTransformURL } from "@/utils/weServTransform";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
@@ -19,10 +20,10 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
         {event.image && (
           <div className="flex flex-col lg:w-full">
             <Image
-              src={event.image}
+              src={weServTransformURL(event.image, "eventCardImage")}
               alt={event.name}
-              width={750}
-              height={750}
+              width={300}
+              height={200}
               className="w-full h-36 object-cover"
             />
             {event.eventType && (
@@ -70,10 +71,10 @@ export const CalendarPageCard = ({
         {event.image && (
           <div className="relative lg:w-full shrink-0 order-2 lg:order-1">
             <Image
-              src={event.image}
+              src={weServTransformURL(event.image, "eventCardImage")}
               alt={event.name}
-              width={750}
-              height={750}
+              width={300}
+              height={200}
               className="w-full h-full object-cover not-lg:max-h-28 not-lg:max-w-44 lg:h-36"
             />
             {/* Gradient fade for mobile only */}

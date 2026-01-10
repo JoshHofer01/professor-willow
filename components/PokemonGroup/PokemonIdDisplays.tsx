@@ -11,6 +11,7 @@ import {
 } from "@/components/shadcn/tooltip";
 import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
+import { weServTransformURL } from "@/utils/weServTransform";
 
 export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
   const nextMonNumber = (pokemon.dexNr + 1).toString();
@@ -159,10 +160,10 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src={pokemon?.assets.image}
+            src={weServTransformURL(pokemon.assets.image, "pokemonDetailsImage")}
             alt={pokemon.names.English}
-            width={500}
-            height={500}
+            width={300}
+            height={300}
             className="max-w-40 max-h-40 object-scale-down"
           />
         </TooltipTrigger>
@@ -175,10 +176,10 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <Image
-              src={pokemon?.assets.shinyImage}
+              src={weServTransformURL(pokemon.assets.shinyImage, "pokemonDetailsImage")}
               alt={`Shiny ${pokemon?.names?.English ?? pokemon?.id}`}
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               className="max-w-40 max-h-40 object-scale-down"
             />
           </TooltipTrigger>

@@ -10,6 +10,7 @@ import {
 import { GameEvent } from "@/interfaces/interfaces";
 import Image from "next/image";
 import Link from "next/link";
+import { weServTransformURL } from "@/utils/weServTransform";
 
 export function CurrentEventsCarousel({
   eventData,
@@ -35,7 +36,7 @@ export function CurrentEventsCarousel({
                 <div className="p-1">
                   <div className="relative w-full aspect-video">
                     <Image
-                      src={event.image}
+                      src={weServTransformURL(event.image, "dashboardImage")}
                       alt={event.name}
                       className="rounded-lg object-cover"
                       fill

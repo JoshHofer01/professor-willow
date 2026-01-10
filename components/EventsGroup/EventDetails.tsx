@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import EventTypeBadge from "./EventTypeBadge";
 import AddToCalendar from "../ClientComponents/AddToCalendar";
 import { cn } from "@/lib/utils";
+import { weServTransformURL } from "@/utils/weServTransform";
 
 const EventDetails = async ({ eventId }: { eventId: string }) => {
   const { eventsData } = await getEvents();
@@ -27,10 +28,10 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
     <div className="container mx-auto px-4 py-8 flex flex-col">
       <div className="pb-6">
         <Image
-          src={event.image}
+          src={weServTransformURL(event.image, "eventDetailsImage")}
           alt={event.name}
           width={1000}
-          height={1000}
+          height={700}
           className="max-h-[450px] w-full object-contain rounded-lg"
           loading="lazy"
         />
