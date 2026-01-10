@@ -6,8 +6,8 @@ export const eventTypeColorMap: Record<string, string> = {
   // general event categories
   "community-day": "bg-yellow-400",
   "research": "bg-indigo-500",
-  "raid-day": "bg-red-600",
-  "go-rocket-takeover": "bg-red-500",
+  "raid-day": "bg-red-100",
+  "go-rocket-takeover": "bg-red-400",
   "event": "bg-blue-500",
   "timed-research": "bg-indigo-400",
   "raid-battles": "bg-rose-400",

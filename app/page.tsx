@@ -32,7 +32,7 @@ export default async function DashboardPage() {
           title="Happening soon!"
           description="Nearest upcoming events at a glance"
           button={{
-            text: "See more",
+            text: "View all upcoming",
             href: "/events/upcoming",
             icon: CalendarDays,
           }}
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
           action={
             <div className="flex flex-col text-sm text-right">
               <p>Last edit:</p>
-              <p className="font-semibold">6th Jan</p>
+              <p className="font-semibold">10th Jan</p>
             </div>
           }
           className="2xl:col-span-2"

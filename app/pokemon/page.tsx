@@ -4,7 +4,7 @@ import { PokedexDisplay } from "@/components/PokemonGroup/PokedexDisplay";
 import pokemonData from "@/data/pokemonIndex.json";
 import { PokemonDataMin } from "@/interfaces/interfaces";
 import { FilterBox } from "@/components/ClientComponents/SearchFilterBox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function filterPokedex(
   data: PokemonDataMin[],
@@ -31,10 +31,6 @@ const Pokemon = () => {
   const [filterType, setFilterType] = useState("");
 
   const pokedex = filterPokedex(data, filterType, filterGeneration);
-
-  useEffect(() => {
-    console.log(filterType);
-  }, [filterType]);
 
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
