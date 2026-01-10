@@ -17,7 +17,8 @@ function AddToCalendar({ eventDetails }: { eventDetails: GameEvent }) {
       hideCheckmark
       hideBranding
       size="6|4|5"
-      organizer="ProfessorWillow|josh@professorwillow.me"
+      organizer="professorwillow.me|josh@professorwillow.me"
+      
     ></AddToCalendarButton>
   );
 }
