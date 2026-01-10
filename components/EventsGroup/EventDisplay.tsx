@@ -14,7 +14,6 @@ const EventDisplay = ({ events, pageType }: {events: GameEvent[], pageType: stri
             <EventPageCard key={events.eventID} event={events} />
         )) : <div>No {pageType.toLowerCase()} events found.</div>}
       </div>
-      {pageType == "Completed" && <div>Completed events are only stored for a short amount of time.</div>}
     </main>
   )
 }
