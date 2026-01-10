@@ -97,12 +97,12 @@ export const pages: PageProps[] = [
         description:
           "Assess the precise IV percentage of each of your Pokemon",
       },
-      {
+      /* {
         title: "Settings",
         href: "/settings",
         description:
           "",
-      },
+      }, */
     ],
     hidesAt: "block sm:hidden",
     showsOnSidebar: false,
