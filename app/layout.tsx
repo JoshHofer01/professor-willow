@@ -5,6 +5,7 @@ import { SidebarInset, SidebarProvider } from "@/components/shadcn/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 import PageFooter from "@/components/PageFooter";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body suppressHydrationWarning
+      {/* {process.env.NODE_ENV === "production" && (
+        <>
+          <GoogleAnalytics gaId="G-9FZ3MR1FFD" />
+        </>
+      )} */}
+      <>
+        <GoogleAnalytics gaId="G-9FZ3MR1FFD" />
+      </>
+      <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TopNav />
