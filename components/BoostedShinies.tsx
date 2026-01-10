@@ -50,7 +50,7 @@ export const BoostedShinies = () => {
           {boostedPokemon.map((pokemon) => (
             <div
               key={pokemon.dexNr}
-              className="aspect-square bg-muted rounded flex items-center justify-center p-1"
+              className="bg-muted rounded flex items-center justify-center p-1"
             >
               <Link
                 href={`/pokemon/${pokemon.dexNr}`}
