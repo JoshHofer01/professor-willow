@@ -29,14 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      {/* {process.env.NODE_ENV === "production" && (
+      {process.env.NODE_ENV === "production" && (
         <>
           <GoogleAnalytics gaId="G-9FZ3MR1FFD" />
         </>
-      )} */}
-      <>
-        <GoogleAnalytics gaId="G-9FZ3MR1FFD" />
-      </>
+      )}
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
