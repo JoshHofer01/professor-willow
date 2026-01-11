@@ -25,22 +25,7 @@ export const BoostedShinies = () => {
     "dexNr": 692,
     "name": "Clauncher",
     "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm692.s.icon.png"
-  },
-    {
-    "dexNr": 643,
-    "name": "Reshiram",
-    "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm643.s.icon.png"
-  },
-  {
-    "dexNr": 644,
-    "name": "Zekrom",
-    "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm644.s.icon.png"
-  },
-    {
-    "dexNr": 646,
-    "name": "Kyurem",
-    "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm646.fNORMAL.s.icon.png"
-  },
+  }
   ];
 
   return (
