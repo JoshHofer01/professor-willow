@@ -31,7 +31,7 @@ export const BoostedShinies = () => {
   return (
     <>
       {boostedPokemon.length ? (
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {boostedPokemon.map((pokemon) => (
             <div
               key={pokemon.dexNr}
