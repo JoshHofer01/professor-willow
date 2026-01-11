@@ -81,7 +81,7 @@ export async function getPokemonByDexNr(dexNr: string) {
 export async function getPokemonByName(pokemonName: string) {
   try {
     const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/name/${pokemonName}.json`
+      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/name/${pokemonName.toUpperCase()}.json`
     );
 
     if (!response.ok) {

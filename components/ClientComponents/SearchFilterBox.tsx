@@ -41,6 +41,7 @@ const types = [
 ];
 
 const generations = [
+  { value: "0", label: "All Generations"},
   { value: "1", label: "Kanto (Gen I)" },
   { value: "2", label: "Johto (Gen II)" },
   { value: "3", label: "Hoenn (Gen III)" },
@@ -64,10 +65,10 @@ export function FilterBox({
   setFilter,
 }: {
   dataType: dataTypeProps;
-  setFilter: React.Dispatch<React.SetStateAction<string>>;
+  setFilter: (val: string) => void
 }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState(dataType === "generation" ? "1" : "");
   const searchData = dataTypeMap[dataType];
 
   return (
@@ -77,7 +78,7 @@ export function FilterBox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-50 justify-between"
         >
           {value
             ? searchData.find((element) => element.value === value)?.label
@@ -85,7 +86,7 @@ export function FilterBox({
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-50 p-0">
         <Command>
           <CommandInput placeholder={`Search ${dataType}...`} className="h-9" />
           <CommandList>

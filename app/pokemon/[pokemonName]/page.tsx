@@ -7,7 +7,7 @@ import {
 } from "@/components/shadcn/card";
 
 import { Separator } from "@/components/shadcn/separator";
-import { getPokemonByDexNr } from "@/utils/getPokemon";
+import { getPokemonByName } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
 import {
   MovesDisplay,
@@ -19,14 +19,14 @@ import {
 } from "@/components/PokemonGroup/PokemonIdDisplays";
 import { Metadata } from "next";
 
-type Props = { params: Promise<{ pokemonId: string }> };
+type Props = { params: Promise<{ pokemonName: string }> };
 
 export async function generateMetadata(
   { params}: Props
 ): Promise<Metadata> {
 
-  const { pokemonId } = await params;
-  const result = await getPokemonByDexNr(pokemonId);
+  const { pokemonName } = await params;
+  const result = await getPokemonByName(pokemonName);
 
   if (!result) {
     return {
@@ -34,9 +34,6 @@ export async function generateMetadata(
       description: "Pokemon not found",
     };
   }
-
-  const { pokemon } = result;
-  const pokemonName = pokemon?.names?.English ?? pokemon?.id;
 
   return {
     title: `${pokemonName} | ProfessorWillow`,
@@ -52,14 +49,14 @@ export async function generateMetadata(
       title: `${pokemonName} | ProfessorWillow`,
       description: `Learn about ${pokemonName} in Pokemon GO!`,
       type: "website",
-      url: `https://professorwillow.me/pokemon/${pokemonId}`,
+      url: `https://professorwillow.me/pokemon/${pokemonName}`,
     },
   };
 }
 
 const PokemonDetails = async ({ params }: Props) => {
-  const { pokemonId } = await params;
-  const result = await getPokemonByDexNr(pokemonId);
+  const { pokemonName } = await params;
+  const result = await getPokemonByName(pokemonName);
 
   if (!result) {
     return;
@@ -73,7 +70,7 @@ const PokemonDetails = async ({ params }: Props) => {
 
   return (
     <div className="container mx-auto p-4 justify-center flex">
-      <Card className="py-4 max-w-[1000px]">
+      <Card className="py-4 max-w-250">
         <CardHeader>
           <div className="flex justify-between items-start">
             <div>

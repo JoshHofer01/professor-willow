@@ -1,15 +1,12 @@
 import { PokedexDisplay } from "@/components/PokemonGroup/PokedexDisplay";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Pokedex | ProfessorWillow",
-  description: "professorwillow.me - View pokedex of Pokemon available in Pokemon GO",
-  keywords: [
-    "pokemon go",
-    "pokemon go pokedex",
-    "pokedex",
-    "professor willow",
-  ],
+  description:
+    "professorwillow.me - View pokedex of Pokemon available in Pokemon GO",
+  keywords: ["pokemon go", "pokemon go pokedex", "pokedex", "professor willow"],
   openGraph: {
     url: "https://professorwillow.me/pokemon",
     type: "website",
@@ -30,7 +27,10 @@ const Pokemon = () => {
           by selecting a Pokemon.
         </p>
       </div>
-      <PokedexDisplay />
+      <Suspense>
+        {/*  Suspense wraps useSearchParams() in PokedexDisplay */}
+        <PokedexDisplay />
+      </Suspense>
     </main>
   );
 };

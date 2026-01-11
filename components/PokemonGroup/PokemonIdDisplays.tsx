@@ -34,7 +34,7 @@ export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
       ) : (
         <p className="text-xs">Next Pokemon:</p>
       )}
-      <Link href={`/pokemon/${nextMon?.dexNr}`}>
+      <Link href={`/pokemon/${nextMon?.names.English}`}>
         <div className="transition-transform duration-200 hover:scale-110">
           <>
             <Tooltip>
@@ -71,7 +71,7 @@ export const PrevMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
   return (
     <div className="flex flex-row items-center gap-2">
       <p className="text-xs">Previous Pokemon:</p>
-      <Link href={`${prevMon?.dexNr}`}>
+      <Link href={`${prevMon?.names.English}`}>
         <div className="transition-transform duration-200 hover:scale-110">
           <Tooltip>
             <TooltipTrigger>
@@ -109,7 +109,7 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
         <Tooltip>
           <TooltipTrigger className="w-full">
             <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">Stamina</span>
+              <span className="font-medium">HP</span>
               <Progress
                 value={Math.round((pokemon?.stats?.stamina / 420) * 100)}
                 className={getStatusColor(pokemon?.stats?.stamina, 420)}
@@ -247,7 +247,7 @@ export const TypeBadgesDisplay = ({
   const getTypeBadge = (type: PokemonType) => {
     const color = typeColorMap[type.names.English] ?? "bg-gray-400";
     return (
-      <Badge className={`${color} text-white`}>{type.names.English}</Badge>
+      <Badge className={`${color} text-white rounded-md`}>{type.names.English}</Badge>
     );
   };
   return (
