@@ -3,8 +3,26 @@ import { CalendarPageCard } from "@/components/CustomCards/EventCards";
 import { Button } from "@/components/shadcn/button";
 import { GameEvent } from "@/interfaces/interfaces";
 import { getEvents } from "@/utils/getEvents";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Event Calendar | ProfessorWillow",
+  description: "View all events in Pokemon GO",
+  keywords: [
+    "pokemon go",
+    "pokemon go events",
+    "current events",
+    "event calendar",
+    "professor willow",
+  ],
+  openGraph: {
+    url: "https://professorwillow.me/events",
+    type: "website",
+    title: "Event Calendar | ProfessorWillow",
+  }
+}
 
 const EventSection = ({
   title,

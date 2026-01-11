@@ -39,7 +39,8 @@ export function CurrentEventsCarousel({
                       src={weServTransformURL(event.image, "dashboardImage")}
                       alt={event.name}
                       className="rounded-lg object-cover"
-                      fill
+                      width={1000}
+                      height={750}
                       loading="eager"
                       priority
                     />

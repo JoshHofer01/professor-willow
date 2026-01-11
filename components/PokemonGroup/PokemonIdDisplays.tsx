@@ -165,6 +165,7 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
             width={300}
             height={300}
             className="max-w-40 max-h-40 object-scale-down"
+            loading="eager"
           />
         </TooltipTrigger>
         <TooltipContent>
@@ -181,6 +182,7 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
               width={300}
               height={300}
               className="max-w-40 max-h-40 object-scale-down"
+              loading="eager"
             />
           </TooltipTrigger>
           <TooltipContent>

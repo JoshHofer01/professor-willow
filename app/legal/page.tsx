@@ -6,6 +6,24 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/shadcn/accordion";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ProfessorWillow",
+  description: "professorwillow.me - Legal Information",
+  keywords: [
+    "pokemon go",
+    "pokemon go events",
+    "current events",
+    "event calendar",
+    "professor willow",
+  ],
+  openGraph: {
+    url: "https://professorwillow.me/legal",
+    type: "website",
+    title: "Legal Information | ProfessorWillow",
+  }
+}
 
 export const ContentSection = ({
   title,
@@ -80,7 +98,7 @@ const Legal = () => {
                   href="https://github.com/bigfoott/ScrapedDuck/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-400 hover:underline"
                 >
                   ScrapedDuck API
                 </a>{" "}
@@ -93,7 +111,7 @@ const Legal = () => {
                   href="https://github.com/pokemon-go-api/pokemon-go-api"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-400 hover:underline"
                 >
                   Pokémon Go API
                 </a>{" "}
@@ -104,7 +122,13 @@ const Legal = () => {
               <p>
                 If you have any questions or concerns about the content on this
                 site, or if you are a copyright holder and believe your material
-                has been used inappropriately, please contact us at josh@professorwillow.me
+                has been used inappropriately, please contact us through{" "}
+                <a
+                  href="mailto:professorwillow.me"
+                  className="hover:underline underline-offset-4 text-blue-300"
+                >
+                  josh@professorwillow.me
+                </a>
               </p>
             </ContentSection>
 

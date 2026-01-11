@@ -5,7 +5,29 @@ import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash
 import { Button } from "@/components/shadcn/button";
 import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "ProfessorWillow | Dashboard",
+  description: "professorwillow.me - Dashboard",
+  keywords: [
+    "pokemon go",
+    "pokemon go events",
+    "current events",
+    "event calendar",
+    "professor willow",
+    "shiny pokemon",
+    "gbl builds",
+    "iv calculator",
+    "boosted shiny pokemon go"
+  ],
+  openGraph: {
+    url: "https://professorwillow.me/",
+    type: "website",
+    title: "ProfessorWillow | Dashboard",
+  },
+};
 
 export default async function DashboardPage() {
   const { liveEvents } = await getEvents();

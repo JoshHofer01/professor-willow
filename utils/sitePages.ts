@@ -56,9 +56,9 @@ export const pages: PageProps[] = [
     href: "/pokemon",
     icon: Inbox,
     hasMenu: false,
-    hidesAt: "hidden sm:block",
+    hidesAt: "",
     showsOnSidebar: true,
-    showsAtMin: false
+    showsAtMin: true
   },
   /* {
     title: "IV Calculator",
@@ -79,7 +79,7 @@ export const pages: PageProps[] = [
     showsOnSidebar: true,
     showsAtMin: false
   }, */
-    {
+    /* {
     title: "More",
     href: "/",
     icon: Calendar,
@@ -97,15 +97,15 @@ export const pages: PageProps[] = [
         description:
           "Assess the precise IV percentage of each of your Pokemon",
       },
-      /* {
+      {
         title: "Settings",
         href: "/settings",
         description:
           "",
-      }, */
+      },
     ],
     hidesAt: "block sm:hidden",
     showsOnSidebar: false,
     showsAtMin: true
-  },
+  }, */
 ];

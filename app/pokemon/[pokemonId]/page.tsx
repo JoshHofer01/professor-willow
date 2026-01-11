@@ -17,8 +17,45 @@ import {
   StatsDisplay,
   TypeBadgesDisplay,
 } from "@/components/PokemonGroup/PokemonIdDisplays";
+import { Metadata } from "next";
 
 type Props = { params: Promise<{ pokemonId: string }> };
+
+export async function generateMetadata(
+  { params}: Props
+): Promise<Metadata> {
+
+  const { pokemonId } = await params;
+  const result = await getPokemonByDexNr(pokemonId);
+
+  if (!result) {
+    return {
+      title: "Not Found | ProfessorWillow",
+      description: "Pokemon not found",
+    };
+  }
+
+  const { pokemon } = result;
+  const pokemonName = pokemon?.names?.English ?? pokemon?.id;
+
+  return {
+    title: `${pokemonName} | ProfessorWillow`,
+    description: `Learn about ${pokemonName} in Pokemon GO!`,
+    keywords: [
+      "pokemon go",
+      "pokedex",
+      pokemonName,
+      "pokemon go pokedex",
+      "professor willow",
+    ],
+    openGraph: {
+      title: `${pokemonName} | ProfessorWillow`,
+      description: `Learn about ${pokemonName} in Pokemon GO!`,
+      type: "website",
+      url: `https://professorwillow.me/pokemon/${pokemonId}`,
+    },
+  };
+}
 
 const PokemonDetails = async ({ params }: Props) => {
   const { pokemonId } = await params;
