@@ -8,7 +8,7 @@ export async function getPokemonByGeneration(genNumber: string) {
     );
 
     if (!response.ok) {
-      console.error("Failed to fetch pokemon", response.status);
+      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
       return null;
     }
 
@@ -18,13 +18,12 @@ export async function getPokemonByGeneration(genNumber: string) {
         fixNullAssets(mon);
       } catch (error) {
         Sentry.captureException(error);
-        console.log(error);
       }
     });
 
     return { pokemonData };
   } catch (error) {
-    console.error("Error fetching pokemon", error);
+    Sentry.captureException(`Error fetching pokemon, ${error}`);
     return null;
   }
 }
@@ -36,7 +35,7 @@ export async function getAllPokemon() {
     );
 
     if (!response.ok) {
-      console.error("Failed to fetch pokemon", response.status);
+      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
       return null;
     }
 
@@ -47,15 +46,13 @@ export async function getAllPokemon() {
         return fixNullAssets(mon);
       } catch (error) {
         Sentry.captureException(error);
-        console.log(error);
         return mon;
       }
     });
 
     return { pokemonData };
   } catch (error) {
-    Sentry.captureException(error);
-    console.error("Error fetching pokemon", error);
+    Sentry.captureException(`Error fething pokemon, ${error}`);
     return null;
   }
 }
@@ -67,7 +64,7 @@ export async function getPokemonByDexNr(dexNr: string) {
     );
 
     if (!response.ok) {
-      console.error("Failed to fetch pokemon", response.status);
+      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
       return null;
     }
 
@@ -77,7 +74,6 @@ export async function getPokemonByDexNr(dexNr: string) {
     return { pokemon };
   } catch (error) {
     Sentry.captureException(error);
-    console.error("Error fetching pokemon", error);
     return null;
   }
 }
@@ -89,7 +85,7 @@ export async function getPokemonByName(pokemonName: string) {
     );
 
     if (!response.ok) {
-      console.error("Failed to fetch pokemon", response.status);
+      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
       return null;
     }
 
@@ -98,8 +94,7 @@ export async function getPokemonByName(pokemonName: string) {
 
     return { pokemon };
   } catch (error) {
-    Sentry.captureException(error);
-    console.error("Error fetching pokemon", error);
+    Sentry.captureException(`Error fetching pokemon, ${error}`);
     return null;
   }
 }
