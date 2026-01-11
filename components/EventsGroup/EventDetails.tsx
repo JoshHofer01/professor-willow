@@ -1,4 +1,3 @@
-import { getEvents } from "@/utils/getEvents";
 import React from "react";
 import {
   Card,
@@ -10,20 +9,13 @@ import {
 } from "@/components/shadcn/card";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import EventTypeBadge from "./EventTypeBadge";
 import AddToCalendar from "../ClientComponents/AddToCalendar";
 import { cn } from "@/lib/utils";
 import { weServTransformURL } from "@/utils/weServTransform";
+import { GameEvent } from "@/interfaces/interfaces";
 
-const EventDetails = async ({ eventId }: { eventId: string }) => {
-  const { eventsData } = await getEvents();
-  const event = eventsData.find((e) => e.eventID === eventId);
-
-  if (!event) {
-    notFound();
-  }
-
+const EventDetails = async ({ event }: { event: GameEvent }) => {
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col">
       <div className="pb-6">
@@ -33,7 +25,7 @@ const EventDetails = async ({ eventId }: { eventId: string }) => {
           width={1000}
           height={700}
           className="max-h-[450px] w-full object-contain rounded-lg"
-          loading="lazy"
+          loading="eager"
         />
       </div>
 
