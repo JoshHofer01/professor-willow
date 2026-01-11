@@ -25,6 +25,7 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
               width={300}
               height={200}
               className="w-full h-36 object-cover"
+              loading="eager"
             />
             {event.eventType && (
               <EventTypeBadge
@@ -76,6 +77,7 @@ export const CalendarPageCard = ({
               width={300}
               height={200}
               className="w-full h-full object-cover not-lg:max-h-28 not-lg:max-w-44 lg:h-36"
+              loading="eager"
             />
             {/* Gradient fade for mobile only */}
             <div className="absolute inset-0 bg-linear-to-r from-card to-50% lg:hidden" />

@@ -14,5 +14,5 @@ export function weServTransformURL(
 };
 
   const width = desktopImgSizeMap[imageType];
-  return `${urlPrefix}${url}?w=${width}${urlSuffix}`;
+  return `${urlPrefix}${url}&w=${width}${urlSuffix}`;
 }

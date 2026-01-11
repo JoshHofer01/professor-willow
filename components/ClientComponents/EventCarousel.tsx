@@ -39,10 +39,10 @@ export function CurrentEventsCarousel({
                       src={weServTransformURL(event.image, "dashboardImage")}
                       alt={event.name}
                       className="rounded-lg object-cover"
-                      width={1000}
-                      height={750}
-                      loading="eager"
-                      priority
+                      width={800}
+                      height={500}
+                      quality={75}
+                      preload
                     />
                   </div>
                   <div className="text-white flex flex-col md:text-base text-sm font-semibold mt-2 text-center">
