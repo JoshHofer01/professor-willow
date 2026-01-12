@@ -124,7 +124,7 @@ const Legal = () => {
                 site, or if you are a copyright holder and believe your material
                 has been used inappropriately, please contact us through{" "}
                 <a
-                  href="mailto:professorwillow.me"
+                  href="mailto:josh@professorwillow.me"
                   className="hover:underline underline-offset-4 text-blue-300"
                 >
                   josh@professorwillow.me

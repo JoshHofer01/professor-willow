@@ -61,7 +61,7 @@ const PageFooter = () => {
         </ItemGroup>
         <ItemGroup titleText="Project Links">
           <Item text="Github" icon={Calendar} href="https://github.com/JoshHofer01/professor-willow" />
-          <Item text="Email Me" icon={Mail} href="mailto:professorwillow.me" />
+          <Item text="Email Me" icon={Mail} href="mailto:josh@professorwillow.me" />
         </ItemGroup>
         <ItemGroup titleText="Site Info">
           <Item text="Legal Information" href="/legal" />
