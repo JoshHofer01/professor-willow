@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const EventDiffToNow = ({
   eventEnd,
@@ -8,15 +8,26 @@ export const EventDiffToNow = ({
   eventEnd: string;
   short?: boolean;
 }) => {
-  const targetDate = new Date(eventEnd);
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
 
-  // Get the time difference in milliseconds
-  const now = new Date();
-  const ms = targetDate.getTime() - now.getTime();
+  useEffect(() => {
+    const calculateTimeDifference = () => {
+      const targetDate = new Date(eventEnd);
+      const now = new Date();
+      const ms = targetDate.getTime() - now.getTime();
 
-  const days = Math.floor(ms / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((ms / (1000 * 60)) % 60);
+      setDays(Math.floor(ms / (1000 * 60 * 60 * 24)));
+      setHours(Math.floor((ms / (1000 * 60 * 60)) % 24));
+      setMinutes(Math.floor((ms / (1000 * 60)) % 60));
+    };
+
+    calculateTimeDifference();
+
+    const interval = setInterval(calculateTimeDifference, 60 * 1000);
+    return () => clearInterval(interval);
+  }, [eventEnd]);
 
   return (
     <>

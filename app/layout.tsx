@@ -6,18 +6,18 @@ import TopNav from "@/components/TopNav";
 import PageFooter from "@/components/PageFooter";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Viewport, Metadata } from "next";
- 
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
- 
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://professorwillow.me"),
   openGraph: {
     siteName: "ProfessorWillow",
     type: "website",
-    locale: "en_US"
+    locale: "en_US",
   },
   robots: {
     index: true,
@@ -25,19 +25,19 @@ export const metadata: Metadata = {
     "max-image-preview": "large",
     "max-snippet": -1,
     "max-video-preview": -1,
-    googleBot: "index, follow"
+    googleBot: "index, follow",
   },
   applicationName: "ProfessorWillow",
   appleWebApp: {
     title: "ProfessorWillow",
     statusBarStyle: "default",
-    capable: true
+    capable: true,
   },
   icons: {
     icon: [
       {
         url: "/favicon.ico",
-        type: "image/x-icon"
+        type: "image/x-icon",
       },
       /* {
         url: "/favicon-16x16.png",
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     shortcut: [
       {
         url: "/favicon.ico",
-        type: "image/x-icon"
-      }
+        type: "image/x-icon",
+      },
     ],
     /* apple: [
       {
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         type: "image/png"
       }
     ] */
-  }
+  },
 };
 
 const geistSans = Geist({
@@ -82,9 +82,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body
-        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <GoogleAnalytics gaId="G-9FZ3MR1FFD" />
