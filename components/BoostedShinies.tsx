@@ -10,24 +10,6 @@ interface ShiniesProps {
 export const BoostedShinies = () => {
   //? REMEMBER: Update the 'Updated on' date on dashboard card
   const boostedPokemon: ShiniesProps[] = [
-    {
-      dexNr: 341,
-      name: "Corphish",
-      image:
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm341.s.icon.png",
-    },
-    {
-      dexNr: 557,
-      name: "Dwebble",
-      image:
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm557.s.icon.png",
-    },
-    {
-      dexNr: 692,
-      name: "Clauncher",
-      image:
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm692.s.icon.png",
-    },
   ];
 
   return (
