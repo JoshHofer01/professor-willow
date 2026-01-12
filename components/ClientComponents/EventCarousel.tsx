@@ -39,7 +39,7 @@ export function CurrentEventsCarousel({
                       src={weServTransformURL(event.image, "dashboardImage")}
                       alt={event.name}
                       className="rounded-lg object-cover"
-                      width={800}
+                      width={900}
                       height={500}
                       quality={75}
                       preload
