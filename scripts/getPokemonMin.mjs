@@ -25,8 +25,8 @@ async function getPokemonIndex() {
         dexNr: element.dexNr,
         generation: element.generation,
         name: element.names.English,
-        primaryType: element.primaryType.type,
-        secondaryType: element.secondaryType ? element.secondaryType.type : null,
+        primaryType: element.primaryType.names.English,
+        secondaryType: element.secondaryType ? element.secondaryType.names.English : null,
         image: element.assets ? element.assets.image : null,
       };
       pokemonDataMin.push(pokemon);

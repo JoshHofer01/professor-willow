@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { PokemonDataMin } from "@/interfaces/interfaces";
@@ -12,22 +12,20 @@ function filterPokedex(
   filterType: string,
   filterGeneration: string
 ) {
-  if (filterGeneration === "0") {
-    return data;
-  }
+  return data.filter((p) => {
+    let matchesType = true;
+    if (filterType) {
+      matchesType =
+        p.primaryType === filterType || p.secondaryType === filterType;
+    }
 
-  if (filterType && filterGeneration) {
-    return data.filter(
-      (p) =>
-        (p.primaryType === filterType || p.secondaryType === filterType) &&
-        p.generation.toString() === filterGeneration
-    );
-  } else if (filterType && !filterGeneration) {
-    return data.filter((p) => p.primaryType === filterType);
-  } else if (!filterType && filterGeneration) {
-    return data.filter((p) => p.generation.toString() === filterGeneration);
-  }
-  return data;
+    let matchesGeneration = true;
+    if (filterGeneration && filterGeneration !== "all") {
+      matchesGeneration = p.generation.toString() === filterGeneration;
+    }
+
+    return matchesType && matchesGeneration;
+  });
 }
 
 export const PokedexDisplay = () => {
