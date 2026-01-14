@@ -53,7 +53,7 @@ export const pages: PageProps[] = [
   },
   {
     title: "Pokedex",
-    href: "/pokemon",
+    href: "/pokemon?gen=1",
     icon: Inbox,
     hasMenu: false,
     hidesAt: "",
@@ -87,7 +87,7 @@ export const pages: PageProps[] = [
     components: [
       {
         title: "Pokedex",
-        href: "/pokemon",
+        href: "/pokemon?gen=1",
         description:
           "View a list of all 1,025 Pokemon that includes variants, species differences, and special forms",
       },

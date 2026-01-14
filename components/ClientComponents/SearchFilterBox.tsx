@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/shadcn/popover";
+import { Input } from "../shadcn/input";
 
 const types = [
   { value: "Normal", label: "Normal" },
@@ -41,7 +42,7 @@ const types = [
 ];
 
 const generations = [
-  { value: "all", label: "All Generations"},
+  { value: "all", label: "All Generations" },
   { value: "1", label: "Kanto (Gen I)" },
   { value: "2", label: "Johto (Gen II)" },
   { value: "3", label: "Hoenn (Gen III)" },
@@ -63,12 +64,14 @@ const dataTypeMap: Record<dataTypeProps, { value: string; label: string }[]> = {
 export function FilterBox({
   dataType,
   setFilter,
+  initialValue,
 }: {
   dataType: dataTypeProps;
-  setFilter: (val: string) => void
+  setFilter: (val: string) => void;
+  initialValue: string;
 }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(dataType === "generation" ? "1" : "");
+  const [value, setValue] = React.useState(initialValue);
   const searchData = dataTypeMap[dataType];
 
   return (
@@ -119,5 +122,27 @@ export function FilterBox({
         </Command>
       </PopoverContent>
     </Popover>
+  );
+}
+
+export function SearchBox({
+  setQuery,
+  initialValue,
+  className
+}: {
+  setQuery: (val: string) => void;
+  initialValue: string;
+  className?: string
+}) {
+  return (
+    <Input
+      onChange={(currentValue) => {
+        setQuery(currentValue.target.value);
+      }}
+      type="search"
+      placeholder="Search Pokedex..."
+      defaultValue={initialValue}
+      className={className}
+    />
   );
 }

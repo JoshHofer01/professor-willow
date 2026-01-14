@@ -112,6 +112,10 @@
   --nav-ring: oklch(0.693 0.156 196.231);
 }
 
+html {
+  scroll-behavior: "smooth";
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
