@@ -15,9 +15,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://professorwillow.me"),
   openGraph: {
-    siteName: "ProfessorWillow",
-    type: "website",
-    locale: "en_US",
+    title: 'ProfessorWillow | Pokemon GO Companion',
+    siteName: 'ProfessorWillow',
+    locale: 'en_US',
+    type: 'website',
   },
   robots: {
     index: true,
@@ -39,11 +40,16 @@ export const metadata: Metadata = {
         url: "/favicon.ico",
         type: "image/x-icon",
       },
-      /* {
-        url: "/favicon-16x16.png",
+      {
+        url: "/branding/favicon-16x16.png",
         sizes: "16x16",
         type: "image/png"
-      } */
+      },
+      {
+        url: "/branding/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png"
+      }
     ],
     shortcut: [
       {
@@ -51,18 +57,23 @@ export const metadata: Metadata = {
         type: "image/x-icon",
       },
     ],
-    /* apple: [
+    apple: [
       {
-        url: "/apple-icon-57x57.png",
-        sizes: "57x57",
-        type: "image/png"
-      },
-      {
-        url: "/apple-icon-60x60.png",
-        sizes: "60x60",
+        url: "/branding/apple-touch-icon.png",
+        sizes: "180x180",
         type: "image/png"
       }
-    ] */
+    ],
+    other: [
+      {
+        rel: 'android-chrome-192x192',
+        url: '/branding/android-chrome-192x192.png',
+      },
+      {
+        rel: 'android-chrome-512x512',
+        url: '/branding/android-chrome-512x512.png',
+      }
+    ]
   },
 };
 

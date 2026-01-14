@@ -55,8 +55,8 @@ const PageFooter = () => {
       <div className="flex mt-4 md:flex-row md:gap-10 flex-col gap-4">
         <ItemGroup titleText="Community Links">
           <Item
-            text="Discord (Coming soon)"
-            href="/"
+            text="Discord"
+            href="https://discord.gg/dvHNCQ8byh"
           />
         </ItemGroup>
         <ItemGroup titleText="Project Links">

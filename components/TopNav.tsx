@@ -8,6 +8,7 @@ import {
 } from "@/components/shadcn/navigation-menu";
 import { cn } from "@/lib/utils";
 import { pages } from "@/utils/sitePages";
+import Image from "next/image";
 import Link from "next/link";
 
 const TopNav = () => {
@@ -17,9 +18,10 @@ const TopNav = () => {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link href="/">
-              <div className="items-center flex flex-col ml-8 mr-3">
-                <h1 className="text-sm font-bold">HOME</h1>
-                <div className="w-11 h-0.5 bg-accent mx-auto"></div>
+              <div className="items-center flex flex-col ml-8">
+                {/* <h1 className="text-sm font-bold">HOME</h1>
+                <div className="w-11 h-0.5 bg-accent mx-auto"></div> */}
+                <Image src="/ProfessorWillowHS.png" alt="ProfessorWillow" width={30} height={30} className="hover:scale-125 hover:transition hover:rotate-6"/>
               </div>
             </Link>
           </NavigationMenuLink>
