@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowUp } from "lucide-react";
 import { Fragment, useEffect, useState } from "react";
 

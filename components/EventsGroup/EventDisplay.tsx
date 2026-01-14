@@ -1,11 +1,13 @@
 import React from 'react'
 import { GameEvent } from '@/interfaces/interfaces'
 import { EventPageCard } from '../CustomCards/EventCards'
+import BackToTopButton from '../ClientComponents/BackToTopButton'
 
 
 const EventDisplay = ({ events, pageType }: {events: GameEvent[], pageType: string}) => {
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
+      <BackToTopButton />
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">{pageType} events</h1>
       </div>

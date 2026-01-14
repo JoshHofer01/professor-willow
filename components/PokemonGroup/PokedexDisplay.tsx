@@ -4,7 +4,7 @@ import { PokemonDataMin } from "@/interfaces/interfaces";
 import { FilterBox, SearchBox } from "../ClientComponents/SearchFilterBox";
 import pokemonData from "@/data/pokemonIndex.json";
 import { useRouter, useSearchParams } from "next/navigation";
-import BackToTopButton from "../BackToTopButton";
+import BackToTopButton from "../ClientComponents/BackToTopButton";
 import { useDebounce } from "@uidotdev/usehooks";
 import PokedexResults from "./PokedexResults";
 import { useEffect, useState } from "react";
@@ -30,7 +30,7 @@ function filterPokedex(
 
     let matchesQuery = true;
     if (filterQuery) {
-      matchesQuery = p.name.toLowerCase().startsWith(filterQuery.toLowerCase());
+      matchesQuery = p.name.toLowerCase().includes(filterQuery.toLowerCase());
     }
 
     return matchesType && matchesGeneration && matchesQuery;
@@ -64,7 +64,6 @@ export const PokedexDisplay = () => {
     if (debouncedQuery !== currentQuery) {
       updateFilter("query", debouncedQuery);
     }
-
   }, [debouncedQuery]);
 
   return (
