@@ -37,7 +37,7 @@ export const BoostedShinies = () => {
                       alt={pokemon.name}
                       width={100}
                       height={100}
-                      className="object-scale-down"
+                      className="object-scale-down max-h-18 max-w-18"
                     />
                   </div>
                 ) : (
