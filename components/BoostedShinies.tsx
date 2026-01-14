@@ -10,6 +10,11 @@ interface ShiniesProps {
 export const BoostedShinies = () => {
   //? REMEMBER: Update the 'Updated on' date on dashboard card
   const boostedPokemon: ShiniesProps[] = [
+      {
+    "dexNr": 938,
+    "name": "Tadbulb",
+    "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm938.s.icon.png"
+  }
   ];
 
   return (

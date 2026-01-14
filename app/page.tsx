@@ -80,7 +80,7 @@ export default async function DashboardPage() {
           action={
             <div className="flex flex-col text-sm text-right">
               <p>Last edit:</p>
-              <p className="font-semibold">12th Jan</p>
+              <p className="font-semibold">14th Jan</p>
             </div>
           }
           className="2xl:col-span-2"
