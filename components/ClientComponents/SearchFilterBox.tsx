@@ -143,6 +143,7 @@ export function SearchBox({
       placeholder="Search Pokedex..."
       defaultValue={initialValue}
       className={className}
+      id="searchPokedex"
     />
   );
 }
