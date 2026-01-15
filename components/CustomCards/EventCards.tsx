@@ -53,7 +53,7 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
   );
 };
 
-export const CalendarPageCard = ({
+export const OverviewPageCard = ({
   event,
   className,
 }: {

@@ -23,7 +23,7 @@ export const pages: PageProps[] = [
     hasMenu: true,
     components: [
       {
-        title: "Calendar",
+        title: "Overview",
         href: "/events",
         description:
           "Overview of live, upcoming, and completed events currently in LeekDuck database",

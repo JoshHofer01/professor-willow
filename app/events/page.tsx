@@ -1,5 +1,5 @@
 // app/events/page.tsx
-import { CalendarPageCard } from "@/components/CustomCards/EventCards";
+import { OverviewPageCard } from "@/components/CustomCards/EventCards";
 import { Button } from "@/components/shadcn/button";
 import { GameEvent } from "@/interfaces/interfaces";
 import { getEvents } from "@/utils/getEvents";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Event Calendar | ProfessorWillow",
+  title: "Events Overview | ProfessorWillow",
   description: "View all events in Pokemon GO",
   keywords: [
     "pokemon go",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     url: "https://professorwillow.me/events",
     type: "website",
-    title: "Event Calendar | ProfessorWillow",
+    title: "Events Overview | ProfessorWillow",
   }
 }
 
@@ -56,7 +56,7 @@ const EventSection = ({
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 lg:overflow-x-auto lg:pb-4 lg:-mb-4">
         {events.length > 0 ? (
           events.map((event, index) => (
-            <CalendarPageCard
+            <OverviewPageCard
               key={event.eventID}
               event={event}
               className={index >= 3 && event.status !== "live" ? "hidden" : ""}
@@ -78,7 +78,7 @@ const EventsPage = async () => {
   return (
     <main className="container max-w-full p-4 md:p-6 lg:p-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Events Calendar</h1>
+        <h1 className="text-4xl font-bold mb-2">Events Overview</h1>
         <p className="text-lg text-muted-foreground">
           Stay up to date with live, upcoming, and past events.
         </p>
