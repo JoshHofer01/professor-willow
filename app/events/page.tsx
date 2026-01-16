@@ -1,5 +1,6 @@
 // app/events/page.tsx
 import { OverviewPageCard } from "@/components/CustomCards/EventCards";
+import EventPopout from "@/components/EventsGroup/EventPopout";
 import { Button } from "@/components/shadcn/button";
 import { GameEvent } from "@/interfaces/interfaces";
 import { getEvents } from "@/utils/getEvents";
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
     url: "https://professorwillow.me/events",
     type: "website",
     title: "Events Overview | ProfessorWillow",
-  }
-}
+  },
+};
 
 const EventSection = ({
   title,
@@ -56,11 +57,14 @@ const EventSection = ({
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 lg:overflow-x-auto lg:pb-4 lg:-mb-4">
         {events.length > 0 ? (
           events.map((event, index) => (
-            <OverviewPageCard
-              key={event.eventID}
-              event={event}
-              className={index >= 3 && event.status !== "live" ? "hidden" : ""}
-            />
+            <EventPopout key={event.eventID} gameEvent={event}>
+              <OverviewPageCard
+                event={event}
+                className={
+                  index >= 3 && event.status !== "live" ? "hidden" : ""
+                }
+              />
+            </EventPopout>
           ))
         ) : (
           <div className="text-muted-foreground italic h-24 flex items-center">
