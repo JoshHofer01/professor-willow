@@ -1,6 +1,6 @@
 export function weServTransformURL(
   url: string,
-  imageType: "dashboardImage" | "eventDetailsImage" | "eventCardImage" | "pokedexImage" | "pokemonDetailsImage",
+  imageType: "dashboardImage" | "eventDetailsImage" | "popoutImage" | "eventCardImage" | "pokedexImage" | "pokemonDetailsImage",
 ) {
   const urlPrefix: string = "https://wsrv.nl/?url=";
   const urlSuffix: string = "&output=webp";
@@ -8,6 +8,7 @@ export function weServTransformURL(
   const desktopImgSizeMap: Record<string, number> = {
     "dashboardImage": 800,
     "eventDetailsImage": 1000,
+    "popoutImage": 600,
     "eventCardImage": 350,
     "pokedexImage": 100,
     "pokemonDetailsImage": 180,

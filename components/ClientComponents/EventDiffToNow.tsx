@@ -1,12 +1,15 @@
 "use client";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 
 export const EventDiffToNow = ({
   eventEnd,
   short = false,
+  className,
 }: {
   eventEnd: string;
   short?: boolean;
+  className?: string
 }) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -32,7 +35,7 @@ export const EventDiffToNow = ({
   return (
     <>
       {short ? (
-        <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+        <div className={cn(className, "flex flex-col gap-1 text-xs text-muted-foreground")}>
           {days === 0 ? (
             <div className="flex flex-row gap-1">
               <div className="flex flex-row">
@@ -58,7 +61,7 @@ export const EventDiffToNow = ({
           )}
         </div>
       ) : (
-        <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+        <div className={cn(className, "flex flex-col gap-1 text-xs text-muted-foreground")}>
           <div className="flex flex-row gap-1">
             <div className="flex flex-row">
               <p className="font-bold">{days}</p>

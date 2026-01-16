@@ -24,7 +24,7 @@ const EventDetails = async ({ event }: { event: GameEvent }) => {
           alt={event.name}
           width={1000}
           height={700}
-          className="max-h-[450px] w-full object-contain rounded-lg"
+          className="max-h-112.5 w-full object-contain rounded-lg"
           loading="eager"
         />
       </div>

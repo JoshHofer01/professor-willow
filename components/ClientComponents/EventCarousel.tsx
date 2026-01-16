@@ -9,8 +9,8 @@ import {
 } from "@/components/shadcn/carousel";
 import { GameEvent } from "@/interfaces/interfaces";
 import Image from "next/image";
-import Link from "next/link";
 import { weServTransformURL } from "@/utils/weServTransform";
+import EventPopout from "../EventsGroup/EventPopout";
 
 export function CurrentEventsCarousel({
   eventData,
@@ -32,7 +32,7 @@ export function CurrentEventsCarousel({
         <CarouselContent className="-ml-2 md:-ml-4">
           {eventData.map((event, index) => (
             <CarouselItem key={index} className="pl-2 md:pl-4 basis-full">
-              <Link href={`events/${event.eventID}`} key={index}>
+              <EventPopout gameEvent={event}>
                 <div className="p-1">
                   <div className="relative w-full aspect-video">
                     <Image
@@ -52,7 +52,7 @@ export function CurrentEventsCarousel({
                     </p>
                   </div>
                 </div>
-              </Link>
+              </EventPopout>
             </CarouselItem>
           ))}
         </CarouselContent>

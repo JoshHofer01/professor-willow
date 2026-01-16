@@ -3,13 +3,13 @@ import { getEvents } from "@/utils/getEvents";
 import React from "react";
 import ErrorPage from "../ErrorPage";
 import { EventDiffToNow } from "../ClientComponents/EventDiffToNow";
-import Link from "next/link";
 import { eventTypeColorMap } from "./EventTypeBadge";
+import EventPopout from "./EventPopout";
 
 const EventPill = ({ event }: { event: GameEvent }) => {
   const color = eventTypeColorMap[event.eventType] ?? "to-gray-400";
   return (
-    <Link href={`events/${event.eventID}`}>
+    <>
       <div className={`${color} my-1 rounded-lg flex flex-1 justify-between`}>
         <p className="px-2 py-2 truncate text-xs font-bold text-black">
           {event.name}
@@ -18,7 +18,7 @@ const EventPill = ({ event }: { event: GameEvent }) => {
           <EventDiffToNow eventEnd={event.start} short />
         </div>
       </div>
-    </Link>
+    </>
   );
 };
 
@@ -34,8 +34,10 @@ const UpcomingEventsDashboard = async () => {
 
   return (
     <div className="grid grid-cols-1 overflow-hidden">
-      {slicedEvents.map((event) => (
-        <EventPill key={event.eventID} event={event} />
+      {slicedEvents.map((gameEvent) => (
+        <EventPopout key={gameEvent.eventID} gameEvent={gameEvent}>
+          <EventPill event={gameEvent} />
+        </EventPopout>
       ))}
     </div>
   );
