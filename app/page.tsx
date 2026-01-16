@@ -11,7 +11,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "ProfessorWillow | Dashboard",
-  description: "professorwillow.me - Dashboard for everything Pokemon GO, events, shiny pokemon, community, and more!",
+  description:
+    "professorwillow.me - Dashboard for everything Pokemon GO, events, shiny pokemon, community, and more!",
   keywords: [
     "pokemon go",
     "pokemon go events",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     "shiny pokemon",
     "gbl builds",
     "iv calculator",
-    "boosted shiny pokemon go"
+    "boosted shiny pokemon go",
   ],
   openGraph: {
     url: "https://professorwillow.me/",
@@ -34,9 +35,9 @@ export const metadata: Metadata = {
         url: "https://professorwillow.me/branding/card.png", //ABSOLUTE PATH
         width: 1200,
         height: 630,
-        alt: "professorwillow.me"
-      }
-    ]
+        alt: "professorwillow.me",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -48,9 +49,9 @@ export const metadata: Metadata = {
         url: "https://professorwillow.me/branding/card.png",
         width: 1200,
         height: 630,
-        alt: "professorwillow.me"
-      }
-    ]
+        alt: "professorwillow.me",
+      },
+    ],
   },
 };
 
@@ -77,7 +78,6 @@ export default async function DashboardPage() {
         {/* All Events */}
         <DashboardCard
           title="Happening soon!"
-          description="Nearest upcoming events at a glance"
           button={{
             text: "View all upcoming",
             href: "/events/upcoming",
@@ -95,7 +95,13 @@ export default async function DashboardPage() {
           className="row-span-1"
         >
           <div className="flex items-center justify-center h-full bg-linear-to-br from-primary/65 to-accent/65 rounded-lg">
-            <Image src="/ProfessorWillowHS.png" alt="ProfessorWillow" width={100} height={100} className="p-2"/>
+            <Image
+              src="/ProfessorWillowHS.png"
+              alt="ProfessorWillow"
+              width={100}
+              height={100}
+              className="p-2"
+            />
           </div>
         </DashboardCard>
 
@@ -137,7 +143,8 @@ export default async function DashboardPage() {
           <div className="flex flex-col items-center justify-center h-full gap-2">
             <span className="text-4xl">💬</span>
             <p className="text-sm text-muted-foreground text-center">
-              Join the ProfessorWillow community server and meet likeminded researchers!
+              Join the ProfessorWillow community server and meet likeminded
+              researchers!
             </p>
           </div>
         </DashboardCard>

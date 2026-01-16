@@ -70,7 +70,6 @@ export const PokedexDisplay = () => {
     <>
       <BackToTopButton />
       <div className="flex flex-wrap gap-2 mb-4">
-          <p className="text-lg font-semibold">Search & Filter:</p>
           <SearchBox setQuery={setQuery} initialValue={query} className="max-w-xs lg:max-w-sm min-w-52"/>
           <FilterBox
             dataType="type"
