@@ -111,7 +111,7 @@ export default async function DashboardPage() {
           action={
             <div className="flex flex-col text-sm text-right">
               <p>Last edit:</p>
-              <p className="font-semibold">14th Jan</p>
+              <p className="font-semibold">18th Jan</p>
             </div>
           }
           className="2xl:col-span-2"
@@ -127,6 +127,12 @@ export default async function DashboardPage() {
           <div className="flex items-center justify-center h-32 xl:h-full bg-linear-to-br from-foreground/20 to-background/20 rounded-lg">
             <span className="text-xl font-semibold">Coming soon</span>
           </div>
+        </DashboardCard> */}
+
+        {/* <DashboardCard
+        title="Raids & Battles"
+        className="row-span-2">
+          <RaidsDash />
         </DashboardCard> */}
 
         {/* Discord */}
