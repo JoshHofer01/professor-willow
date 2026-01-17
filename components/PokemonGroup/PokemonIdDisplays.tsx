@@ -1,4 +1,9 @@
-import { Move, PokemonData, PokemonType } from "@/interfaces/interfaces";
+import {
+  AssetForm,
+  Move,
+  PokemonData,
+  PokemonType,
+} from "@/interfaces/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/shadcn/badge";
@@ -12,6 +17,7 @@ import {
 import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
 import { weServTransformURL } from "@/utils/weServTransform";
+import PokemonPopout from "./PokemonPopout";
 
 export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
   const nextMonNumber = (pokemon.dexNr + 1).toString();
@@ -98,8 +104,8 @@ export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
     return Math.round((statValue / statTotal) * 100) < 33
       ? "bg-red-500"
       : Math.round((statValue / statTotal) * 100) > 66
-      ? "bg-green-500"
-      : "bg-amber-500";
+        ? "bg-green-500"
+        : "bg-amber-500";
   }
 
   return (
@@ -160,7 +166,10 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src={weServTransformURL(pokemon.assets.image, "pokemonDetailsImage")}
+            src={weServTransformURL(
+              pokemon.assets.image,
+              "pokemonDetailsImage",
+            )}
             alt={pokemon.names.English}
             width={300}
             height={300}
@@ -177,7 +186,10 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <Image
-              src={weServTransformURL(pokemon.assets.shinyImage, "pokemonDetailsImage")}
+              src={weServTransformURL(
+                pokemon.assets.shinyImage,
+                "pokemonDetailsImage",
+              )}
               alt={`Shiny ${pokemon?.names?.English ?? pokemon?.id}`}
               width={300}
               height={300}
@@ -197,9 +209,11 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
 export const MovesDisplay = ({
   type,
   moves,
+  eliteMoves,
 }: {
   type: string;
   moves: Record<string, Move>;
+  eliteMoves: Record<string, Move>;
 }) => {
   return (
     <div>
@@ -209,6 +223,17 @@ export const MovesDisplay = ({
           <li key={m.id} className="flex justify-between">
             <span>{m.names?.English ?? m.id}</span>
             <span className="text-gray-500">{m.type.names.English}</span>
+          </li>
+        ))}
+        {Object.values(eliteMoves || {}).map((em) => (
+          <li key={em.id} className="flex justify-between">
+            <span className="inline-flex gap-1">
+              {em.names?.English ?? em.id}
+              <p className="bg-linear-to-br from-purple-600 to-pink-400 px-1.5 rounded-xl">
+                Elite
+              </p>
+            </span>
+            <span className="text-gray-500">{em.type.names.English}</span>
           </li>
         ))}
       </ul>
@@ -247,7 +272,9 @@ export const TypeBadgesDisplay = ({
   const getTypeBadge = (type: PokemonType) => {
     const color = typeColorMap[type.names.English] ?? "bg-gray-400";
     return (
-      <Badge className={`${color} text-white rounded-md`}>{type.names.English}</Badge>
+      <Badge className={`${color} text-white rounded-md`}>
+        {type.names.English}
+      </Badge>
     );
   };
   return (
@@ -260,3 +287,33 @@ export const TypeBadgesDisplay = ({
     </div>
   );
 };
+
+export const FormDisplay = ({
+  name,
+  assets,
+  formType
+}: {
+  name: string;
+  assets: AssetForm[];
+  formType: string
+}) => {
+  const asset = assets.find((asset) => asset.form === formType);
+
+  if (asset === undefined) return null;
+
+  return (
+    <PokemonPopout
+      pokemonName={`${formType} ${name}`}
+      regularImage={asset.image}
+      shinyImage={asset.shinyImage}
+    >
+      <Image
+        src={`/${formType}.png`}
+        alt={`${formType} ${name}`}
+        width={50}
+        height={50}
+      />
+    </PokemonPopout>
+  );
+};
+

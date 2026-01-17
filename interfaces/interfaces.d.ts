@@ -31,10 +31,10 @@ export interface PokemonData {
   pokemonClass?: string;
   quickMoves: Record<string, Move>;
   cinematicMoves: Record<string, Move>;
-  eliteQuickMoves?: Record<string, Move>;
-  eliteCinematicMoves?: Record<string, Move>;
+  eliteQuickMoves: Record<string, Move>;
+  eliteCinematicMoves: Record<string, Move>;
   assets: Assets;
-  assetForms?: AssetForm[];
+  assetForms: AssetForm[];
   regionForms?: Record<string, PokemonData>;
   evolutions?: Evolution[];
   hasMegaEvolution?: boolean;
@@ -95,8 +95,8 @@ export interface Assets {
 
 export interface AssetForm {
   image: string;
-  shinyImage?: string;
-  form?: string;
+  shinyImage: string;
+  form: string;
   costume?: string;
   isFemale?: boolean;
 }
