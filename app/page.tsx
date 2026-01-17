@@ -166,15 +166,33 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
 
-        {/* IV Calculator */}
-        {/* <DashboardCard
-          title="IV Calculator"
-          description="Precisely assess your Pokemon"
+        {/* Dev Notes */}
+        <DashboardCard
+          title="Dev Notes"
+          description="Thank you so much for using ProfesorWillow!! All the feedback has been overwhelming and I'm committed to improving this site."
         >
-          <div className="flex items-center justify-center h-24 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-lg">
-            <span className="text-3xl">🧮</span>
+          <div className="text-xs">
+            <div className="inline-flex gap-2">
+              <p>
+                - Upgraded{" "}
+                <Link
+                  href="pokemon"
+                  className="text-blue-300 hover:underline hover:underline-offset-2"
+                >
+                  pokedex
+                </Link>{" "}
+                display to include Elite moves & Gigantamax/Mega forms{" "}
+                <Link
+                  href="pokemon/venusaur"
+                  className="text-blue-300 hover:underline hover:underline-offset-2"
+                >
+                  (Venusaur Example)
+                </Link>
+              </p>
+              <p className="text-muted-foreground">17th Jan</p>
+            </div>
           </div>
-        </DashboardCard> */}
+        </DashboardCard>
       </div>
     </main>
   );
