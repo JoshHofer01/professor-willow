@@ -35,7 +35,7 @@ const EventPopout = ({
         <DialogTitle>{gameEvent.name}</DialogTitle>
         <DialogDescription>{gameEvent.name}</DialogDescription>
       </DialogHeader>
-      <DialogContent showCloseButton={false}>
+      <DialogContent showCloseButton={false} className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl">
         {/* Image */}
         <div className="flex flex-col">
           <Image
