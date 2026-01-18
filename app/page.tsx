@@ -175,10 +175,16 @@ export default async function DashboardPage() {
 
         {/* Dev Notes */}
         <DashboardCard
-          title="Dev Notes"
+          title="Dev Log"
           description="Thank you so much for using ProfesorWillow!! All the feedback has been overwhelming and I'm committed to improving this site."
         >
           <div className="text-xs">
+            <div className="inline-flex gap-2">
+              <p>
+                - Added Raid & Battles dashboard widget. Pages for each raid coming soon
+              </p>
+              <p className="text-muted-foreground">18th Jan</p>
+            </div>
             <div className="inline-flex gap-2">
               <p>
                 - Upgraded{" "}
