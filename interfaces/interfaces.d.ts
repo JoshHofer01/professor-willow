@@ -128,3 +128,49 @@ export interface MegaEvolution {
   secondaryType?: PokemonType | null;
   assets: Assets;
 }
+
+export interface BattleResult {
+  name: string;
+  friendshipLevel: number;
+  pokemonLevel: number;
+  totalEstimator: number;
+}
+
+export interface BattleResults {
+  easy: BattleResult;
+  normal: BattleResult;
+  hard: BattleResult;
+}
+
+export interface RaidPokemon {
+  id: string;
+  form: string;
+  costume: string;
+  assets: Assets;
+  level: string;
+  shiny: boolean;
+  types: string[];
+  counter: Record<string, number>;
+  weather: string[];
+  cpRange: [number, number];
+  cpRangeBoost: [number, number];
+  names: LocalizedNames;
+  battleResult: BattleResults;
+}
+
+export interface RaidList {
+  lvl1: RaidPokemon[];
+  lvl3: RaidPokemon[];
+  lvl5: RaidPokemon[];
+  mega: RaidPokemon[];
+  ultra_beast: RaidPokemon[];
+  legendary_mega: RaidPokemon[];
+  ex: RaidPokemon[];
+  shadow_lvl5: RaidPokemon[];
+  shadow_lvl3: RaidPokemon[];
+  shadow_lvl1: RaidPokemon[];
+}
+
+export interface Raid {
+  currentList: RaidList;
+}

@@ -2,6 +2,7 @@ import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash";
+import RaidsDash from "@/components/RaidsGroup/RaidsDash";
 import { Button } from "@/components/shadcn/button";
 import { getEvents } from "@/utils/getEvents";
 import { CalendarDays } from "lucide-react";
@@ -129,11 +130,11 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
 
-        {/* <DashboardCard
+        <DashboardCard
         title="Raids & Battles"
         className="row-span-2">
           <RaidsDash />
-        </DashboardCard> */}
+        </DashboardCard>
 
         {/* Discord */}
         <DashboardCard
