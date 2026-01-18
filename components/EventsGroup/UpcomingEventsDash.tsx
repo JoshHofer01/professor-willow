@@ -3,8 +3,8 @@ import { getEvents } from "@/utils/getEvents";
 import React from "react";
 import ErrorPage from "../ErrorPage";
 import { EventDiffToNow } from "../ClientComponents/EventDiffToNow";
-import { eventTypeColorMap } from "./EventTypeBadge";
 import EventPopout from "./EventPopout";
+import { eventTypeColorMap } from "@/utils/colorMaps";
 
 const EventPill = ({ event }: { event: GameEvent }) => {
   const color = eventTypeColorMap[event.eventType] ?? "to-gray-400";

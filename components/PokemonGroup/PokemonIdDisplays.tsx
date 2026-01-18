@@ -18,6 +18,7 @@ import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
 import { weServTransformURL } from "@/utils/weServTransform";
 import PokemonPopout from "./PokemonPopout";
+import { pokemonTypeColorMap } from "@/utils/colorMaps";
 
 export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
   const nextMonNumber = (pokemon.dexNr + 1).toString();
@@ -241,6 +242,15 @@ export const MovesDisplay = ({
   );
 };
 
+export const PokemonTypeBadge = ({ type }:{type: string}) => {
+    const color = pokemonTypeColorMap[type] ?? "bg-gray-400";
+    return (
+      <Badge className={`${color} text-white rounded-md`}>
+        {type}
+      </Badge>
+    );
+  };
+
 export const TypeBadgesDisplay = ({
   primary,
   secondary,
@@ -248,41 +258,12 @@ export const TypeBadgesDisplay = ({
   primary: PokemonType;
   secondary?: PokemonType;
 }) => {
-  const typeColorMap: Record<string, string> = {
-    Normal: "bg-gray-400",
-    Fire: "bg-red-500",
-    Water: "bg-blue-500",
-    Grass: "bg-green-500",
-    Electric: "bg-yellow-400",
-    Ice: "bg-blue-200",
-    Fighting: "bg-red-700",
-    Poison: "bg-purple-500",
-    Ground: "bg-yellow-600",
-    Flying: "bg-indigo-300",
-    Psychic: "bg-pink-500",
-    Bug: "bg-lime-500",
-    Rock: "bg-yellow-700",
-    Ghost: "bg-purple-700",
-    Dragon: "bg-indigo-700",
-    Dark: "bg-gray-700",
-    Steel: "bg-gray-500",
-    Fairy: "bg-pink-300",
-  };
-
-  const getTypeBadge = (type: PokemonType) => {
-    const color = typeColorMap[type.names.English] ?? "bg-gray-400";
-    return (
-      <Badge className={`${color} text-white rounded-md`}>
-        {type.names.English}
-      </Badge>
-    );
-  };
   return (
     <div className="flex flex-row gap-2">
       <h3 className="text-lg font-semibold p-1">Type:</h3>
       <div className="flex space-x-2 mt-2">
-        {getTypeBadge(primary)}
-        {secondary && getTypeBadge(secondary)}
+        <PokemonTypeBadge type={primary.names.English} />
+        {secondary && <PokemonTypeBadge type={secondary.names.English} />}
       </div>
     </div>
   );

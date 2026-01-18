@@ -13,11 +13,12 @@ import Image from "next/image";
 import { weServTransformURL } from "@/utils/weServTransform";
 import AddToCalendar from "../ClientComponents/AddToCalendar";
 import Link from "next/link";
-import EventTypeBadge, { eventTypeColorMap } from "./EventTypeBadge";
+import EventTypeBadge from "./EventTypeBadge";
 import { cn } from "@/lib/utils";
 import { Button } from "../shadcn/button";
 import { dateFormatter } from "@/utils/dateFormatter";
 import Countdown from "./Countdown";
+import { eventTypeColorMap } from "@/utils/colorMaps";
 
 const EventPopout = ({
   children,
