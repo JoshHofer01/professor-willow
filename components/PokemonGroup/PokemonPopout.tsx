@@ -42,7 +42,7 @@ const PokemonPopout = ({
             width={300}
             height={300}
             alt={pokemonName}
-            className="object-scale-down justify-center"
+            className="object-scale-down justify-center max-h-56 max-w-64"
           />
           <hr className="my-4" />
           {/* Shiny Image */}
@@ -55,7 +55,7 @@ const PokemonPopout = ({
             width={300}
             height={300}
             alt={pokemonName}
-            className="object-scale-down"
+            className="object-scale-down justify-center max-h-56 max-w-64"
           />
           <h3 className="text-2xl sm:text-xl font-bold text-center mt-2">{pokemonName}</h3>
         </div>
