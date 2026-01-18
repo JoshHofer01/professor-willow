@@ -7,33 +7,26 @@ interface ShiniesProps {
   name: string;
   image: string;
 }
+
+//TODO: Add Date() object to each pokemon for start/end date
+// Add logic in BoostedShinies to only show shinies boosted between start/end date
 export const BoostedShinies = () => {
-  //? REMEMBER: Update the 'Updated on' date on dashboard card
+  //? REMEMBER: Update the 'Updated on' date on "app\page.tsx"
   const boostedPokemon: ShiniesProps[] = [
-      {
-    "dexNr": 938,
-    "name": "Tadbulb",
-    "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm938.s.icon.png"
-  },
-  {
-    "dexNr": 810,
-    "name": "Grookey",
-    "image": "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm810.s.icon.png"
-  },
   ];
 
   return (
     <>
       {boostedPokemon.length ? (
-        <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {boostedPokemon.map((pokemon) => (
             <div
               key={pokemon.dexNr}
-              className="bg-muted rounded flex items-center justify-center p-1"
+              className="bg-muted flex items-center justify-center p-1"
             >
               <Link
                 href={`/pokemon/${pokemon.name}`}
-                className="flex items-center justify-center w-full h-full"
+                className="flex items-center justify-center h-full"
               >
                 {pokemon.image ? (
                   <div>
