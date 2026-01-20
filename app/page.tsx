@@ -1,7 +1,7 @@
-import { BoostedShinies } from "@/components/BoostedShinies";
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash";
+import { BoostedShinies } from "@/components/PokemonGroup/BoostedShinies";
 import RaidsDash from "@/components/RaidsGroup/RaidsDash";
 import { Button } from "@/components/shadcn/button";
 import { getEvents } from "@/utils/getEvents";
@@ -109,13 +109,6 @@ export default async function DashboardPage() {
         {/* Boosted Shiny Spawns */}
         <DashboardCard
           title="Boosted Shinies"
-          action={
-            <div className="flex flex-col text-sm text-right">
-              <p>Last edit:</p>
-              <p className="font-semibold">18th Jan</p>
-            </div>
-          }
-          className="2xl:col-span-2"
         >
           <BoostedShinies />
         </DashboardCard>
@@ -130,6 +123,7 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
 
+        {/* Raids & Battles */}
         <DashboardCard
         title="Raids & Battles"
         className="row-span-2">

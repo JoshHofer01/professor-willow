@@ -156,6 +156,7 @@ export interface RaidPokemon {
   cpRangeBoost: [number, number];
   names: LocalizedNames;
   battleResult: BattleResults;
+  shadow: boolean
 }
 
 export interface RaidList {
@@ -173,4 +174,12 @@ export interface RaidList {
 
 export interface Raid {
   currentList: RaidList;
+}
+
+interface ShiniesProps {
+  dexNr: number;
+  name: string;
+  image: string;
+  startDate: string,
+  endDate: string,
 }
