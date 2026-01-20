@@ -15,7 +15,7 @@ const EventPill = ({ event }: { event: GameEvent }) => {
           {event.name}
         </p>
         <div className="bg-nav-accent my-1 mr-1 rounded-lg text-xs items-center flex px-2">
-          <EventDiffToNow eventEnd={event.start} short />
+          <EventDiffToNow eventEnd={event.start}/>
         </div>
       </div>
     </>

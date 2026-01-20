@@ -71,7 +71,7 @@ const EventPopout = ({
           {/* Timing badge */}
           <Button variant="outline" className="rounded-3xl max-w-47.5 h-11.25"><Countdown event={gameEvent} /></Button>
           {/* AddToCalendar */}
-          {new Date() < new Date(gameEvent.start) ? (
+          {gameEvent.status === "upcoming" ? (
             <AddToCalendar eventDetails={gameEvent} />
           ) : null}
         </DialogFooter>
