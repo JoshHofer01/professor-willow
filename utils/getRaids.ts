@@ -15,24 +15,24 @@ export async function getRaids() {
     const raids: Raid = await response.json();
 
     const tier5: RaidPokemon[] = [
-      ...(raids.currentList.lvl5 || []),
-      ...(raids.currentList.shadow_lvl5 || []),
-      ...(raids.currentList.ultra_beast || [])
+      ...(raids.currentList.lvl5 || []).map((raid) => ({...raid, shadow: false})),
+      ...(raids.currentList.shadow_lvl5 || []).map((raid) => ({...raid, shadow: true})),
+      ...(raids.currentList.ultra_beast || []).map((raid) => ({...raid, shadow: false}))
     ];
 
     const tier3: RaidPokemon[] = [
-      ...(raids.currentList.lvl3 || []),
-      ...(raids.currentList.shadow_lvl3 || [])
+      ...(raids.currentList.lvl3 || []).map((raid) => ({...raid, shadow: false})),
+      ...(raids.currentList.shadow_lvl3 || []).map((raid) => ({...raid, shadow: true}))
     ];
 
     const tier1: RaidPokemon[] = [
-      ...(raids.currentList.lvl1 || []),
-      ...(raids.currentList.shadow_lvl1 || [])
+      ...(raids.currentList.lvl1 || []).map((raid) => ({...raid, shadow: false})),
+      ...(raids.currentList.shadow_lvl1 || []).map((raid) => ({...raid, shadow: true}))
     ];
 
     const mega: RaidPokemon[] = [
-      ...(raids.currentList.mega || []),
-      ...(raids.currentList.legendary_mega || [])
+      ...(raids.currentList.mega || []).map((raid) => ({...raid, shadow: false})),
+      ...(raids.currentList.legendary_mega || []).map((raid) => ({...raid, shadow: false}))
     ];
 
     return { tier5, tier3, tier1, mega };

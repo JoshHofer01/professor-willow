@@ -23,7 +23,7 @@ const SpecialRaidIndicators = ({
         )}
         {isShiny && (
           <Image
-            src="/ShinySparkles.png"
+            src="/GoldSparkles.png"
             width={18}
             height={18}
             alt="Possible Shiny"

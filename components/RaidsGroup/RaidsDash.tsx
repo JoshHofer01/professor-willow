@@ -10,6 +10,7 @@ import { RaidPokemon } from "@/interfaces/interfaces";
 import Image from "next/image";
 import { weServTransformURL } from "@/utils/weServTransform";
 import { PokemonTypeBadge } from "../PokemonGroup/PokemonIdDisplays";
+import SpecialRaidIndicators from "./SpecialRaidIndicators";
 
 const ContentSection = ({
   title,
@@ -34,49 +35,50 @@ const ContentSection = ({
 
 const RaidInfo = ({ raids }: { raids: RaidPokemon[] }) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {raids.map((raid) => (
-        <div
-          key={raid.id}
-          className="flex flex-col items-center rounded-xl shadow-md p-3 w-full"
-        >
-          {raid.shiny && (
-            <Image
-              src="/ShinySparkles.png"
-              width={18}
-              height={18}
-              alt="shiny image"
-              className="relative left-8 top-2"
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+      {raids.length > 0 ? (
+        raids.map((raid) => (
+          <div
+            key={raid.id}
+            className="relative flex flex-col items-center rounded-xl shadow-md p-3 w-full"
+          >
+            {/* Shadow and Shiny indicators */}
+            <SpecialRaidIndicators
+              isShadow={raid.shadow}
+              isShiny={raid.shiny}
             />
-          )}
-          {/* Image */}
-          <div className="relative w-20 h-20">
-            <Image
-              src={weServTransformURL(raid.assets.image, "pokedexImage")}
-              alt={raid.names.English}
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
 
-          <hr className="gap-y-2" />
+            {/* Image */}
+            <div className="relative w-20 h-20">
+              <Image
+                src={weServTransformURL(raid.assets.image, "pokedexImage")}
+                alt={raid.names.English}
+                fill
+                sizes="80px"
+                className="object-contain"
+              />
+            </div>
 
-          {/* Name */}
-          <div className="mt-2 text-center text-sm font-semibold">
-            {raid.names.English}
-          </div>
+            <hr className="gap-y-2" />
 
-          {/* Types */}
-          <div className="flex flex-row sm:flex-col gap-1 mt-1 justify-center items-center">
-            {raid.types.map((type) => (
-              <div key={type}>
-                <PokemonTypeBadge type={type} />
-              </div>
-            ))}
+            {/* Name */}
+            <div className="mt-2 text-center text-sm font-semibold">
+              {raid.names.English}
+            </div>
+
+            {/* Types */}
+            <div className="flex flex-row sm:flex-col gap-1 mt-1 justify-center items-center">
+              {raid.types.map((type) => (
+                <div key={type}>
+                  <PokemonTypeBadge type={type} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div>No current raids in this tier</div>
+      )}
     </div>
   );
 };
@@ -85,7 +87,7 @@ const RaidBossImage = ({ imageCount }: { imageCount: number }) => {
   return (
     <div className="flex flex-1 justify-between">
       <p>{imageCount === 4 ? "Mega" : `Tier ${imageCount}`}</p>
-      <div className="inline-flex">
+      <div className="inline-flex justify-center mt-1">
         {Array.from({ length: imageCount }, (_, i) => (
           <Image
             key={i}
@@ -93,7 +95,7 @@ const RaidBossImage = ({ imageCount }: { imageCount: number }) => {
             alt="RaidBoss"
             width={20}
             height={20}
-            className="object-scale-down"
+            className="object-scale-down w-5 h-5"
           />
         ))}
       </div>
@@ -101,13 +103,12 @@ const RaidBossImage = ({ imageCount }: { imageCount: number }) => {
   );
 };
 
-//TODO: Differentiate shadow raids
 const RaidsDash = async () => {
   const raidResult = await getRaids();
 
   if (!raidResult) return null;
 
-  const { tier5, tier3, tier1, mega } = raidResult;
+  const { tier5 = [], tier3 = [], tier1 = [], mega = [] } = raidResult;
   return (
     <Accordion
       type="single"
