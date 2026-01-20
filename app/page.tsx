@@ -171,11 +171,17 @@ export default async function DashboardPage() {
         <DashboardCard
           title="Dev Log"
           description="Thank you so much for using ProfesorWillow!! All the feedback has been overwhelming and I'm committed to improving this site."
-        >
-          <div className="text-xs">
+        > 
+          <div className="flex flex-col text-xs gap-1">
             <div className="inline-flex gap-2">
               <p>
-                - Added Raid & Battles dashboard widget. Pages for each raid coming soon
+                - Boosted Shinies now display according to your local time. Raids & Battles include shiny/shadow icons
+              </p>
+              <p className="text-muted-foreground">20th Jan</p>
+            </div>
+            <div className="inline-flex gap-2">
+              <p>
+                - Added Raid & Battles dashboard widget
               </p>
               <p className="text-muted-foreground">18th Jan</p>
             </div>
