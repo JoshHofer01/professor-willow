@@ -10,7 +10,7 @@ const SpecialRaidIndicators = ({
 }) => {
   return (
     <>
-      <div className="absolute top-2 right-2 flex gap-1">
+      <div className="absolute top-2 right-2 flex gap-1 z-10 bg-background/20 rounded-sm mt-1 p-1">
         {isShadow && (
           <Image
             src="/Shadow.png"
