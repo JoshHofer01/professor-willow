@@ -183,3 +183,27 @@ interface ShiniesProps {
   startDate: string,
   endDate: string,
 }
+
+export interface MaxBattle {
+  currentList: MaxBattleList;
+}
+
+export interface MaxBattleList {
+  tier_1: BattlePokemon[];
+  tier_2: BattlePokemon[];
+  tier_3: BattlePokemon[];
+  tier_4: BattlePokemon[];
+  tier_5: BattlePokemon[];
+  tier_6: BattlePokemon[];
+}
+
+export interface BattlePokemon {
+  id: string;
+  assets: Assets;
+  level: [1, 2, 3, 4, 5, 6];
+  shiny: boolean;
+  types: string[];
+  cpRange: [number, number];
+  names: LocalizedNames;
+  shadow: boolean
+}

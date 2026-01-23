@@ -1,6 +1,7 @@
 import { CurrentEventsCarousel } from "@/components/ClientComponents/EventCarousel";
 import { DashboardCard } from "@/components/CustomCards/DashboardCard";
 import UpcomingEventsDashboard from "@/components/EventsGroup/UpcomingEventsDash";
+import PageContainer from "@/components/PageContainer";
 import { BoostedShinies } from "@/components/PokemonGroup/BoostedShinies";
 import RaidsDash from "@/components/RaidsGroup/RaidsDash";
 import { Button } from "@/components/shadcn/button";
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   const { liveEvents } = await getEvents();
   return (
-    <main className="container max-w-full p-4 md:p-6 lg:p-8">
+    <PageContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6 ">
         {/* Current Events Carousel */}
         <DashboardCard
@@ -107,9 +108,7 @@ export default async function DashboardPage() {
         </DashboardCard>
 
         {/* Boosted Shiny Spawns */}
-        <DashboardCard
-          title="Boosted Shinies"
-        >
+        <DashboardCard title="Boosted Shinies">
           <BoostedShinies />
         </DashboardCard>
 
@@ -123,10 +122,18 @@ export default async function DashboardPage() {
           </div>
         </DashboardCard> */}
 
-        {/* Raids & Battles */}
+        {/* Raids */}
         <DashboardCard
-        title="Raids & Battles"
-        className="row-span-2">
+          title="Current Raid Bosses"
+          className="row-span-2"
+          action={
+            <Link href={"/raids"}>
+              <Button variant="ghost" size="sm" aria-label="More Raid Details">
+                More Details
+              </Button>
+            </Link>
+          }
+        >
           <RaidsDash />
         </DashboardCard>
 
@@ -170,22 +177,52 @@ export default async function DashboardPage() {
         {/* Dev Notes */}
         <DashboardCard
           title="Dev Log"
-          description="Thank you so much for using ProfesorWillow!! All the feedback has been overwhelming and I'm committed to improving this site."
-        > 
+          description="Thank you so much for using ProfesorWillow!!"
+           action={
+            <Link href={"events/live"}>
+              <Button variant="ghost" size="sm">
+                Full Log
+              </Button>
+            </Link>
+          }
+        >
           <div className="flex flex-col text-xs gap-1">
             <div className="inline-flex gap-2">
+              <p>- Improved Raid Boss widget</p>
+              <p className="text-muted-foreground">22nd Jan</p>
+            </div>
+            <div className="inline-flex gap-2">
               <p>
-                - Boosted Shinies now display according to your local time. Raids & Battles include shiny/shadow icons
+                - Added{" "}
+                <Link
+                  href="/raids"
+                  className="text-blue-300 hover:underline hover:underline-offset-2"
+                >
+                  Raids
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/battles"
+                  className="text-blue-300 hover:underline hover:underline-offset-2"
+                >
+                  Max Battles{" "}
+                </Link>
+                pages.
+              </p>
+              <p className="text-muted-foreground">22nd Jan</p>
+            </div>
+            <div className="inline-flex gap-2">
+              <p>
+                - Boosted Shinies now display according to your local time.
+                Raids & Battles include shiny/shadow icons
               </p>
               <p className="text-muted-foreground">20th Jan</p>
             </div>
             <div className="inline-flex gap-2">
-              <p>
-                - Added Raid & Battles dashboard widget
-              </p>
+              <p>- Added Raid & Battles dashboard widget</p>
               <p className="text-muted-foreground">18th Jan</p>
             </div>
-            <div className="inline-flex gap-2">
+            {/* <div className="inline-flex gap-2">
               <p>
                 - Upgraded{" "}
                 <Link
@@ -203,10 +240,10 @@ export default async function DashboardPage() {
                 </Link>
               </p>
               <p className="text-muted-foreground">17th Jan</p>
-            </div>
+            </div> */}
           </div>
         </DashboardCard>
       </div>
-    </main>
+    </PageContainer>
   );
 }

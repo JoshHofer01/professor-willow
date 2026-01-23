@@ -33,7 +33,7 @@ export function AppSidebar() {
               <SidebarGroup>
                 <SidebarMenu>
                   {pages.map((page) => (
-                    <Collapsible key={page.title} className="group/collapsible" defaultOpen={true}>
+                    <Collapsible key={page.title} className="group/collapsible" defaultOpen={page.title === "Events" ? true : false}>
                       {page.showsOnSidebar && (
                         <SidebarMenuItem className="my-1">
                           <CollapsibleTrigger asChild>
