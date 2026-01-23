@@ -179,7 +179,7 @@ export default async function DashboardPage() {
           title="Dev Log"
           description="Thank you so much for using ProfesorWillow!!"
            action={
-            <Link href={"events/live"}>
+            <Link href={"https://github.com/JoshHofer01/professor-willow/commits/main/"}>
               <Button variant="ghost" size="sm">
                 Full Log
               </Button>
