@@ -1,3 +1,4 @@
+import PageContainer from "@/components/PageContainer";
 import { PokedexDisplay } from "@/components/PokemonGroup/PokedexDisplay";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -16,22 +17,19 @@ export const metadata: Metadata = {
 
 const Pokemon = () => {
   return (
-    <main className="container max-w-full p-4 md:p-6 lg:p-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Pokedex</h1>
-        <p className="text-lg text-muted-foreground">
-          Entire Pokedex of Pokemon currently available in Pokemon GO
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Use filters for a refined search, or navigate to more detailed stats
-          by selecting a Pokemon.
-        </p>
-      </div>
+    <PageContainer
+      title="Pokedex"
+      description="Entire Pokedex of Pokemon currently available in Pokemon GO"
+    >
+      <p className="text-xs text-muted-foreground mb-2">
+        Use filters for a refined search, or navigate to more detailed stats by
+        selecting a Pokemon.
+      </p>
       <Suspense>
         {/*  Suspense wraps useSearchParams() in PokedexDisplay */}
         <PokedexDisplay />
       </Suspense>
-    </main>
+    </PageContainer>
   );
 };
 

@@ -3,6 +3,7 @@ import { GameEvent } from "@/interfaces/interfaces";
 import { EventPageCard } from "../CustomCards/EventCards";
 import BackToTopButton from "../ClientComponents/BackToTopButton";
 import EventPopout from "./EventPopout";
+import PageContainer from "../PageContainer";
 
 const EventDisplay = ({
   events,
@@ -12,11 +13,8 @@ const EventDisplay = ({
   pageType: string;
 }) => {
   return (
-    <main className="container max-w-full p-4 md:p-6 lg:p-8">
+    <PageContainer title={`${pageType} Events`}>
       <BackToTopButton />
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">{pageType} events</h1>
-      </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
         {events.length > 0 ? (
           events.map((gameEvent) => (
@@ -28,7 +26,7 @@ const EventDisplay = ({
           <div>No {pageType.toLowerCase()} events found.</div>
         )}
       </div>
-    </main>
+    </PageContainer>
   );
 };
 
