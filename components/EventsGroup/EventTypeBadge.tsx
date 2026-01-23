@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Badge } from "../shadcn/badge";
-import { eventTypeColorMap } from "@/utils/colorMaps";
+import { eventTypeColorMap } from "@/utils/maps";
 
 const EventTypeBadge = ({
   eventType,
