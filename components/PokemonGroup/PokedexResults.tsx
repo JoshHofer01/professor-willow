@@ -10,7 +10,7 @@ const PokedexResults = ({pokedex}: {pokedex: PokemonDataMin[]}) => {
         {pokedex.map((pokemon) =>
           pokemon.image != null ? (
             <Link
-              href={`/pokemon/${pokemon.name}`}
+              href={`/pokemon/${pokemon.name.toLowerCase()}`}
               key={pokemon.dexNr}
               className="max-w-max"
             >

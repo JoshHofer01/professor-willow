@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${pokemonName} | ProfessorWillow`,
       description: `Learn about ${pokemonName} in Pokemon GO!`,
       type: "website",
-      url: `https://professorwillow.me/pokemon/${pokemonName}`,
+      url: `https://professorwillow.me/pokemon/${pokemonName.toLowerCase()}`,
     },
   };
 }
