@@ -1,6 +1,7 @@
 // app/events/page.tsx
 import { OverviewPageCard } from "@/components/CustomCards/EventCards";
 import EventPopout from "@/components/EventsGroup/EventPopout";
+import PageContainer from "@/components/PageContainer";
 import { Button } from "@/components/shadcn/button";
 import { GameEvent } from "@/interfaces/interfaces";
 import { getEvents } from "@/utils/getEvents";
@@ -80,14 +81,10 @@ const EventsPage = async () => {
   const { liveEvents, upcomingEvents, completedEvents } = await getEvents();
 
   return (
-    <main className="container max-w-full p-4 md:p-6 lg:p-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Events Overview</h1>
-        <p className="text-lg text-muted-foreground">
-          Stay up to date with live, upcoming, and past events.
-        </p>
-      </div>
-
+    <PageContainer
+      title="Events Overview"
+      description="Stay up to date with live, upcoming, and past events."
+    >
       <div className="space-y-8">
         {/* Event information fetch can be found in getEvents.tsx */}
         <EventSection
@@ -106,7 +103,7 @@ const EventsPage = async () => {
           color="bg-slate-500"
         />
       </div>
-    </main>
+    </PageContainer>
   );
 };
 

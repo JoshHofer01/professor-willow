@@ -4,7 +4,7 @@ import React from "react";
 import ErrorPage from "../ErrorPage";
 import { EventDiffToNow } from "../ClientComponents/EventDiffToNow";
 import EventPopout from "./EventPopout";
-import { eventTypeColorMap } from "@/utils/colorMaps";
+import { eventTypeColorMap } from "@/utils/maps";
 
 const EventPill = ({ event }: { event: GameEvent }) => {
   const color = eventTypeColorMap[event.eventType] ?? "to-gray-400";

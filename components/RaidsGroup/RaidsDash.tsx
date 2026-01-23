@@ -8,9 +8,7 @@ import {
 import { getRaids } from "@/utils/getRaids";
 import { RaidPokemon } from "@/interfaces/interfaces";
 import Image from "next/image";
-import { weServTransformURL } from "@/utils/weServTransform";
-import { PokemonTypeBadge } from "../PokemonGroup/PokemonIdDisplays";
-import SpecialRaidIndicators from "./SpecialRaidIndicators";
+import BossCard from "./BossCard";
 
 const ContentSection = ({
   title,
@@ -38,43 +36,11 @@ const RaidInfo = ({ raids }: { raids: RaidPokemon[] }) => {
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
       {raids.length > 0 ? (
         raids.map((raid) => (
-          <div
-            key={raid.id}
-            className="relative flex flex-col items-center rounded-xl shadow-md p-3 w-full"
-          >
-            {/* Shadow and Shiny indicators */}
-            <SpecialRaidIndicators
-              isShadow={raid.shadow}
-              isShiny={raid.shiny}
-            />
-
-            {/* Image */}
-            <div className="relative w-20 h-20">
-              <Image
-                src={weServTransformURL(raid.assets.image, "pokedexImage")}
-                alt={raid.names.English}
-                fill
-                sizes="80px"
-                className="object-contain"
-              />
-            </div>
-
-            <hr className="gap-y-2" />
-
-            {/* Name */}
-            <div className="mt-2 text-center text-sm font-semibold">
-              {raid.names.English}
-            </div>
-
-            {/* Types */}
-            <div className="flex flex-row sm:flex-col gap-1 mt-1 justify-center items-center">
-              {raid.types.map((type) => (
-                <div key={type}>
-                  <PokemonTypeBadge type={type} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <BossCard
+            key={raid.names.English}
+            raidBoss={raid}
+            weather={raid.weather}
+          />
         ))
       ) : (
         <div>No current raids in this tier</div>
@@ -83,22 +49,20 @@ const RaidInfo = ({ raids }: { raids: RaidPokemon[] }) => {
   );
 };
 
-const RaidBossImage = ({ imageCount }: { imageCount: number }) => {
+export const RaidBossImages = ({ imageCount }: { imageCount: string }) => {
+  const imageCountNumber = parseInt(imageCount);
   return (
-    <div className="flex flex-1 justify-between">
-      <p>{imageCount === 4 ? "Mega" : `Tier ${imageCount}`}</p>
-      <div className="inline-flex justify-center mt-1">
-        {Array.from({ length: imageCount }, (_, i) => (
-          <Image
-            key={i}
-            src="/RaidBoss.png"
-            alt="RaidBoss"
-            width={20}
-            height={20}
-            className="object-scale-down w-5 h-5"
-          />
-        ))}
-      </div>
+    <div className="inline-flex justify-center mt-1">
+      {Array.from({ length: imageCountNumber }, (_, i) => (
+        <Image
+          key={i}
+          src="/RaidBoss.png"
+          alt="RaidBoss"
+          width={20}
+          height={20}
+          className="object-scale-down w-5 h-5"
+        />
+      ))}
     </div>
   );
 };
@@ -117,28 +81,48 @@ const RaidsDash = async () => {
       defaultValue="item-1"
     >
       <ContentSection
-        title={<RaidBossImage imageCount={5} />}
+        title={
+          <div className="flex flex-1 justify-between">
+            <p>Tier 5</p>
+            <RaidBossImages imageCount="5" />
+          </div>
+        }
         itemNumber="item-1"
       >
         <RaidInfo raids={tier5} />
       </ContentSection>
 
       <ContentSection
-        title={<RaidBossImage imageCount={4} />}
+        title={
+          <div className="flex flex-1 justify-between">
+            <p>Mega</p>
+            <RaidBossImages imageCount="4" />
+          </div>
+        }
         itemNumber="item-2"
       >
         <RaidInfo raids={mega} />
       </ContentSection>
 
       <ContentSection
-        title={<RaidBossImage imageCount={3} />}
+        title={
+          <div className="flex flex-1 justify-between">
+            <p>Tier 3</p>
+            <RaidBossImages imageCount="3" />
+          </div>
+        }
         itemNumber="item-3"
       >
         <RaidInfo raids={tier3} />
       </ContentSection>
 
       <ContentSection
-        title={<RaidBossImage imageCount={1} />}
+       title={
+          <div className="flex flex-1 justify-between">
+            <p>Tier 1</p>
+            <RaidBossImages imageCount="1" />
+          </div>
+        }
         itemNumber="item-4"
       >
         <RaidInfo raids={tier1} />

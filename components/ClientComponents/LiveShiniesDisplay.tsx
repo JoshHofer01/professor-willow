@@ -49,10 +49,10 @@ const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
           {shinies.map((pokemon) => (
             <div
               key={pokemon.dexNr}
-              className="bg-muted flex items-center justify-center p-1"
+              className="flex items-center justify-center p-1"
             >
               <Link
-                href={`/pokemon/${pokemon.name}`}
+                href={`/pokemon/${pokemon.name.toLowerCase()}`}
                 className="flex items-center justify-center h-full"
               >
                 {pokemon.image ? (
@@ -60,8 +60,8 @@ const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
                     <Image
                       src={pokemon.image}
                       alt={pokemon.name}
-                      width={100}
-                      height={100}
+                      width={64}
+                      height={64}
                       className="object-scale-down max-h-18 max-w-18"
                     />
                   </div>

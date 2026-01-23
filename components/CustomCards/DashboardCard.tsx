@@ -47,7 +47,7 @@ export function DashboardCard({
               <CardDescription>{description}</CardDescription>
             )}
           </div>
-          {action && <div className="shrink-0">{action}</div>}
+          {action && (<div className="shrink-0">{action}</div>)}
         </div>
       </CardHeader>
       <CardContent className="flex-1">{children}</CardContent>

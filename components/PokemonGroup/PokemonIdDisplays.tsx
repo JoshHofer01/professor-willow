@@ -18,7 +18,7 @@ import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
 import { weServTransformURL } from "@/utils/weServTransform";
 import PokemonPopout from "./PokemonPopout";
-import { pokemonTypeColorMap } from "@/utils/colorMaps";
+import { pokemonTypeColorMap } from "@/utils/maps";
 
 export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
   const nextMonNumber = (pokemon.dexNr + 1).toString();
@@ -41,7 +41,7 @@ export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
       ) : (
         <p className="text-xs">Next Pokemon:</p>
       )}
-      <Link href={`/pokemon/${nextMon?.names.English}`}>
+      <Link href={`/pokemon/${nextMon?.names.English.toLowerCase()}`}>
         <div className="transition-transform duration-200 hover:scale-110">
           <>
             <Tooltip>

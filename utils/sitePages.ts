@@ -1,18 +1,18 @@
-import { Calendar, Inbox, LucideIcon } from "lucide-react";
+import { Calendar, Inbox, LucideIcon, Swords } from "lucide-react";
 
 interface PageProps {
-  title: string,
-  href: string,
-  icon: LucideIcon,
-  hasMenu: boolean,
+  title: string;
+  href: string;
+  icon: LucideIcon;
+  hasMenu: boolean;
   components?: {
     title: string;
     href: string;
     description: string;
-  }[],
-  hidesAt: string,
-  showsOnSidebar: boolean
-  showsAtMin: boolean
+  }[];
+  hidesAt: string;
+  showsOnSidebar: boolean;
+  showsAtMin: boolean;
 }
 
 export const pages: PageProps[] = [
@@ -31,25 +31,44 @@ export const pages: PageProps[] = [
       {
         title: "Live Events",
         href: "/events/live",
-        description:
-          "",
+        description: "",
       },
       {
         title: "Upcoming Events",
         href: "/events/upcoming",
-        description:
-          "",
+        description: "",
       },
       {
         title: "Completed Events",
         href: "/events/completed",
-        description:
-          "",
+        description: "",
       },
     ],
     hidesAt: "",
     showsOnSidebar: true,
-    showsAtMin: true
+    showsAtMin: true,
+  },
+  {
+    title: "Raids",
+    href: "/raids",
+    icon: Swords,
+    hasMenu: true,
+    components: [
+      {
+        title: "Raid Bosses",
+        href: "/raids",
+        description:
+          "Check important information about the current Raid Boss rotation",
+      },
+      {
+        title: "Max Battles",
+        href: "/battles",
+        description: "View all Max Battle Pokemon currently in rotation",
+      },
+    ],
+    hidesAt: "",
+    showsOnSidebar: true,
+    showsAtMin: true,
   },
   {
     title: "Pokedex",
@@ -58,18 +77,8 @@ export const pages: PageProps[] = [
     hasMenu: false,
     hidesAt: "",
     showsOnSidebar: true,
-    showsAtMin: true
+    showsAtMin: true,
   },
-  /* {
-    title: "IV Calculator",
-    href: "/",
-    icon: Calculator,
-    hasMenu: false,
-    hidesAt: "hidden sm:block",
-    showsOnSidebar: true,
-    showsAtMin: false
-    
-  }, */
   /* {
     title: "Settings",
     href: "/settings",
@@ -79,7 +88,7 @@ export const pages: PageProps[] = [
     showsOnSidebar: true,
     showsAtMin: false
   }, */
-    /* {
+  /* {
     title: "More",
     href: "/",
     icon: Calendar,

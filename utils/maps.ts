@@ -57,3 +57,13 @@ export const pokemonTypeColorMap: Record<string, string> = {
     Steel: "bg-gray-500",
     Fairy: "bg-pink-300",
   };
+
+  export const weatherToImage: Record<string, string> = {
+    "rain": "/weather/rainy.webp",
+    "windy": "/weather/windy.webp",
+    "sunny": "/weather/sunny.webp",
+    "partlycloudy_day" : "/weather/partlycloudy.webp",
+    "fog": "/weather/foggy.webp",
+    "snow" : "/weather/snowy.webp",
+    "cloudy": "/weather/cloudy.webp"
+  }

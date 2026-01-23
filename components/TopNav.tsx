@@ -1,3 +1,5 @@
+'use client'
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,16 +20,14 @@ const TopNav = () => {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link href="/">
-              <div className="items-center flex flex-col ml-8">
-                {/* <h1 className="text-sm font-bold">HOME</h1>
-                <div className="w-11 h-0.5 bg-accent mx-auto"></div> */}
+              <div className="items-center flex flex-col ml-4">
                 <Image src="/ProfessorWillowHS.png" alt="ProfessorWillow" width={30} height={30} className="hover:scale-125 hover:transition hover:rotate-6"/>
               </div>
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         {pages.map((page) => (
-          <NavigationMenuItem key={page.title} className={cn("my-1 mx-3 min-w-fit", page.hidesAt)}>
+          <NavigationMenuItem key={page.title} className={cn("my-1 mx-auto min-w-fit", page.hidesAt)}>
             {!page.showsAtMin && !page.hasMenu ? (
               <NavigationMenuLink
                 href={page.href}
@@ -47,13 +47,14 @@ const TopNav = () => {
                 <NavigationMenuTrigger className="flex-row data-[active=true]:focus:bg-nav-accent data-[active=true]:hover:bg-nav-accent data-[active=true]:nav-accent/50 hover:bg-nav-accent focus:bg-nav-accent focus:text-nav-accent-foreground focus-visible:ring-ring/50">
                   {page.title}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                <NavigationMenuContent className="p-2">
+                  <ul className="flex flex-col sm:w-100 md:w-125 lg:w-150">
                     {page.components?.map((component) => (
                       <ListItem
                         key={component.title}
                         title={component.title}
                         href={component.href}
+                        className="hover:bg-muted-foreground/25 rounded-sm"
                       >
                         {component.description}
                       </ListItem>

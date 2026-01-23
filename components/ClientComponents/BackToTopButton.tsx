@@ -26,7 +26,7 @@ export default function BackToTopButton() {
   return (
     <Fragment>
       {show ? (
-        <div className="fixed top-15 right-0 mb-6 mr-6 z-10">
+        <div className="fixed top-15 right-0 mb-6 mr-6 z-8">
           <button
             onClick={jumpToTop}
             className="bg-nav text-white rounded-full p-2 hover:bg-nav-accent"

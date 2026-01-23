@@ -18,8 +18,8 @@ const PokemonPopout = ({
 }: {
   children: React.ReactNode;
   pokemonName: string;
-  regularImage: string;
-  shinyImage: string;
+  regularImage?: string;
+  shinyImage?: string;
 }) => {
   return (
     <Dialog>
@@ -30,34 +30,41 @@ const PokemonPopout = ({
         <DialogTitle>{pokemonName}</DialogTitle>
         <DialogDescription>{pokemonName}</DialogDescription>
       </DialogHeader>
-      <DialogContent showCloseButton={false} className="max-w-xs sm:max-w-fit">
+      <DialogContent className="max-w-xs sm:max-w-fit">
         <div className="flex flex-col justify-center">
           {/* Image */}
-          <Image
-            src={
-              regularImage
-                ? weServTransformURL(regularImage, "eventCardImage")
-                : "/QuestionMark.png"
-            }
-            width={300}
-            height={300}
-            alt={pokemonName}
-            className="object-scale-down justify-center max-h-56 max-w-64"
-          />
-          <hr className="my-4" />
+          {regularImage && (
+            <Image
+              src={
+                regularImage
+                  ? weServTransformURL(regularImage, "eventCardImage")
+                  : "/QuestionMark.png"
+              }
+              width={300}
+              height={300}
+              alt={pokemonName}
+              className="object-scale-down justify-center max-h-56 max-w-64"
+            />
+          )}
+          {regularImage && shinyImage && (<hr className="my-4" />)}
           {/* Shiny Image */}
-          <Image
-            src={
-              shinyImage
-                ? weServTransformURL(shinyImage, "eventCardImage")
-                : "/QuestionMark.png"
-            }
-            width={300}
-            height={300}
-            alt={pokemonName}
-            className="object-scale-down justify-center max-h-56 max-w-64"
-          />
-          <h3 className="text-2xl sm:text-xl font-bold text-center mt-2">{pokemonName}</h3>
+          {shinyImage && (
+            <Image
+              src={
+                shinyImage
+                  ? weServTransformURL(shinyImage, "eventCardImage")
+                  : "/QuestionMark.png"
+              }
+              width={300}
+              height={300}
+              alt={pokemonName}
+              className="object-scale-down justify-center max-h-56 max-w-64"
+            />
+          )}
+
+          <h3 className="text-2xl sm:text-xl font-bold text-center mt-2">
+            {pokemonName}
+          </h3>
         </div>
       </DialogContent>
     </Dialog>

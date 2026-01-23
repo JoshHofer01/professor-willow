@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../shadcn/button";
 import { dateFormatter } from "@/utils/dateFormatter";
 import Countdown from "./Countdown";
-import { eventTypeColorMap } from "@/utils/colorMaps";
+import { eventTypeColorMap } from "@/utils/maps";
 
 const EventPopout = ({
   children,
@@ -36,7 +36,7 @@ const EventPopout = ({
         <DialogTitle>{gameEvent.name}</DialogTitle>
         <DialogDescription>{gameEvent.name}</DialogDescription>
       </DialogHeader>
-      <DialogContent showCloseButton={false} className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl">
+      <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl">
         {/* Image */}
         <div className="flex flex-col">
           <Image
