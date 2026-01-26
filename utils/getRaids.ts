@@ -5,6 +5,7 @@ export async function getRaids() {
   try {
     const response = await fetch(
       "https://pokemon-go-api.github.io/pokemon-go-api/api/raidboss.json",
+      { next: { revalidate: 600 } }
     );
 
     if (!response.ok) {
@@ -48,6 +49,7 @@ export async function getMaxBattles() {
   try {
     const response = await fetch(
       "https://pokemon-go-api.github.io/pokemon-go-api/api/maxbattles.json",
+      { next: { revalidate: 600 } }
     );
 
     if (!response.ok) {
