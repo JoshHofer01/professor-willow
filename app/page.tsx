@@ -85,7 +85,7 @@ export default async function DashboardPage() {
             href: "/events/upcoming",
             icon: CalendarDays,
           }}
-          className="md:col-span-2 lg:col-span-1 xl:col-span-1"
+          className="md:col-span-2 lg:col-span-1"
         >
           <UpcomingEventsDashboard />
         </DashboardCard>
@@ -125,7 +125,7 @@ export default async function DashboardPage() {
         {/* Raids */}
         <DashboardCard
           title="Current Raid Bosses"
-          className="row-span-2"
+          className="row-span-3"
           action={
             <Link href={"/raids"}>
               <Button variant="ghost" size="sm" aria-label="More Raid Details">
