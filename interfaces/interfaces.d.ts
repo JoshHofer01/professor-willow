@@ -13,7 +13,7 @@ export interface GameEvent {
 export interface PokemonDataMin {
   dexNr: number;
   generation: number;
-  name: string,
+  name: string;
   primaryType: string;
   secondaryType?: string | null;
   image?: string | null;
@@ -156,7 +156,7 @@ export interface RaidPokemon {
   cpRangeBoost: [number, number];
   names: LocalizedNames;
   battleResult: BattleResults;
-  shadow: boolean
+  shadow: boolean;
 }
 
 export interface RaidList {
@@ -180,8 +180,8 @@ interface ShiniesProps {
   dexNr: number;
   name: string;
   image: string;
-  startDate: string,
-  endDate: string,
+  startDate: string;
+  endDate: string;
 }
 
 export interface MaxBattle {
@@ -205,5 +205,21 @@ export interface BattlePokemon {
   types: string[];
   cpRange: [number, number];
   names: LocalizedNames;
-  shadow: boolean
+  shadow: boolean;
+}
+
+interface Research {
+  text: string;
+  type: string;
+  rewards: Reward[];
+}
+
+interface Reward {
+  name: string;
+  image: string;
+  canBeShiny: boolean;
+  combatPower: {
+    min: number;
+    max: number;
+  };
 }
