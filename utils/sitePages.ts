@@ -1,4 +1,4 @@
-import { Calendar, Inbox, LucideIcon, Swords } from "lucide-react";
+import { Calendar, ClockCheck, Inbox, LucideIcon, Swords } from "lucide-react";
 
 interface PageProps {
   title: string;
@@ -75,20 +75,20 @@ export const pages: PageProps[] = [
     href: "/pokemon?gen=1",
     icon: Inbox,
     hasMenu: false,
-    hidesAt: "",
+    hidesAt: "hidden sm:block",
     showsOnSidebar: true,
-    showsAtMin: true,
+    showsAtMin: false,
   },
-  /* {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
+  {
+    title: "Research",
+    href: "/research",
+    icon: ClockCheck,
     hasMenu: false,
     hidesAt: "hidden sm:block",
     showsOnSidebar: true,
     showsAtMin: false
-  }, */
-  /* {
+  },
+  {
     title: "More",
     href: "/",
     icon: Calendar,
@@ -101,20 +101,14 @@ export const pages: PageProps[] = [
           "View a list of all 1,025 Pokemon that includes variants, species differences, and special forms",
       },
       {
-        title: "IV Calculator",
-        href: "/",
+        title: "Research Rewards",
+        href: "/research",
         description:
-          "Assess the precise IV percentage of each of your Pokemon",
-      },
-      {
-        title: "Settings",
-        href: "/settings",
-        description:
-          "",
+          "See all current research tasks with Pokemon as the reward",
       },
     ],
     hidesAt: "block sm:hidden",
     showsOnSidebar: false,
     showsAtMin: true
-  }, */
+  }
 ];
