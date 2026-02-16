@@ -177,9 +177,13 @@ export default async function DashboardPage() {
         {/* Dev Notes */}
         <DashboardCard
           title="Dev Log"
-          description="Thank you so much for using ProfesorWillow!!"
-           action={
-            <Link href={"https://github.com/JoshHofer01/professor-willow/commits/main/"}>
+          description="Thank you so much for using ProfesorWillow!! Currently viewing last 3 site updates."
+          action={
+            <Link
+              href={
+                "https://github.com/JoshHofer01/professor-willow/commits/main/"
+              }
+            >
               <Button variant="ghost" size="sm">
                 Full Log
               </Button>
@@ -188,8 +192,17 @@ export default async function DashboardPage() {
         >
           <div className="flex flex-col text-xs gap-1">
             <div className="inline-flex gap-2">
+              <p>
+                - Added{" "}
+                <Link
+                  href="/research"
+                  className="text-blue-300 hover:underline hover:underline-offset-2"
+                >/research</Link>{" "}
+                to view all research tasks with encounter rewards{" "}
+              </p>
+            </div>
+            <div className="inline-flex gap-2">
               <p>- Improved Raid Boss widget</p>
-              <p className="text-muted-foreground">22nd Jan</p>
             </div>
             <div className="inline-flex gap-2">
               <p>
@@ -209,38 +222,7 @@ export default async function DashboardPage() {
                 </Link>
                 pages.
               </p>
-              <p className="text-muted-foreground">22nd Jan</p>
             </div>
-            <div className="inline-flex gap-2">
-              <p>
-                - Boosted Shinies now display according to your local time.
-                Raids & Battles include shiny/shadow icons
-              </p>
-              <p className="text-muted-foreground">20th Jan</p>
-            </div>
-            <div className="inline-flex gap-2">
-              <p>- Added Raid & Battles dashboard widget</p>
-              <p className="text-muted-foreground">18th Jan</p>
-            </div>
-            {/* <div className="inline-flex gap-2">
-              <p>
-                - Upgraded{" "}
-                <Link
-                  href="pokemon"
-                  className="text-blue-300 hover:underline hover:underline-offset-2"
-                >
-                  pokedex
-                </Link>{" "}
-                display to include Elite moves & Gigantamax/Mega forms{" "}
-                <Link
-                  href="pokemon/venusaur"
-                  className="text-blue-300 hover:underline hover:underline-offset-2"
-                >
-                  (Venusaur Example)
-                </Link>
-              </p>
-              <p className="text-muted-foreground">17th Jan</p>
-            </div> */}
           </div>
         </DashboardCard>
       </div>

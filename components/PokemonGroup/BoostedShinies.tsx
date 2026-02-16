@@ -5,34 +5,34 @@ import { LiveShiniesDisplay } from "../ClientComponents/LiveShiniesDisplay";
 export const BoostedShinies = () => {
   const boostedShinies: ShiniesProps[] = [
     {
-      dexNr: 50,
-      name: "Diglett",
+      dexNr: 522,
+      name: "Blitzle",
       image: weServTransformURL(
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm50.s.icon.png",
+        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm522.s.icon.png",
         "pokedexImage",
       ),
-      startDate: "January 27, 2026 10:00:00",
-      endDate: "February 1, 2026 16:00:00",
+      startDate: "February 17, 2026 10:00:00",
+      endDate: "February 21, 2026 20:00:00",
     },
     {
-      dexNr: 734,
-      name: "Yungoos",
+      dexNr: 554,
+      name: "Darumaka",
       image: weServTransformURL(
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm734.s.icon.png",
+        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm554.s.icon.png",
         "pokedexImage",
       ),
-      startDate: "January 27, 2026 10:00:00",
-      endDate: "February 1, 2026 16:00:00",
+      startDate: "February 17, 2026 10:00:00",
+      endDate: "February 21, 2026 20:00:00",
     },
     {
-      dexNr: 37,
-      name: "Vulpix",
+      dexNr: 999,
+      name: "Gimmighoul",
       image: weServTransformURL(
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm37.s.icon.png",
+        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm999.s.icon.png",
         "pokedexImage",
       ),
-      startDate: "February 1, 2026 14:00:00",
-      endDate: "February 1, 2026 17:00:00",
+      startDate: "February 17, 2026 10:00:00",
+      endDate: "February 21, 2026 20:00:00",
     },
   ];
 
