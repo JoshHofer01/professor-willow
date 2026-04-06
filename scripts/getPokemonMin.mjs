@@ -1,4 +1,3 @@
-
 // npm run pokemon:index
 // Recommended to run minimally once per Pokemon GO update cycle
 
@@ -27,7 +26,7 @@ async function getPokemonIndex() {
         name: element.names.English,
         primaryType: element.primaryType.names.English,
         secondaryType: element.secondaryType ? element.secondaryType.names.English : null,
-        image: element.assets ? element.assets.image : null,
+        image: element.assets ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${element.dexNr}.png` : null,
       };
       pokemonDataMin.push(pokemon);
     });
