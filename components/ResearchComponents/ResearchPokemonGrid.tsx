@@ -25,7 +25,7 @@ const ResearchPokemonGrid = ({ rewards }: { rewards: Reward[] }) => {
                     width={12}
                     height={12}
                     alt="Possible Shiny"
-                    title="Possible Shiny from Raid"
+                    title="Possible Shiny"
                     className="object-contain"
                   />
                 </div>

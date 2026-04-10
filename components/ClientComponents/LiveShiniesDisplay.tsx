@@ -60,9 +60,9 @@ const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
                     <Image
                       src={pokemon.image}
                       alt={pokemon.name}
-                      width={64}
-                      height={64}
-                      className="object-scale-down max-h-18 max-w-18"
+                      width={96}
+                      height={96}
+                      className="object-scale-down max-h-20 max-w-20"
                     />
                   </div>
                 ) : (

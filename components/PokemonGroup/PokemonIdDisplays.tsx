@@ -17,7 +17,6 @@ import {
 import { getPokemonByDexNr } from "@/utils/getPokemon";
 import ErrorPage from "@/components/ErrorPage";
 import { weServTransformURL } from "@/utils/weServTransform";
-import PokemonPopout from "./PokemonPopout";
 import { pokemonTypeColorMap } from "@/utils/maps";
 
 export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
@@ -167,10 +166,14 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src={weServTransformURL(
-              pokemon.assets.image,
-              "pokemonDetailsImage",
-            )}
+            src={
+              pokemon.assets.image == "/QuestionMark.png"
+                ? pokemon.assets.image
+                : weServTransformURL(
+                    pokemon.assets.image,
+                    "pokemonDetailsImage",
+                  )
+            }
             alt={pokemon.names.English}
             width={300}
             height={300}
@@ -187,10 +190,14 @@ export const PokemonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <Image
-              src={weServTransformURL(
-                pokemon.assets.shinyImage,
-                "pokemonDetailsImage",
-              )}
+              src={
+                pokemon.assets.image == "/QuestionMark.png"
+                  ? pokemon.assets.image
+                  : weServTransformURL(
+                      pokemon.assets.shinyImage,
+                      "pokemonDetailsImage",
+                    )
+              }
               alt={`Shiny ${pokemon?.names?.English ?? pokemon?.id}`}
               width={300}
               height={300}
@@ -242,14 +249,10 @@ export const MovesDisplay = ({
   );
 };
 
-export const PokemonTypeBadge = ({ type }:{type: string}) => {
-    const color = pokemonTypeColorMap[type] ?? "bg-gray-400";
-    return (
-      <Badge className={`${color} text-white rounded-md`}>
-        {type}
-      </Badge>
-    );
-  };
+export const PokemonTypeBadge = ({ type }: { type: string }) => {
+  const color = pokemonTypeColorMap[type] ?? "bg-gray-400";
+  return <Badge className={`${color} text-white rounded-md`}>{type}</Badge>;
+};
 
 export const TypeBadgesDisplay = ({
   primary,
@@ -272,18 +275,30 @@ export const TypeBadgesDisplay = ({
 export const FormDisplay = ({
   name,
   assets,
-  formType
+  formType,
 }: {
   name: string;
   assets: AssetForm[];
-  formType: string
+  formType: string;
 }) => {
   const asset = assets.find((asset) => asset.form === formType);
 
   if (asset === undefined) return null;
 
   return (
-    <PokemonPopout
+    <Image
+      src={`/${formType}.png`}
+      alt={`${formType} ${name}`}
+      title={`HAS ${formType}`} // Remove when original assets are fixed
+      width={50}
+      height={50}
+    />
+  );
+};
+
+//! Return value for FormDisplay once original assets are fixed
+{
+  /* <PokemonPopout
       pokemonName={`${formType} ${name}`}
       regularImage={asset.image}
       shinyImage={asset.shinyImage}
@@ -294,7 +309,5 @@ export const FormDisplay = ({
         width={50}
         height={50}
       />
-    </PokemonPopout>
-  );
-};
-
+    </PokemonPopout> */
+}
