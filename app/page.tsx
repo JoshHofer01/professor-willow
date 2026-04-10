@@ -193,6 +193,11 @@ export default async function DashboardPage() {
           <div className="flex flex-col text-xs gap-1">
             <div className="inline-flex gap-2">
               <p>
+                Source for assets has been changed while original source is updating.
+              </p>
+            </div>
+            <div className="inline-flex gap-2">
+              <p>
                 - Added{" "}
                 <Link
                   href="/research"
@@ -203,25 +208,6 @@ export default async function DashboardPage() {
             </div>
             <div className="inline-flex gap-2">
               <p>- Improved Raid Boss widget</p>
-            </div>
-            <div className="inline-flex gap-2">
-              <p>
-                - Added{" "}
-                <Link
-                  href="/raids"
-                  className="text-blue-300 hover:underline hover:underline-offset-2"
-                >
-                  Raids
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="/battles"
-                  className="text-blue-300 hover:underline hover:underline-offset-2"
-                >
-                  Max Battles{" "}
-                </Link>
-                pages.
-              </p>
             </div>
           </div>
         </DashboardCard>

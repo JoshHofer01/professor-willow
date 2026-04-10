@@ -20,9 +20,9 @@ const PokedexResults = ({pokedex}: {pokedex: PokemonDataMin[]}) => {
                   alt={pokemon.name}
                   width={100}
                   height={100}
-                  className="overflow-hidden h-20 object-scale-down p-1"
+                  className="overflow-hidden h-24 object-scale-down p-0.5"
                 />
-                <div className="text-xs flex flex-col gap-1 m-2 min-w-fit truncate text-center">
+                <div className="text-xs flex flex-col gap-1 mx-2 mb-2 min-w-fit truncate text-center">
                   <p className="text-muted-foreground">#{pokemon.dexNr}</p>
                   <p className="text-[9px] sm:text-xs">{pokemon.name}</p>
                 </div>

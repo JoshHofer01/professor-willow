@@ -1,10 +1,11 @@
 import { PokemonData } from "@/interfaces/interfaces";
 import * as Sentry from "@sentry/nextjs";
+import { getPkmnImgUrl } from "./getPkmnImgUrl";
 
 export async function getPokemonByGeneration(genNumber: string) {
   try {
     const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/generation/${genNumber}.json`
+      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/generation/${genNumber}.json`,
     );
 
     if (!response.ok) {
@@ -15,7 +16,7 @@ export async function getPokemonByGeneration(genNumber: string) {
     const pokemonData: PokemonData[] = await response.json();
     pokemonData.map((mon) => {
       try {
-        fixNullAssets(mon);
+        fixAssets(mon);
       } catch (error) {
         Sentry.captureException(error);
       }
@@ -31,7 +32,7 @@ export async function getPokemonByGeneration(genNumber: string) {
 export async function getAllPokemon() {
   try {
     const response = await fetch(
-      "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex.json"
+      "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex.json",
     );
 
     if (!response.ok) {
@@ -43,7 +44,7 @@ export async function getAllPokemon() {
 
     const pokemonData = data.map((mon) => {
       try {
-        return fixNullAssets(mon);
+        return fixAssets(mon);
       } catch (error) {
         Sentry.captureException(error);
         return mon;
@@ -60,7 +61,7 @@ export async function getAllPokemon() {
 export async function getPokemonByDexNr(dexNr: string) {
   try {
     const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/id/${dexNr}.json`
+      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/id/${dexNr}.json`,
     );
 
     if (!response.ok) {
@@ -69,7 +70,7 @@ export async function getPokemonByDexNr(dexNr: string) {
     }
 
     const pokemonData: PokemonData = await response.json();
-    const pokemon = fixNullAssets(pokemonData);
+    const pokemon = fixAssets(pokemonData);
 
     return { pokemon };
   } catch (error) {
@@ -81,7 +82,7 @@ export async function getPokemonByDexNr(dexNr: string) {
 export async function getPokemonByName(pokemonName: string) {
   try {
     const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/name/${pokemonName.toUpperCase()}.json`
+      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/name/${pokemonName.toUpperCase()}.json`,
     );
 
     if (!response.ok) {
@@ -90,7 +91,7 @@ export async function getPokemonByName(pokemonName: string) {
     }
 
     const pokemonData: PokemonData = await response.json();
-    const pokemon = fixNullAssets(pokemonData);
+    const pokemon = fixAssets(pokemonData);
 
     return { pokemon };
   } catch (error) {
@@ -99,10 +100,16 @@ export async function getPokemonByName(pokemonName: string) {
   }
 }
 
-function fixNullAssets(pokemonData: PokemonData): PokemonData {
+function fixAssets(pokemonData: PokemonData): PokemonData {
   const fallbackAsset = "/QuestionMark.png";
   if (pokemonData.assets !== null) {
-    return pokemonData;
+    return {
+      ...pokemonData,
+      assets: {
+        image: getPkmnImgUrl(pokemonData.dexNr),
+        shinyImage: getPkmnImgUrl(pokemonData.dexNr, true),
+      }
+    };
   }
 
   try {
@@ -111,7 +118,7 @@ function fixNullAssets(pokemonData: PokemonData): PokemonData {
       assets: {
         image: fallbackAsset,
         shinyImage: fallbackAsset,
-      },
+      }
     };
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {

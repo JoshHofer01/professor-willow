@@ -32,7 +32,7 @@ const BossCard = ({
       )}
 
       {/* Image */}
-      <div className="relative w-20 h-20">
+      <div className="relative w-24 h-24">
         <Link href={`/pokemon/${raidBoss.id.toLowerCase()}`}>
         <Image
           src={weServTransformURL(raidBoss.assets.image, "pokedexImage")}

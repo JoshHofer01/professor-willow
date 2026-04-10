@@ -1,6 +1,7 @@
 import { ShiniesProps } from "@/interfaces/interfaces";
 import { weServTransformURL } from "@/utils/weServTransform";
 import { LiveShiniesDisplay } from "../ClientComponents/LiveShiniesDisplay";
+import { getPkmnImgUrl } from "@/utils/getPkmnImgUrl";
 
 export const BoostedShinies = () => {
   const boostedShinies: ShiniesProps[] = [
@@ -8,32 +9,21 @@ export const BoostedShinies = () => {
       dexNr: 522,
       name: "Blitzle",
       image: weServTransformURL(
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm522.s.icon.png",
+        getPkmnImgUrl(522, true),
         "pokedexImage",
       ),
       startDate: "February 17, 2026 10:00:00",
       endDate: "February 21, 2026 20:00:00",
     },
-    {
-      dexNr: 554,
-      name: "Darumaka",
-      image: weServTransformURL(
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm554.s.icon.png",
-        "pokedexImage",
-      ),
-      startDate: "February 17, 2026 10:00:00",
-      endDate: "February 21, 2026 20:00:00",
-    },
-    {
-      dexNr: 999,
-      name: "Gimmighoul",
-      image: weServTransformURL(
-        "https://raw.githubusercontent.com/RetroJohn86/PoGo-Unpacked-DL-Assets/main/Sprite/pm%20and%20portraits/pm999.s.icon.png",
-        "pokedexImage",
-      ),
-      startDate: "February 17, 2026 10:00:00",
-      endDate: "February 21, 2026 20:00:00",
-    },
+  {
+    dexNr: 957,
+    name: "Tinkatink",
+    image: weServTransformURL(
+      getPkmnImgUrl(957, true),
+      "pokedexImage"),
+    startDate: "April 11, 2026 14:00:00",
+    endDate: "April 11, 2026 17:00:00",
+  }
   ];
 
   return (
