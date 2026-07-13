@@ -17,17 +17,17 @@ export function CurrentEventsCarousel({
 }: {
   eventData: GameEvent[];
 }) {
-  const plugin = React.useRef(
-    Autoplay({ delay: 3500, stopOnInteraction: true })
-  );
 
   return (
     <>
       <Carousel
-        plugins={[plugin.current]}
+        plugins={[
+        Autoplay({
+          delay: 2000,
+          stopOnMouseEnter: true,
+        }),
+      ]}
         className="w-full border-x border-b rounded-2xl"
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.reset}
       >
         <CarouselContent className="-ml-2 md:-ml-4">
           {eventData.map((event, index) => (
