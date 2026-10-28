@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { renderToString } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NOW, makeEvent } from "@/test/fixtures/events";
@@ -114,6 +115,34 @@ describe("UpcomingEventsDashboard", () => {
   it("says when nothing is coming up", () => {
     render(<UpcomingEventsDashboard events={[liveEvent("Live One")]} />);
     expect(screen.getByText("No upcoming events right now")).toBeInTheDocument();
+  });
+});
+
+describe("opening event details", () => {
+  // Regression: after classification moved to the client, cards stopped
+  // receiving the popout trigger's props, so clicks did nothing.
+  it.each([
+    ["EventDisplay", () => <EventDisplay events={events} status="upcoming" />],
+    ["EventsOverview", () => <EventsOverview events={events} />],
+    ["UpcomingEventsDashboard", () => <UpcomingEventsDashboard events={events} />],
+  ])("opens the popout when a card in %s is clicked", async (_, ui) => {
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    render(ui());
+
+    await user.click(screen.getByRole("button", { name: /Soon 1/ }));
+
+    expect(screen.getByRole("dialog", { name: "Soon 1" })).toBeInTheDocument();
+  });
+
+  it.each(["{Enter}", " "])("opens the popout from the keyboard with %j", async (key) => {
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    render(<EventDisplay events={events} status="live" />);
+
+    await user.tab();
+    expect(screen.getByRole("button", { name: /Live One/ })).toHaveFocus();
+    await user.keyboard(key);
+
+    expect(screen.getByRole("dialog", { name: "Live One" })).toBeInTheDocument();
   });
 });
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Dialog,
@@ -18,6 +20,19 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import Countdown from "./Countdown";
 import { eventTypeColorMap } from "@/utils/maps";
 
+// The trigger is a card, not a <button>, so it takes the button role and
+// keyboard activation itself.
+function activateOnEnterOrSpace(event: React.KeyboardEvent<HTMLElement>) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    event.currentTarget.click();
+  }
+}
+
+/**
+ * Opens event details from a card. `children` must be a DOM element or a
+ * component that passes its props to one, so the trigger's handlers land.
+ */
 const EventPopout = ({
   children,
   gameEvent,
@@ -27,7 +42,13 @@ const EventPopout = ({
 }) => {
   return (
     <Dialog>
-      <DialogTrigger asChild className="hover:cursor-pointer">
+      <DialogTrigger
+        asChild
+        role="button"
+        tabIndex={0}
+        onKeyDown={activateOnEnterOrSpace}
+        className="hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
         {children}
       </DialogTrigger>
       <DialogContent

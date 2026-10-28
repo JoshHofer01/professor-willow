@@ -175,7 +175,7 @@ describe("EventPopout", () => {
     );
   });
 
-  it("opens from a card with the keyboard [bug 2.8]", async () => {
+  it("opens from a card with the keyboard", async () => {
     const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
     const event = upcoming();
     render(
