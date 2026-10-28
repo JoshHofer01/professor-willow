@@ -1,33 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Spinner } from "../shadcn/spinner";
 import { ShiniesProps } from "@/interfaces/interfaces";
 import Link from "next/link";
 import Image from "next/image";
-import { findPokemonByDexNr, pokemonHref } from "@/utils/pokedex";
+import { useNow } from "@/hooks/use-now";
 
-export const LiveShiniesDisplay = ({boostedShinies}: {boostedShinies: ShiniesProps[]}) => {
-
-  const [liveBoostedShinies, setLiveBoostedShinies] = useState<
-    ShiniesProps[] | null
-  >(null);
-
-  useEffect(() => {
-    const getLiveShinies = () => {
-      const now = new Date();
-      const filteredShinies = boostedShinies.filter(
-        (pokemon) => now > new Date(pokemon.startDate) && now < new Date(pokemon.endDate),
-      );
-      setLiveBoostedShinies(filteredShinies);
-    };
-
-    getLiveShinies();
-
-    // Refresh every 5 mins page hasn't been reloaded
-    const interval = setInterval(getLiveShinies, 5 * 60000);
-    return () => clearInterval(interval);
-  }, []);
+export const LiveShiniesDisplay = ({ boostedShinies }: { boostedShinies: ShiniesProps[] }) => {
+  // Boost windows are in the viewer's local time, so filter in the browser.
+  const now = useNow();
+  const liveBoostedShinies = useMemo(
+    () =>
+      now &&
+      boostedShinies.filter(
+        (pokemon) => now >= new Date(pokemon.startDate) && now < new Date(pokemon.endDate),
+      ),
+    [boostedShinies, now],
+  );
 
   return (
     <>
@@ -42,6 +32,16 @@ export const LiveShiniesDisplay = ({boostedShinies}: {boostedShinies: ShiniesPro
   );
 };
 
+const ShinyImage = ({ pokemon }: { pokemon: ShiniesProps }) => (
+  <Image
+    src={pokemon.image}
+    alt={pokemon.name}
+    width={96}
+    height={96}
+    className="object-scale-down max-h-20 max-w-20"
+  />
+);
+
 const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
   return (
     <>
@@ -49,35 +49,19 @@ const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
         <>
           {shinies.map((pokemon) => (
             <div
-              key={pokemon.dexNr}
+              key={pokemon.id}
               className="flex items-center justify-center p-1"
             >
-              <Link
-                href={pokemonHref(
-                  findPokemonByDexNr(pokemon.dexNr)?.id ?? pokemon.name,
-                )}
-                className="flex items-center justify-center h-full"
-              >
-                {pokemon.image ? (
-                  <div>
-                    <Image
-                      src={pokemon.image}
-                      alt={pokemon.name}
-                      width={96}
-                      height={96}
-                      className="object-scale-down max-h-20 max-w-20"
-                    />
-                  </div>
-                ) : (
-                  <Image
-                    src="/QuestionMark.png"
-                    alt="Question Mark"
-                    width={64}
-                    height={64}
-                    className=""
-                  />
-                )}
-              </Link>
+              {pokemon.href ? (
+                <Link
+                  href={pokemon.href}
+                  className="flex items-center justify-center h-full"
+                >
+                  <ShinyImage pokemon={pokemon} />
+                </Link>
+              ) : (
+                <ShinyImage pokemon={pokemon} />
+              )}
             </div>
           ))}
         </>
@@ -91,5 +75,3 @@ const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
     </>
   );
 };
-
-

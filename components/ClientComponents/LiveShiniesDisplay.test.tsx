@@ -7,9 +7,10 @@ const MINUTE = 60_000;
 const at = (offsetMs: number) => new Date(NOW.getTime() + offsetMs).toISOString();
 
 const shiny = (name: string, dexNr: number, start: number, end: number) => ({
-  dexNr,
+  id: `${dexNr}-${at(start)}`,
   name,
   image: `https://example.test/${dexNr}.png`,
+  href: `/pokemon/${name.toLowerCase()}`,
   startDate: at(start),
   endDate: at(end),
 });
@@ -39,6 +40,16 @@ describe("LiveShiniesDisplay", () => {
   it("links each shiny to its Pokédex page", () => {
     render(<LiveShiniesDisplay boostedShinies={[shiny("Pawniard", 624, -MINUTE, MINUTE)]} />);
     expect(screen.getByRole("link")).toHaveAttribute("href", "/pokemon/pawniard");
+  });
+
+  it("shows the image without a link when there's no Pokédex page", () => {
+    render(
+      <LiveShiniesDisplay
+        boostedShinies={[{ ...shiny("Alolan Grimer", 88, -MINUTE, MINUTE), href: null }]}
+      />,
+    );
+    expect(screen.getByRole("img", { name: "Alolan Grimer" })).toBeInTheDocument();
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
   });
 
   it("shows an empty state when nothing is boosted", () => {

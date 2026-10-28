@@ -8,6 +8,21 @@ export interface GameEvent {
   start: string;
   end: string;
   status?: "live" | "upcoming" | "completed";
+  extraData?: {
+    communityday?: CommunityDayData;
+  };
+}
+
+export interface CommunityDayPokemon {
+  name: string;
+  image: string;
+}
+
+export interface CommunityDayData {
+  /** The featured Pokémon, which have boosted shiny odds. */
+  spawns?: CommunityDayPokemon[];
+  /** Shiny forms available, including evolutions. */
+  shinies?: CommunityDayPokemon[];
 }
 
 export interface PokemonDataMin {
@@ -178,10 +193,14 @@ export interface Raid {
   currentList: RaidList;
 }
 
-interface ShiniesProps {
-  dexNr: number;
+/** A Pokémon with boosted shiny odds during a time window. */
+export interface ShiniesProps {
+  /** Unique per Pokémon and window. */
+  id: string;
   name: string;
   image: string;
+  /** Pokédex page, when the Pokémon is in the index. */
+  href: string | null;
   startDate: string;
   endDate: string;
 }

@@ -109,7 +109,7 @@ export default async function DashboardPage() {
 
         {/* Boosted Shiny Spawns */}
         <DashboardCard title="Boosted Shinies">
-          <BoostedShinies />
+          <BoostedShinies events={events} />
         </DashboardCard>
 
         {/* Boosted Spawns */}
