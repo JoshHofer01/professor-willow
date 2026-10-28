@@ -8,7 +8,7 @@ import {
 import { getRaids } from "@/utils/getRaids";
 import { RaidPokemon } from "@/interfaces/interfaces";
 import Image from "next/image";
-import BossCard from "./BossCard";
+import BossCard, { bossKey } from "./BossCard";
 
 const ContentSection = ({
   title,
@@ -37,7 +37,7 @@ const RaidInfo = ({ raids }: { raids: RaidPokemon[] }) => {
       {raids.length > 0 ? (
         raids.map((raid) => (
           <BossCard
-            key={raid.names.English}
+            key={bossKey(raid)}
             raidBoss={raid}
             weather={raid.weather}
           />

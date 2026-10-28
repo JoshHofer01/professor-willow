@@ -98,7 +98,7 @@ describe("RaidsDisplay", () => {
     expect(await RaidsDisplay()).toBeNull();
   });
 
-  it("gives every boss a unique React key [bug 3.10]", async () => {
+  it("gives every boss a unique React key", async () => {
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
     const giratina = raidFixture.currentList.lvl5[0];
     mockFetch({

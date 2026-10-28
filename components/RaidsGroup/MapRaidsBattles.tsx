@@ -1,5 +1,5 @@
 import React from "react";
-import BossCard from "./BossCard";
+import BossCard, { bossKey } from "./BossCard";
 import { BattlePokemon, RaidPokemon } from "@/interfaces/interfaces";
 import PokemonPopout from "../PokemonGroup/PokemonPopout";
 import { Button } from "../shadcn/button";
@@ -50,7 +50,7 @@ export const MapRaidLists = ({ tiers }: { tiers: RaidProps[] }) => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {tier.items.map((raidBoss) => (
                     <BossCard
-                      key={raidBoss.names.English}
+                      key={bossKey(raidBoss)}
                       raidBoss={raidBoss}
                       weather={raidBoss.weather}
                     >
@@ -109,7 +109,7 @@ export const MapBattleLists = ({ tiers }: { tiers: BattleProps[] }) => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {tier.items.map((battleBoss) => (
                     <BossCard
-                      key={battleBoss.names.English}
+                      key={bossKey(battleBoss)}
                       raidBoss={battleBoss}
                     >
                       <>
