@@ -7,7 +7,6 @@ export const EventDiffToNow = ({
   className,
 }: {
   eventEnd: string;
-  short?: boolean;
   className?: string;
 }) => {
   const [days, setDays] = useState(0);
