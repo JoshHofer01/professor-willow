@@ -6,13 +6,9 @@ import {
   RaidPokemon,
 } from "@/interfaces/interfaces";
 import * as Sentry from "@sentry/nextjs";
-import pokemonData from "@/data/pokemonIndex.json";
 import { fetchJson } from "./fetchJson";
 import { getPkmnImgUrl } from "./getPkmnImgUrl";
-
-const pokedexLookup = new Map(
-  pokemonData.map((pokemon) => [pokemon.name.toLowerCase(), pokemon]),
-);
+import { findPokemonById } from "./pokedex";
 
 export async function getRaids() {
   const raids = await fetchJson<Raid>(
@@ -134,8 +130,8 @@ export async function getMaxBattles() {
   return null;
 }
 
-function fixBattleAssets(assets: Assets, name: string) {
-  const pokemon = pokedexLookup.get(name.toLowerCase());
+function fixBattleAssets(assets: Assets, id: string) {
+  const pokemon = findPokemonById(id);
 
   let fixedAssets = assets; // Fallback
   if (pokemon) {

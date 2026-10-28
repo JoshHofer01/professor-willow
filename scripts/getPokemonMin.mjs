@@ -21,6 +21,7 @@ async function getPokemonIndex() {
     const pokemonDataMin = [];
     pokemonData.forEach((element) => {
       let pokemon = {
+        id: element.id,
         dexNr: element.dexNr,
         generation: element.generation,
         name: element.names.English,

@@ -5,6 +5,7 @@ import { Spinner } from "../shadcn/spinner";
 import { ShiniesProps } from "@/interfaces/interfaces";
 import Link from "next/link";
 import Image from "next/image";
+import { findPokemonByDexNr, pokemonHref } from "@/utils/pokedex";
 
 export const LiveShiniesDisplay = ({boostedShinies}: {boostedShinies: ShiniesProps[]}) => {
 
@@ -52,7 +53,9 @@ const MapShinies = ({ shinies }: { shinies: ShiniesProps[] }) => {
               className="flex items-center justify-center p-1"
             >
               <Link
-                href={`/pokemon/${pokemon.name.toLowerCase()}`}
+                href={pokemonHref(
+                  findPokemonByDexNr(pokemon.dexNr)?.id ?? pokemon.name,
+                )}
                 className="flex items-center justify-center h-full"
               >
                 {pokemon.image ? (

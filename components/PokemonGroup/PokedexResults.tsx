@@ -1,4 +1,5 @@
 import { PokemonDataMin } from '@/interfaces/interfaces'
+import { pokemonHref } from '@/utils/pokedex'
 import { weServTransformURL } from '@/utils/weServTransform'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,7 +11,7 @@ const PokedexResults = ({pokedex}: {pokedex: PokemonDataMin[]}) => {
         {pokedex.map((pokemon) =>
           pokemon.image != null ? (
             <Link
-              href={`/pokemon/${pokemon.name.toLowerCase()}`}
+              href={pokemonHref(pokemon.id)}
               key={pokemon.dexNr}
               className="max-w-max"
             >

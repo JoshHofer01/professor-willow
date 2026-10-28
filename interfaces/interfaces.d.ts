@@ -11,6 +11,8 @@ export interface GameEvent {
 }
 
 export interface PokemonDataMin {
+  /** API id, e.g. `MR_MIME`; used for detail page URLs. */
+  id: string;
   dexNr: number;
   generation: number;
   name: string;
