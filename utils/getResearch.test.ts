@@ -18,7 +18,7 @@ describe("getResearch", () => {
     expect(result?.research[0].rewards).toEqual(researchFixture[0].rewards);
   });
 
-  it("strips the <span> markup ScrapedDuck wraps task text in [bug 1.14]", async () => {
+  it("strips the <span> markup ScrapedDuck wraps task text in", async () => {
     mockFetch({ [RESEARCH_URL]: json(researchFixture) });
 
     const result = await getResearch();

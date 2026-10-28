@@ -29,13 +29,13 @@ describe("ResearchDisplay", () => {
     expect(await screen.findByText(`100% CP: ${reward.combatPower.max}`)).toBeInTheDocument();
   });
 
-  it("doesn't show ScrapedDuck's <span> markup [bug 1.14]", async () => {
+  it("doesn't show ScrapedDuck's <span> markup", async () => {
     mockFetch({ [RESEARCH_URL]: json(researchFixture) });
     const { container } = render(await ResearchDisplay());
     expect(container.textContent).not.toContain("<span>");
   });
 
-  it("handles repeated task texts without duplicate keys [bug 1.14]", async () => {
+  it("handles repeated task texts without duplicate keys", async () => {
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
     mockFetch({ [RESEARCH_URL]: json(researchFixture) });
 

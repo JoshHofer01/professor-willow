@@ -8,5 +8,11 @@ export async function getResearch() {
   );
   if (!research) return null;
 
-  return { research };
+  // ScrapedDuck wraps task text in markup such as <span>; keep plain text.
+  return {
+    research: research.map((task) => ({
+      ...task,
+      text: task.text.replace(/<[^>]*>/g, "").trim(),
+    })),
+  };
 }
