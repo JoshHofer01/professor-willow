@@ -52,7 +52,18 @@ In the project directory, you can run:
 - `npm run dev`: Runs the app in development mode.
 - `npm run build`: Builds the app for production.
 - `npm run start`: Starts a production server.
+- `npm run lint`: Lints the project with ESLint.
+- `npm run typecheck`: Generates Next.js route types and type-checks the project.
+- `npm run test`: Runs the unit tests once (Vitest + React Testing Library).
+- `npm run test:watch`: Re-runs the tests as files change.
+- `npm run test:coverage`: Runs the tests with a coverage report in `coverage/`.
 - `npm run pokemon:index`: A custom script to process and index Pokémon data.
+
+### Testing
+
+Tests sit next to the code they cover as `*.test.ts(x)`; shared setup, mocks and API fixtures live in `test/`. The tests never call the real APIs: `fetch` is stubbed, and any request a test hasn't mocked fails. They need Node.js 22.12 or newer (the app itself runs on 20.9+).
+
+CI (`.github/workflows/ci.yml`) runs lint, typecheck and the tests on every push to `main` and on pull requests.
 
 <hr></hr>
 
