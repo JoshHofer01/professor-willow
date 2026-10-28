@@ -43,13 +43,15 @@ beforeEach(() => {
 
 describe("CurrentEventsCarousel", () => {
   it("shows an empty state when nothing is live", () => {
-    render(<CurrentEventsCarousel eventData={[]} />);
+    render(<CurrentEventsCarousel events={[upcoming()]} />);
     expect(screen.getByText("No live events right now.")).toBeInTheDocument();
   });
 
   it("shows a slide per live event with its position", () => {
-    render(<CurrentEventsCarousel eventData={[live(), upcoming()]} />);
+    const second = makeEvent({ name: "Raid Week", start: "2026-10-26T10:00:00.000", end: "2026-11-02T10:00:00.000" });
+    render(<CurrentEventsCarousel events={[live(), upcoming(), second]} />);
     expect(screen.getByRole("img", { name: "Halloween Part II" })).toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: "Pawniard Community Day" })).not.toBeInTheDocument();
     expect(screen.getByText("1/2")).toBeInTheDocument();
     expect(screen.getByText("2/2")).toBeInTheDocument();
   });

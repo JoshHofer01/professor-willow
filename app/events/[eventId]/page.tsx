@@ -13,8 +13,8 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { eventId } = await params;
 
-  const { eventsData } = await getEvents();
-  const event = eventsData.find((e) => e.eventID === eventId);
+  const events = await getEvents();
+  const event = events.find((e) => e.eventID === eventId);
 
   if (!event)
     return {
@@ -37,8 +37,8 @@ export async function generateMetadata(
 const EventPage = async ({ params }: Props) => {
   const { eventId } = await params;
 
-  const { eventsData } = await getEvents();
-  const event = eventsData.find((e) => e.eventID === eventId);
+  const events = await getEvents();
+  const event = events.find((e) => e.eventID === eventId);
 
   if (!event) {
       notFound();

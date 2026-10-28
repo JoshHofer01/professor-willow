@@ -11,12 +11,16 @@ import { GameEvent } from "@/interfaces/interfaces";
 import Image from "next/image";
 import { weServTransformURL } from "@/utils/weServTransform";
 import EventPopout from "../EventsGroup/EventPopout";
+import { Skeleton } from "../shadcn/skeleton";
+import { useClassifiedEvents } from "@/hooks/use-classified-events";
 
-export function CurrentEventsCarousel({
-  eventData,
-}: {
-  eventData: GameEvent[];
-}) {
+export function CurrentEventsCarousel({ events }: { events: GameEvent[] }) {
+  const eventData = useClassifiedEvents(events)?.liveEvents;
+
+  if (!eventData) {
+    return <Skeleton className="w-full aspect-video rounded-2xl" />;
+  }
+
   if (eventData.length === 0) {
     return (
       <p className="text-muted-foreground italic">No live events right now.</p>
@@ -36,7 +40,7 @@ export function CurrentEventsCarousel({
       >
         <CarouselContent className="-ml-2 md:-ml-4">
           {eventData.map((event, index) => (
-            <CarouselItem key={index} className="pl-2 md:pl-4 basis-full">
+            <CarouselItem key={event.eventID} className="pl-2 md:pl-4 basis-full">
               <EventPopout gameEvent={event}>
                 <div className="p-1">
                   <div className="relative w-full aspect-video">

@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-  const { liveEvents } = await getEvents();
+  const events = await getEvents();
   return (
     <PageContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6 ">
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
           }
           className="md:col-span-2 md:row-span-2 xl:row-span-1 2xl:row-span-2"
         >
-          <CurrentEventsCarousel eventData={liveEvents} />
+          <CurrentEventsCarousel events={events} />
         </DashboardCard>
 
         {/* All Events */}
@@ -87,7 +87,7 @@ export default async function DashboardPage() {
           }}
           className="md:col-span-2 lg:col-span-1"
         >
-          <UpcomingEventsDashboard />
+          <UpcomingEventsDashboard events={events} />
         </DashboardCard>
 
         {/* Welcome */}
