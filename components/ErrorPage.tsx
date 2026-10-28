@@ -4,7 +4,7 @@ const ErrorPage = ({ message }: { message?: string }) => {
   return (
     <>
       {message ? (
-        <div>ErrorPage {message}</div>
+        <div>{message}</div>
       ) : (
         <div>
           <span>

@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 }
 
 const LiveEvents = async () => {
-  const { liveEvents } = await getEvents();
-  return <EventDisplay events={liveEvents} pageType="Live" />;
+  const events = await getEvents();
+  return <EventDisplay events={events} status="live" />;
 };
 
 export default LiveEvents;

@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 }
 
 const UpcomingEvents = async () => {
-  const { upcomingEvents } = await getEvents();
-  return <EventDisplay events={upcomingEvents} pageType="Upcoming" />;
+  const events = await getEvents();
+  return <EventDisplay events={events} status="upcoming" />;
 };
 
 export default UpcomingEvents;

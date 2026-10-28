@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-  const { liveEvents } = await getEvents();
+  const events = await getEvents();
   return (
     <PageContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6 ">
@@ -66,15 +66,13 @@ export default async function DashboardPage() {
         <DashboardCard
           title={`Live Events`}
           action={
-            <Link href={"events/live"}>
-              <Button variant="ghost" size="sm">
-                View All
-              </Button>
-            </Link>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/events/live">View All</Link>
+            </Button>
           }
           className="md:col-span-2 md:row-span-2 xl:row-span-1 2xl:row-span-2"
         >
-          <CurrentEventsCarousel eventData={liveEvents} />
+          <CurrentEventsCarousel events={events} />
         </DashboardCard>
 
         {/* All Events */}
@@ -87,7 +85,7 @@ export default async function DashboardPage() {
           }}
           className="md:col-span-2 lg:col-span-1"
         >
-          <UpcomingEventsDashboard />
+          <UpcomingEventsDashboard events={events} />
         </DashboardCard>
 
         {/* Welcome */}
@@ -109,7 +107,7 @@ export default async function DashboardPage() {
 
         {/* Boosted Shiny Spawns */}
         <DashboardCard title="Boosted Shinies">
-          <BoostedShinies />
+          <BoostedShinies events={events} />
         </DashboardCard>
 
         {/* Boosted Spawns */}
@@ -127,11 +125,11 @@ export default async function DashboardPage() {
           title="Current Raid Bosses"
           className="row-span-3"
           action={
-            <Link href={"/raids"}>
-              <Button variant="ghost" size="sm" aria-label="More Raid Details">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/raids" aria-label="More Raid Details">
                 More Details
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           }
         >
           <RaidsDash />
@@ -177,17 +175,13 @@ export default async function DashboardPage() {
         {/* Dev Notes */}
         <DashboardCard
           title="Dev Log"
-          description="Thank you so much for using ProfesorWillow!! Currently viewing last 3 site updates."
+          description="Thank you so much for using ProfessorWillow!! Currently viewing last 3 site updates."
           action={
-            <Link
-              href={
-                "https://github.com/JoshHofer01/professor-willow/commits/main/"
-              }
-            >
-              <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="https://github.com/JoshHofer01/professor-willow/commits/main/">
                 Full Log
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           }
         >
           <div className="flex flex-col text-xs gap-1">

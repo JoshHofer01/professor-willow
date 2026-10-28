@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import BackToTopButton from "../ClientComponents/BackToTopButton";
 import { useDebounce } from "@uidotdev/usehooks";
 import PokedexResults from "./PokedexResults";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 function filterPokedex(
   filterQuery: string,
@@ -59,11 +59,17 @@ export const PokedexDisplay = () => {
       router.push(`?${params.toString()}`);
     };
 
-  useEffect(() => {
+  // An effect event reads the latest URL without re-running on every change:
+  // the URL should only follow the search box when the debounced text changes.
+  const syncQueryToUrl = useEffectEvent((query: string) => {
     const currentQuery = searchParams.get("query") ?? "";
-    if (debouncedQuery !== currentQuery) {
-      updateFilter("query", debouncedQuery);
+    if (query !== currentQuery) {
+      updateFilter("query", query);
     }
+  });
+
+  useEffect(() => {
+    syncQueryToUrl(debouncedQuery);
   }, [debouncedQuery]);
 
   return (
@@ -71,12 +77,15 @@ export const PokedexDisplay = () => {
       <BackToTopButton />
       <div className="flex flex-wrap gap-2 mb-4">
           <SearchBox setQuery={setQuery} initialValue={query} className="max-w-xs lg:max-w-sm min-w-52"/>
+          {/* Keyed on the URL value so Back/Forward resets the shown selection. */}
           <FilterBox
+            key={`type-${filterType}`}
             dataType="type"
             setFilter={(val) => updateFilter("type", val)}
             initialValue={filterType}
           />
           <FilterBox
+            key={`gen-${filterGeneration}`}
             dataType="generation"
             setFilter={(val) => updateFilter("gen", val)}
             initialValue={filterGeneration}

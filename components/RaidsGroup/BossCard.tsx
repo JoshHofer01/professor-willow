@@ -7,6 +7,16 @@ import { weServTransformURL } from "@/utils/weServTransform";
 import WeatherIndicators from "./WeatherIndicators";
 import Link from "next/link";
 
+/**
+ * A unique React key for a boss. Names repeat between shadow and regular
+ * bosses, and ids repeat across forms and costumes (Giratina Origin/Altered).
+ */
+export function bossKey(boss: RaidPokemon | BattlePokemon) {
+  const form = "form" in boss ? boss.form : "";
+  const costume = "costume" in boss ? boss.costume : "";
+  return [boss.id, form, costume, boss.shadow ? "shadow" : ""].join("|");
+}
+
 const BossCard = ({
   raidBoss,
   children,
@@ -18,7 +28,6 @@ const BossCard = ({
 }) => {
   return (
     <div
-      key={raidBoss.names.English}
       className="relative flex flex-col items-center rounded-xl border-b-4 border-x p-3 w-full"
     >
       {/* Shadow and Shiny indicators */}

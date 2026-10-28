@@ -101,11 +101,12 @@ export default function RootLayout({
         <TopNav />
         <SidebarProvider>
           <AppSidebar />
+          {/* SidebarInset is the page's <main> landmark. */}
           <SidebarInset className="overflow-x-hidden">
-            <main>
+            <div>
               {children}
               <PageFooter />
-            </main>
+            </div>
           </SidebarInset>
         </SidebarProvider>
       </body>

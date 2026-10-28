@@ -53,13 +53,13 @@ export function DashboardCard({
       <CardContent className="flex-1">{children}</CardContent>
       {button && 
       <CardFooter className="flex w-full justify-end-safe">
-        <Link href={button.href} className={cn("mt-2", button.className)} target={button.target ? button.target : "_self"}>
-          <Button className="w-full">
-            {button.icon && <button.icon />}
-            <p>{button.text}</p>
-            <ArrowRight />
-          </Button>
-        </Link>
+        <Button asChild className={cn("mt-2", button.className)}>
+          <Link href={button.href} target={button.target ? button.target : "_self"}>
+            {button.icon && <button.icon aria-hidden="true" />}
+            <span>{button.text}</span>
+            <ArrowRight aria-hidden="true" />
+          </Link>
+        </Button>
       </CardFooter>}
     </Card>
   );

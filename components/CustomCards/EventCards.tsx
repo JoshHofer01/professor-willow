@@ -6,10 +6,19 @@ import EventTypeBadge from "../EventsGroup/EventTypeBadge";
 import { weServTransformURL } from "@/utils/weServTransform";
 import { dateFormatter } from "@/utils/dateFormatter";
 import Countdown from "../EventsGroup/Countdown";
+import type React from "react";
 
-export const EventPageCard = ({ event }: { event: GameEvent }) => {
+// Card props pass through to the root element so the cards can be popout
+// triggers (EventPopout uses Radix asChild).
+type CardProps = Omit<React.ComponentProps<typeof Card>, "children">;
+
+export const EventPageCard = ({
+  event,
+  className,
+  ...props
+}: { event: GameEvent } & CardProps) => {
   return (
-    <Card className="gap-2">
+    <Card className={cn("gap-2", className)} {...props}>
       {/* Image Container */}
       {event.image && (
         <div className="flex flex-col lg:w-full">
@@ -56,13 +65,12 @@ export const EventPageCard = ({ event }: { event: GameEvent }) => {
 export const OverviewPageCard = ({
   event,
   className,
-}: {
-  event: GameEvent;
-  className?: string;
-}) => {
+  ...props
+}: { event: GameEvent } & CardProps) => {
   return (
     <Card
       className={cn("w-full lg:w-72 lg:shrink-0 overflow-hidden", className)}
+      {...props}
     >
       <div className="w-full lg:w-72 flex flex-row lg:flex-col">
         {/* Image Container */}

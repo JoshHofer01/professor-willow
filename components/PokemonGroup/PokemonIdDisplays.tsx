@@ -2,6 +2,7 @@ import {
   AssetForm,
   Move,
   PokemonData,
+  PokemonDataMin,
   PokemonType,
 } from "@/interfaces/interfaces";
 import Image from "next/image";
@@ -14,149 +15,118 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/shadcn/tooltip";
-import { getPokemonByDexNr } from "@/utils/getPokemon";
-import ErrorPage from "@/components/ErrorPage";
+import { getPkmnImgUrl } from "@/utils/getPkmnImgUrl";
 import { weServTransformURL } from "@/utils/weServTransform";
 import { pokemonTypeColorMap } from "@/utils/maps";
+import { pokedex, pokemonHref } from "@/utils/pokedex";
 
-export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
-  const nextMonNumber = (pokemon.dexNr + 1).toString();
-  const nextMonResult = await getPokemonByDexNr(nextMonNumber);
-
-  if (!nextMonResult) {
-    return (
-      <ErrorPage
-        message={`Error finding pokemon following ${pokemon.names.English}`}
-      />
-    );
-  }
-
-  const { pokemon: nextMon } = nextMonResult;
-
+const NeighbourLink = ({
+  label,
+  neighbour,
+}: {
+  label: string;
+  neighbour: PokemonDataMin;
+}) => {
   return (
     <div className="flex flex-row items-center gap-2">
-      {pokemon?.evolutions?.length ? (
-        <p className="text-xs">Evolves into:</p>
-      ) : (
-        <p className="text-xs">Next Pokemon:</p>
-      )}
-      <Link href={`/pokemon/${nextMon?.names.English.toLowerCase()}`}>
-        <div className="transition-transform duration-200 hover:scale-110">
-          <>
-            <Tooltip>
-              <TooltipTrigger>
-                <Avatar>
-                  <AvatarImage
-                    src={nextMon?.assets.image}
-                    alt={nextMon?.id}
-                    className="object-scale-down"
-                  />
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{nextMon?.names.English}</p>
-              </TooltipContent>
-            </Tooltip>
-          </>
-        </div>
-      </Link>
+      <p className="text-xs">{label}</p>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Link
+            href={pokemonHref(neighbour.id)}
+            aria-label={neighbour.name}
+            className="transition-transform duration-200 hover:scale-110"
+          >
+            <Avatar>
+              <AvatarImage
+                src={getPkmnImgUrl(neighbour.dexNr)}
+                alt=""
+                className="object-scale-down"
+              />
+            </Avatar>
+          </Link>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{neighbour.name}</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };
 
-export const PrevMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
-  const prevMonNumber = (pokemon.dexNr - 1).toString();
-  const prevMonResult = await getPokemonByDexNr(prevMonNumber);
+// Neighbours come from the local index, so gaps in the API (e.g. #902) are skipped.
+export const NextMonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
+  const next = pokedex.find((entry) => entry.dexNr > pokemon.dexNr);
+  if (!next) return null;
 
-  if (!prevMonResult) {
-    return <div></div>;
-  }
-
-  const { pokemon: prevMon } = prevMonResult;
+  const isEvolution = pokemon.evolutions?.some((evo) => evo.id === next.id);
 
   return (
-    <div className="flex flex-row items-center gap-2">
-      <p className="text-xs">Previous Pokemon:</p>
-      <Link href={`${prevMon?.names.English}`}>
-        <div className="transition-transform duration-200 hover:scale-110">
-          <Tooltip>
-            <TooltipTrigger>
-              <Avatar>
-                <AvatarImage
-                  src={prevMon?.assets.image}
-                  alt={prevMon?.id}
-                  className="object-scale-down"
-                />
-              </Avatar>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{prevMon?.names.English}</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </Link>
-    </div>
+    <NeighbourLink
+      label={isEvolution ? "Evolves into:" : "Next Pokemon:"}
+      neighbour={next}
+    />
   );
+};
+
+export const PrevMonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
+  const previous = pokedex.findLast((entry) => entry.dexNr < pokemon.dexNr);
+  if (!previous) return null;
+
+  return <NeighbourLink label="Previous Pokemon:" neighbour={previous} />;
 };
 
 export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
-  function getStatusColor(statValue: number, statTotal: number) {
-    return Math.round((statValue / statTotal) * 100) < 33
-      ? "bg-red-500"
-      : Math.round((statValue / statTotal) * 100) > 66
-        ? "bg-green-500"
-        : "bg-amber-500";
-  }
-
   return (
     <div>
       <h3 className="text-lg font-semibold">Stats</h3>
       <div className="space-y-2 mt-2">
-        <Tooltip>
-          <TooltipTrigger className="w-full">
-            <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">HP</span>
-              <Progress
-                value={Math.round((pokemon?.stats?.stamina / 420) * 100)}
-                className={getStatusColor(pokemon?.stats?.stamina, 420)}
-              />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{pokemon?.stats?.stamina}</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger className="w-full">
-            <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">Attack</span>
-              <Progress
-                value={Math.round((pokemon?.stats?.attack / 360) * 100)}
-                className={getStatusColor(pokemon?.stats?.attack, 360)}
-              />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{pokemon?.stats?.attack}</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger className="w-full">
-            <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">Defense</span>
-              <Progress
-                value={Math.round((pokemon?.stats?.defense / 350) * 100)}
-                max={255}
-                className={getStatusColor(pokemon?.stats?.defense, 350)}
-              />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{pokemon?.stats?.defense}</p>
-          </TooltipContent>
-        </Tooltip>
+        {STATS.map(({ label, key, scale }) => (
+          <StatRow
+            key={key}
+            label={label}
+            value={pokemon?.stats?.[key]}
+            scale={scale}
+          />
+        ))}
       </div>
     </div>
+  );
+};
+
+// Bars are drawn against these values; a few Pokémon exceed them.
+const STATS = [
+  { label: "HP", key: "stamina", scale: 420 },
+  { label: "Attack", key: "attack", scale: 360 },
+  { label: "Defense", key: "defense", scale: 350 },
+] as const;
+
+const StatRow = ({
+  label,
+  value,
+  scale,
+}: {
+  label: string;
+  value: number;
+  scale: number;
+}) => {
+  // Clamped so outliers (e.g. Blissey's HP) fill the bar rather than shift it.
+  const percent = Math.min(100, Math.round((value / scale) * 100));
+  const color =
+    percent < 33 ? "bg-red-500" : percent > 66 ? "bg-green-500" : "bg-amber-500";
+
+  return (
+    <Tooltip>
+      <TooltipTrigger className="w-full">
+        <div className="grid grid-cols-4 items-center">
+          <span className="font-medium">{label}</span>
+          <Progress value={percent} aria-label={label} className={color} />
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{value}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 

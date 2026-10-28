@@ -1,5 +1,5 @@
 import React from "react";
-import BossCard from "./BossCard";
+import BossCard, { bossKey } from "./BossCard";
 import { BattlePokemon, RaidPokemon } from "@/interfaces/interfaces";
 import PokemonPopout from "../PokemonGroup/PokemonPopout";
 import { Button } from "../shadcn/button";
@@ -22,15 +22,19 @@ interface BattleProps {
   items: BattlePokemon[];
 }
 
-const TierDisplay = ({ tier }: { tier: string }) => {
+// Accordion pattern: a heading containing the toggle button, so the tier
+// stays a heading and the toggle works from the keyboard.
+const TierTrigger = ({ tier }: { tier: string }) => {
   return (
-    <div className="flex justify-between items-center w-full mb-4 rounded-lg p-2 border-b-8 border-r-6 hover:border-muted-foreground hover:bg-linear-to-tr to-accent/75 from-primary/75 hover:cursor-pointer">
-      <h2 className="text-3xl font-bold">{`Tier ${tier}`}</h2>
-      <div className="inline-flex gap-2">
-        <RaidBossImages imageCount={tier} />
-        <ChevronsUpDown className="ml-auto" />
-      </div>
-    </div>
+    <h2 className="mb-4">
+      <CollapsibleTrigger className="flex justify-between items-center w-full rounded-lg p-2 border-b-8 border-r-6 hover:border-muted-foreground hover:bg-linear-to-tr to-accent/75 from-primary/75 hover:cursor-pointer text-left">
+        <span className="text-3xl font-bold">{`Tier ${tier}`}</span>
+        <span className="inline-flex gap-2">
+          <RaidBossImages imageCount={tier} />
+          <ChevronsUpDown className="ml-auto" aria-hidden="true" />
+        </span>
+      </CollapsibleTrigger>
+    </h2>
   );
 };
 
@@ -41,14 +45,12 @@ export const MapRaidLists = ({ tiers }: { tiers: RaidProps[] }) => {
         (tier) =>
           tier.items.length > 0 && (
             <Collapsible key={`Tier ${tier.tier}`} defaultOpen>
-              <CollapsibleTrigger asChild>
-                <TierDisplay tier={tier.tier} />
-              </CollapsibleTrigger>
+              <TierTrigger tier={tier.tier} />
               <CollapsibleContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {tier.items.map((raidBoss) => (
                     <BossCard
-                      key={raidBoss.names.English}
+                      key={bossKey(raidBoss)}
                       raidBoss={raidBoss}
                       weather={raidBoss.weather}
                     >
@@ -102,14 +104,12 @@ export const MapBattleLists = ({ tiers }: { tiers: BattleProps[] }) => {
         (tier) =>
           tier.items.length > 0 && (
             <Collapsible key={`Tier ${tier.tier}`} defaultOpen>
-              <CollapsibleTrigger asChild>
-                <TierDisplay tier={tier.tier} />
-              </CollapsibleTrigger>
+              <TierTrigger tier={tier.tier} />
               <CollapsibleContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {tier.items.map((battleBoss) => (
                     <BossCard
-                      key={battleBoss.names.English}
+                      key={bossKey(battleBoss)}
                       raidBoss={battleBoss}
                     >
                       <>
@@ -119,9 +119,9 @@ export const MapBattleLists = ({ tiers }: { tiers: BattleProps[] }) => {
                             pokemonName={`Shiny ${battleBoss.names.English}`}
                             shinyImage={battleBoss.assets.shinyImage}
                           >
-                            <div className="text-primary underline-offset-4 hover:underline text-sm font-semibold mt-2">
+                            <button type="button" className="text-primary underline-offset-4 hover:underline text-sm font-semibold mt-2 cursor-pointer">
                               View Shiny
-                            </div>
+                            </button>
                           </PokemonPopout>
                         )}
 

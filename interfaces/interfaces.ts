@@ -8,9 +8,26 @@ export interface GameEvent {
   start: string;
   end: string;
   status?: "live" | "upcoming" | "completed";
+  extraData?: {
+    communityday?: CommunityDayData;
+  };
+}
+
+export interface CommunityDayPokemon {
+  name: string;
+  image: string;
+}
+
+export interface CommunityDayData {
+  /** The featured Pokémon, which have boosted shiny odds. */
+  spawns?: CommunityDayPokemon[];
+  /** Shiny forms available, including evolutions. */
+  shinies?: CommunityDayPokemon[];
 }
 
 export interface PokemonDataMin {
+  /** API id, e.g. `MR_MIME`; used for detail page URLs. */
+  id: string;
   dexNr: number;
   generation: number;
   name: string;
@@ -159,48 +176,55 @@ export interface RaidPokemon {
   shadow: boolean;
 }
 
+/** The API leaves out lists with no bosses (e.g. ultra_beast, ex). */
 export interface RaidList {
-  lvl1: RaidPokemon[];
-  lvl3: RaidPokemon[];
-  lvl5: RaidPokemon[];
-  mega: RaidPokemon[];
-  ultra_beast: RaidPokemon[];
-  legendary_mega: RaidPokemon[];
-  ex: RaidPokemon[];
-  shadow_lvl5: RaidPokemon[];
-  shadow_lvl3: RaidPokemon[];
-  shadow_lvl1: RaidPokemon[];
+  lvl1?: RaidPokemon[];
+  lvl3?: RaidPokemon[];
+  lvl5?: RaidPokemon[];
+  mega?: RaidPokemon[];
+  ultra_beast?: RaidPokemon[];
+  legendary_mega?: RaidPokemon[];
+  ex?: RaidPokemon[];
+  shadow_lvl5?: RaidPokemon[];
+  shadow_lvl3?: RaidPokemon[];
+  shadow_lvl1?: RaidPokemon[];
 }
 
 export interface Raid {
   currentList: RaidList;
 }
 
-interface ShiniesProps {
-  dexNr: number;
+/** A Pokémon with boosted shiny odds during a time window. */
+export interface ShiniesProps {
+  /** Unique per Pokémon and window. */
+  id: string;
   name: string;
   image: string;
+  /** Pokédex page, when the Pokémon is in the index. */
+  href: string | null;
   startDate: string;
   endDate: string;
 }
 
 export interface MaxBattle {
+  /** The API sends an empty array, not an object, when no battles are on. */
   currentList: MaxBattleList;
 }
 
 export interface MaxBattleList {
-  tier_1: BattlePokemon[];
-  tier_2: BattlePokemon[];
-  tier_3: BattlePokemon[];
-  tier_4: BattlePokemon[];
-  tier_5: BattlePokemon[];
-  tier_6: BattlePokemon[];
+  tier_1?: BattlePokemon[];
+  tier_2?: BattlePokemon[];
+  tier_3?: BattlePokemon[];
+  tier_4?: BattlePokemon[];
+  tier_5?: BattlePokemon[];
+  tier_6?: BattlePokemon[];
 }
 
 export interface BattlePokemon {
   id: string;
   assets: Assets;
-  level: [1, 2, 3, 4, 5, 6];
+  /** Battle tier, 1-6. */
+  level: number | string;
   shiny: boolean;
   types: string[];
   cpRange: [number, number];
@@ -208,13 +232,13 @@ export interface BattlePokemon {
   shadow: boolean;
 }
 
-interface Research {
+export interface Research {
   text: string;
   type: string;
   rewards: Reward[];
 }
 
-interface Reward {
+export interface Reward {
   name: string;
   image: string;
   canBeShiny: boolean;

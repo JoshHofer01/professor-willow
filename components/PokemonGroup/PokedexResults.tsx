@@ -1,4 +1,6 @@
 import { PokemonDataMin } from '@/interfaces/interfaces'
+import { getPkmnImgUrl } from '@/utils/getPkmnImgUrl'
+import { pokemonHref } from '@/utils/pokedex'
 import { weServTransformURL } from '@/utils/weServTransform'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,16 +9,15 @@ import React from 'react'
 const PokedexResults = ({pokedex}: {pokedex: PokemonDataMin[]}) => {
   return (
     <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-2 max-w-350 mx-auto">
-        {pokedex.map((pokemon) =>
-          pokemon.image != null ? (
+        {pokedex.map((pokemon) => (
             <Link
-              href={`/pokemon/${pokemon.name.toLowerCase()}`}
+              href={pokemonHref(pokemon.id)}
               key={pokemon.dexNr}
               className="max-w-max"
             >
               <div className="items-center max-w-28 border-b-2 rounded-lg">
                 <Image
-                  src={weServTransformURL(pokemon.image, "pokedexImage")}
+                  src={weServTransformURL(pokemon.image ?? getPkmnImgUrl(pokemon.dexNr), "pokedexImage")}
                   alt={pokemon.name}
                   width={100}
                   height={100}
@@ -28,8 +29,7 @@ const PokedexResults = ({pokedex}: {pokedex: PokemonDataMin[]}) => {
                 </div>
               </div>
             </Link>
-          ) : null
-        )}
+        ))}
       </div>
   )
 }

@@ -8,7 +8,6 @@ import {
 
 import { Separator } from "@/components/shadcn/separator";
 import { getPokemonByName } from "@/utils/getPokemon";
-import ErrorPage from "@/components/ErrorPage";
 import {
   FormDisplay,
   MovesDisplay,
@@ -18,7 +17,9 @@ import {
   StatsDisplay,
   TypeBadgesDisplay,
 } from "@/components/PokemonGroup/PokemonIdDisplays";
+import { pokemonHref } from "@/utils/pokedex";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = { params: Promise<{ pokemonName: string }> };
 
@@ -33,21 +34,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const name = result.pokemon.names.English;
+
   return {
-    title: `${pokemonName} | ProfessorWillow`,
-    description: `Learn about ${pokemonName} in Pokemon GO!`,
+    title: `${name} | ProfessorWillow`,
+    description: `Learn about ${name} in Pokemon GO!`,
     keywords: [
       "pokemon go",
       "pokedex",
-      pokemonName,
+      name,
       "pokemon go pokedex",
       "professor willow",
     ],
     openGraph: {
-      title: `${pokemonName} | ProfessorWillow`,
-      description: `Learn about ${pokemonName} in Pokemon GO!`,
+      title: `${name} | ProfessorWillow`,
+      description: `Learn about ${name} in Pokemon GO!`,
       type: "website",
-      url: `https://professorwillow.me/pokemon/${pokemonName.toLowerCase()}`,
+      url: `https://professorwillow.me${pokemonHref(pokemonName)}`,
     },
   };
 }
@@ -57,14 +60,10 @@ const PokemonDetails = async ({ params }: Props) => {
   const result = await getPokemonByName(pokemonName);
 
   if (!result) {
-    return;
+    notFound();
   }
 
   const { pokemon } = result;
-
-  if (pokemon == undefined) {
-    return <ErrorPage />;
-  }
 
   const eliteQuickMovesRecord = Array.isArray(pokemon.eliteQuickMoves)
     ? {}
@@ -88,8 +87,8 @@ const PokemonDetails = async ({ params }: Props) => {
             </div>
           </div>
 
-          {pokemon.dexNr == 1025 ? null : <NextMonDisplay pokemon={pokemon} />}
-          {pokemon.dexNr == 1 ? null : <PrevMonDisplay pokemon={pokemon} />}
+          <NextMonDisplay pokemon={pokemon} />
+          <PrevMonDisplay pokemon={pokemon} />
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>

@@ -1,10 +1,10 @@
+"use client";
+
 import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/shadcn/dialog";
@@ -15,11 +15,24 @@ import AddToCalendar from "../ClientComponents/AddToCalendar";
 import Link from "next/link";
 import EventTypeBadge from "./EventTypeBadge";
 import { cn } from "@/lib/utils";
-import { Button } from "../shadcn/button";
+import { buttonVariants } from "../shadcn/button";
 import { dateFormatter } from "@/utils/dateFormatter";
 import Countdown from "./Countdown";
 import { eventTypeColorMap } from "@/utils/maps";
 
+// The trigger is a card, not a <button>, so it takes the button role and
+// keyboard activation itself.
+function activateOnEnterOrSpace(event: React.KeyboardEvent<HTMLElement>) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    event.currentTarget.click();
+  }
+}
+
+/**
+ * Opens event details from a card. `children` must be a DOM element or a
+ * component that passes its props to one, so the trigger's handlers land.
+ */
 const EventPopout = ({
   children,
   gameEvent,
@@ -29,14 +42,19 @@ const EventPopout = ({
 }) => {
   return (
     <Dialog>
-      <DialogTrigger asChild className="hover:cursor-pointer">
+      <DialogTrigger
+        asChild
+        role="button"
+        tabIndex={0}
+        onKeyDown={activateOnEnterOrSpace}
+        className="hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
         {children}
       </DialogTrigger>
-      <DialogHeader className="hidden">
-        <DialogTitle>{gameEvent.name}</DialogTitle>
-        <DialogDescription>{gameEvent.name}</DialogDescription>
-      </DialogHeader>
-      <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl">
+      <DialogContent
+        className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl"
+        aria-describedby={undefined}
+      >
         {/* Image */}
         <div className="flex flex-col">
           <Image
@@ -50,7 +68,7 @@ const EventPopout = ({
         </div>
         <div id="content" className="flex flex-col gap-1">
           {/* Title */}
-          <h3 className="text-2xl sm:text-xl font-bold">{gameEvent.name}</h3>
+          <DialogTitle className="text-2xl sm:text-xl font-bold">{gameEvent.name}</DialogTitle>
           {/* Dates */}
           <div className="flex flex-row gap-2">
             <p>{dateFormatter.format(new Date(gameEvent.start))}</p>
@@ -66,10 +84,20 @@ const EventPopout = ({
           >
             {gameEvent.link}
           </Link>
+          {/* Event page */}
+          <Link
+            href={`/events/${encodeURIComponent(gameEvent.eventID)}`}
+            className="hover:underline underline-offset-4 text-primary text-sm font-semibold"
+          >
+            View details
+          </Link>
         </div>
         <DialogFooter>
           {/* Timing badge */}
-          <Button variant="outline" className="rounded-3xl max-w-47.5 h-11.25"><Countdown event={gameEvent} /></Button>
+          {/* Styled like an outline button, but it's information, not a control. */}
+          <div className={cn(buttonVariants({ variant: "outline" }), "rounded-3xl max-w-47.5 h-11.25")}>
+            <Countdown event={gameEvent} />
+          </div>
           {/* AddToCalendar */}
           {gameEvent.status === "upcoming" ? (
             <AddToCalendar eventDetails={gameEvent} />

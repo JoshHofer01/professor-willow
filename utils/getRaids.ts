@@ -2,81 +2,55 @@ import {
   Assets,
   BattlePokemon,
   MaxBattle,
+  MaxBattleList,
   Raid,
+  RaidList,
   RaidPokemon,
 } from "@/interfaces/interfaces";
 import * as Sentry from "@sentry/nextjs";
-import pokemonData from "@/data/pokemonIndex.json";
+import { fetchJson } from "./fetchJson";
 import { getPkmnImgUrl } from "./getPkmnImgUrl";
+import { findPokemonById } from "./pokedex";
 
-const pokedexLookup = new Map(
-  pokemonData.map((pokemon) => [pokemon.name.toLowerCase(), pokemon]),
-);
+/** API lists that make up each raid tier shown on the site. */
+const RAID_TIERS = {
+  tier5: ["lvl5", "shadow_lvl5", "ultra_beast"],
+  tier3: ["lvl3", "shadow_lvl3"],
+  tier1: ["lvl1", "shadow_lvl1"],
+  mega: ["mega", "legendary_mega"],
+} as const satisfies Record<string, readonly (keyof RaidList)[]>;
+
+const MAX_BATTLE_TIERS = [
+  "tier_1",
+  "tier_2",
+  "tier_3",
+  "tier_4",
+  "tier_5",
+  "tier_6",
+] as const satisfies readonly (keyof MaxBattleList)[];
 
 export async function getRaids() {
+  const raids = await fetchJson<Raid>(
+    "https://pokemon-go-api.github.io/pokemon-go-api/api/raidboss.json",
+    { source: "getRaids", revalidate: 600 },
+  );
+  if (!raids) return null;
+
   try {
-    const response = await fetch(
-      "https://pokemon-go-api.github.io/pokemon-go-api/api/raidboss.json",
-      { next: { revalidate: 600 } },
-    );
+    // Merge the API's lists into a tier; bosses from shadow_ lists are shadow.
+    const buildTier = (lists: readonly (keyof RaidList)[]): RaidPokemon[] =>
+      lists.flatMap((list) =>
+        (raids.currentList[list] || []).map((raid) =>
+          withLocalAssets(raid, list.startsWith("shadow_")),
+        ),
+      );
 
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const raids: Raid = await response.json();
-
-    const augmentRaids = (raid: RaidPokemon, isShadow: boolean) => {
-      const fixedAssets = fixBattleAssets(raid.assets, raid.id);
-
-      return {
-        ...raid,
-        shadow: isShadow,
-        assets: fixedAssets,
-      };
+    return {
+      tier5: buildTier(RAID_TIERS.tier5),
+      tier3: buildTier(RAID_TIERS.tier3),
+      tier1: buildTier(RAID_TIERS.tier1),
+      mega: buildTier(RAID_TIERS.mega),
     };
-
-    const tier5: RaidPokemon[] = [
-      ...(raids.currentList.lvl5 || []).map((raid) =>
-        augmentRaids(raid, false),
-      ),
-      ...(raids.currentList.shadow_lvl5 || []).map((raid) =>
-        augmentRaids(raid, true),
-      ),
-      ...(raids.currentList.ultra_beast || []).map((raid) =>
-        augmentRaids(raid, false),
-      ),
-    ];
-
-    const tier3: RaidPokemon[] = [
-      ...(raids.currentList.lvl3 || []).map((raid) =>
-        augmentRaids(raid, false),
-      ),
-      ...(raids.currentList.shadow_lvl3 || []).map((raid) =>
-        augmentRaids(raid, true),
-      ),
-    ];
-
-    const tier1: RaidPokemon[] = [
-      ...(raids.currentList.lvl1 || []).map((raid) =>
-        augmentRaids(raid, false),
-      ),
-      ...(raids.currentList.shadow_lvl1 || []).map((raid) =>
-        augmentRaids(raid, true),
-      ),
-    ];
-
-    const mega: RaidPokemon[] = [
-      ...(raids.currentList.mega || []).map((raid) =>
-        augmentRaids(raid, false),
-      ),
-      ...(raids.currentList.legendary_mega || []).map((raid) =>
-        augmentRaids(raid, false),
-      ),
-    ];
-
-    return { tier5, tier3, tier1, mega };
   } catch (error) {
     Sentry.captureException(error, {
       extra: { source: "getRaids" },
@@ -86,56 +60,22 @@ export async function getRaids() {
 }
 
 export async function getMaxBattles() {
+  const maxBattles = await fetchJson<MaxBattle>(
+    "https://pokemon-go-api.github.io/pokemon-go-api/api/maxbattles.json",
+    { source: "getMaxBattles", revalidate: 600 },
+  );
+  if (!maxBattles) return null;
+
   try {
-    const response = await fetch(
-      "https://pokemon-go-api.github.io/pokemon-go-api/api/maxbattles.json",
-      { next: { revalidate: 600 } },
-    );
+    // currentList is an empty array, not an object, when nothing is on.
+    const buildTier = (list: keyof MaxBattleList): BattlePokemon[] =>
+      (maxBattles.currentList[list] || []).map((battle) => withLocalAssets(battle, false));
 
-    if (!response.ok) {
-      Sentry.captureException(
-        `Failed to fetch Max Battles from API, ${response.status}`,
-      );
-    }
-
-    const maxBattles: MaxBattle = await response.json();
-
-    const augmentBattles = (battle: BattlePokemon, isShadow: boolean) => {
-      const fixedAssets = fixBattleAssets(battle.assets, battle.id);
-
-      return {
-        ...battle,
-        shadow: isShadow,
-        assets: fixedAssets,
-      };
-    };
-
-    const tier1: BattlePokemon[] = (maxBattles.currentList.tier_1 || []).map(
-      (battle) => augmentBattles(battle, false),
+    const [tier1, tier2, tier3, tier4, tier5, tier6] = MAX_BATTLE_TIERS.map(buildTier);
+    const maxBattleCount = [tier1, tier2, tier3, tier4, tier5, tier6].reduce(
+      (count, tier) => count + tier.length,
+      0,
     );
-    const tier2: BattlePokemon[] = (maxBattles.currentList.tier_2 || []).map(
-      (battle) => augmentBattles(battle, false),
-    );
-    const tier3: BattlePokemon[] = (maxBattles.currentList.tier_3 || []).map(
-      (battle) => augmentBattles(battle, false),
-    );
-    const tier4: BattlePokemon[] = (maxBattles.currentList.tier_4 || []).map(
-      (battle) => augmentBattles(battle, false),
-    );
-    const tier5: BattlePokemon[] = (maxBattles.currentList.tier_5 || []).map(
-      (battle) => augmentBattles(battle, false),
-    );
-    const tier6: BattlePokemon[] = (maxBattles.currentList.tier_6 || []).map(
-      (battle) => augmentBattles(battle, false),
-    );
-
-    const maxBattleCount =
-      tier1.length +
-      tier2.length +
-      tier3.length +
-      tier4.length +
-      tier5.length +
-      tier6.length;
 
     return { tier1, tier2, tier3, tier4, tier5, tier6, maxBattleCount };
   } catch (error) {
@@ -146,16 +86,15 @@ export async function getMaxBattles() {
   return null;
 }
 
-function fixBattleAssets(assets: Assets, name: string) {
-  const pokemon = pokedexLookup.get(name.toLowerCase());
+/** Sets `shadow` and swaps in sprites from the local index when it knows the boss. */
+function withLocalAssets<T extends RaidPokemon | BattlePokemon>(boss: T, shadow: boolean): T {
+  const pokemon = findPokemonById(boss.id);
+  const assets: Assets = pokemon
+    ? {
+        image: getPkmnImgUrl(pokemon.dexNr),
+        shinyImage: getPkmnImgUrl(pokemon.dexNr, true),
+      }
+    : boss.assets;
 
-  let fixedAssets = assets; // Fallback
-  if (pokemon) {
-    fixedAssets = {
-      image: getPkmnImgUrl(pokemon.dexNr),
-      shinyImage: getPkmnImgUrl(pokemon.dexNr, true),
-    };
-  }
-
-  return fixedAssets;
+  return { ...boss, shadow, assets };
 }

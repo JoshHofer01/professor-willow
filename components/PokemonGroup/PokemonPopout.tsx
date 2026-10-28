@@ -2,8 +2,6 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/shadcn/dialog";
@@ -26,11 +24,7 @@ const PokemonPopout = ({
       <DialogTrigger asChild className="hover:cursor-pointer">
         {children}
       </DialogTrigger>
-      <DialogHeader className="hidden">
-        <DialogTitle>{pokemonName}</DialogTitle>
-        <DialogDescription>{pokemonName}</DialogDescription>
-      </DialogHeader>
-      <DialogContent className="max-w-xs sm:max-w-fit">
+      <DialogContent className="max-w-xs sm:max-w-fit" aria-describedby={undefined}>
         <div className="flex flex-col justify-center">
           {/* Image */}
           {regularImage && (
@@ -62,9 +56,9 @@ const PokemonPopout = ({
             />
           )}
 
-          <h3 className="text-2xl sm:text-xl font-bold text-center mt-2">
+          <DialogTitle className="text-2xl sm:text-xl font-bold text-center mt-2">
             {pokemonName}
-          </h3>
+          </DialogTitle>
         </div>
       </DialogContent>
     </Dialog>

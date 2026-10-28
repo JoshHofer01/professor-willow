@@ -7,7 +7,6 @@ export const EventDiffToNow = ({
   className,
 }: {
   eventEnd: string;
-  short?: boolean;
   className?: string;
 }) => {
   const [days, setDays] = useState(0);
@@ -18,7 +17,8 @@ export const EventDiffToNow = ({
     const calculateTimeDifference = () => {
       const targetDate = new Date(eventEnd);
       const now = new Date();
-      const ms = targetDate.getTime() - now.getTime();
+      // Clamp at zero: the page may stay open (or cached) past the target.
+      const ms = Math.max(0, targetDate.getTime() - now.getTime());
 
       setDays(Math.floor(ms / (1000 * 60 * 60 * 24)));
       setHours(Math.floor((ms / (1000 * 60 * 60)) % 24));

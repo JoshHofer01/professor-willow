@@ -10,7 +10,7 @@ const PageContainer = ({
   description?: string;
 }) => {
   return (
-    <main className="container max-w-full p-4 md:p-6 lg:p-8">
+    <div className="container max-w-full p-4 md:p-6 lg:p-8">
       {title && (
         <div className="mb-5">
           <h1 className="text-4xl font-bold mb-2">{title}</h1>
@@ -20,7 +20,7 @@ const PageContainer = ({
         </div>
       )}
       {children}
-    </main>
+    </div>
   );
 };
 

@@ -1,103 +1,21 @@
 import { PokemonData } from "@/interfaces/interfaces";
-import * as Sentry from "@sentry/nextjs";
+import { fetchJson } from "./fetchJson";
 import { getPkmnImgUrl } from "./getPkmnImgUrl";
+import { isPokemonSlug } from "./pokedex";
 
-export async function getPokemonByGeneration(genNumber: string) {
-  try {
-    const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/generation/${genNumber}.json`,
-    );
+const POKEDEX_API = "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex";
 
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const pokemonData: PokemonData[] = await response.json();
-    pokemonData.map((mon) => {
-      try {
-        fixAssets(mon);
-      } catch (error) {
-        Sentry.captureException(error);
-      }
-    });
-
-    return { pokemonData };
-  } catch (error) {
-    Sentry.captureException(`Error fetching pokemon, ${error}`);
-    return null;
-  }
-}
-
-export async function getAllPokemon() {
-  try {
-    const response = await fetch(
-      "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex.json",
-    );
-
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const data: PokemonData[] = await response.json();
-
-    const pokemonData = data.map((mon) => {
-      try {
-        return fixAssets(mon);
-      } catch (error) {
-        Sentry.captureException(error);
-        return mon;
-      }
-    });
-
-    return { pokemonData };
-  } catch (error) {
-    Sentry.captureException(`Error fething pokemon, ${error}`);
-    return null;
-  }
-}
-
-export async function getPokemonByDexNr(dexNr: string) {
-  try {
-    const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/id/${dexNr}.json`,
-    );
-
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const pokemonData: PokemonData = await response.json();
-    const pokemon = fixAssets(pokemonData);
-
-    return { pokemon };
-  } catch (error) {
-    Sentry.captureException(error);
-    return null;
-  }
-}
-
+/** Looks up a Pokémon by its URL slug (lowercase API id, e.g. `mr_mime`). */
 export async function getPokemonByName(pokemonName: string) {
-  try {
-    const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/name/${pokemonName.toUpperCase()}.json`,
-    );
+  if (!isPokemonSlug(pokemonName)) return null;
 
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
+  const pokemonData = await fetchJson<PokemonData>(
+    `${POKEDEX_API}/name/${pokemonName.toUpperCase()}.json`,
+    { source: "getPokemonByName" },
+  );
+  if (!pokemonData) return null;
 
-    const pokemonData: PokemonData = await response.json();
-    const pokemon = fixAssets(pokemonData);
-
-    return { pokemon };
-  } catch (error) {
-    Sentry.captureException(`Error fetching pokemon, ${error}`);
-    return null;
-  }
+  return { pokemon: fixAssets(pokemonData) };
 }
 
 function fixAssets(pokemonData: PokemonData): PokemonData {
@@ -112,20 +30,11 @@ function fixAssets(pokemonData: PokemonData): PokemonData {
     };
   }
 
-  try {
-    return {
-      ...pokemonData,
-      assets: {
-        image: fallbackAsset,
-        shinyImage: fallbackAsset,
-      }
-    };
-  } catch (err) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Invalid Pokémon:", pokemonData.id, err);
-    } else {
-      Sentry.captureException(err);
+  return {
+    ...pokemonData,
+    assets: {
+      image: fallbackAsset,
+      shinyImage: fallbackAsset,
     }
-    return pokemonData;
-  }
+  };
 }

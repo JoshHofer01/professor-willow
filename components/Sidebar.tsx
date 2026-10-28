@@ -7,6 +7,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -14,9 +15,52 @@ import {
   SidebarMenuSubItem,
 } from "@/components/shadcn/sidebar";
 import Link from "next/link";
-import { pages } from "@/utils/sitePages";
+import { useState } from "react";
+import { pages, PageProps } from "@/utils/sitePages";
 import { ChevronDownIcon, Minus } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./shadcn/collapsible";
+
+function SidebarPage({ page }: { page: PageProps }) {
+  const [open, setOpen] = useState(page.title === "Events");
+
+  return (
+    <Collapsible open={open} onOpenChange={setOpen} className="group/collapsible">
+      <SidebarMenuItem className="my-1">
+        {/* A link, not a button: opening the page also toggles its submenu. */}
+        <SidebarMenuButton asChild className="font-semibold">
+          <Link
+            href={page.href}
+            onClick={page.hasMenu ? () => setOpen((isOpen) => !isOpen) : undefined}
+          >
+            <page.icon />
+            <span>{page.title}</span>
+          </Link>
+        </SidebarMenuButton>
+        {page.hasMenu && (
+          <>
+            <CollapsibleTrigger asChild>
+              <SidebarMenuAction aria-label={`Toggle ${page.title} menu`}>
+                <ChevronDownIcon className="group-data-[state=open]/collapsible:hidden" />
+                <Minus className="group-data-[state=closed]/collapsible:hidden" />
+              </SidebarMenuAction>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                {page.components?.map((subPage) => (
+                  <SidebarMenuSubItem key={subPage.title}>
+                    <SidebarMenuSubButton asChild>
+                      <Link href={subPage.href}>{subPage.title}</Link>
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                ))}
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </>
+        )}
+      </SidebarMenuItem>
+    </Collapsible>
+  );
+}
 
 export function AppSidebar() {
   return (
@@ -34,44 +78,11 @@ export function AppSidebar() {
             <SidebarMenu className="mt-5">
               <SidebarGroup>
                 <SidebarMenu>
-                  {pages.map((page) => (
-                    <Collapsible key={page.title} className="group/collapsible" defaultOpen={page.title === "Events" ? true : false}>
-                      {page.showsOnSidebar && (
-                        <SidebarMenuItem className="my-1">
-                          <CollapsibleTrigger asChild>
-                            <SidebarMenuButton className="font-semibold">
-                              <Link
-                                href={page.href}
-                                className="flex flex-row gap-2"
-                              >
-                                <page.icon />
-                                <span>{page.title}</span>
-                              </Link>
-                              {page.hasMenu && (
-                                <>
-                                  <ChevronDownIcon className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                                  <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
-                                </>
-                              )}
-                            </SidebarMenuButton>
-                          </CollapsibleTrigger>
-                          {page.hasMenu ? (
-                            <CollapsibleContent>
-                              <SidebarMenuSub>
-                                {page.components?.map((page) => (
-                                  <SidebarMenuSubItem key={page.title}>
-                                    <SidebarMenuSubButton asChild>
-                                      <Link href={page.href}>{page.title}</Link>
-                                    </SidebarMenuSubButton>
-                                  </SidebarMenuSubItem>
-                                ))}
-                              </SidebarMenuSub>
-                            </CollapsibleContent>
-                          ) : null}
-                        </SidebarMenuItem>
-                      )}
-                    </Collapsible>
-                  ))}
+                  {pages
+                    .filter((page) => page.showsOnSidebar)
+                    .map((page) => (
+                      <SidebarPage key={page.title} page={page} />
+                    ))}
                 </SidebarMenu>
               </SidebarGroup>
             </SidebarMenu>

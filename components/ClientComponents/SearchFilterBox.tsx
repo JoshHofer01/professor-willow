@@ -73,6 +73,7 @@ export function FilterBox({
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(initialValue);
   const searchData = dataTypeMap[dataType];
+  const selectedLabel = searchData.find((element) => element.value === value)?.label;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -81,12 +82,12 @@ export function FilterBox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          // A combobox isn't named by its text, so name it explicitly.
+          aria-label={`Filter by ${dataType}${selectedLabel ? `: ${selectedLabel}` : ""}`}
           className="w-50 justify-between"
         >
-          {value
-            ? searchData.find((element) => element.value === value)?.label
-            : `Select ${dataType}...`}
-          <ChevronsUpDown className="opacity-50" />
+          {value ? selectedLabel : `Select ${dataType}...`}
+          <ChevronsUpDown className="opacity-50" aria-hidden="true" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-50 p-0">
@@ -101,6 +102,8 @@ export function FilterBox({
                 <CommandItem
                   key={element.value}
                   value={element.value.toString()}
+                  // cmdk searches value and keywords, not the visible label.
+                  keywords={[element.label]}
                   onSelect={(currentValue) => {
                     const newValue = currentValue === value ? "" : currentValue;
                     setValue(newValue);

@@ -10,12 +10,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import EventTypeBadge from "./EventTypeBadge";
-import AddToCalendar from "../ClientComponents/AddToCalendar";
+import { LocalDateTime, UpcomingAddToCalendar } from "../ClientComponents/LocalDateTime";
 import { cn } from "@/lib/utils";
 import { weServTransformURL } from "@/utils/weServTransform";
 import { GameEvent } from "@/interfaces/interfaces";
 
-const EventDetails = async ({ event }: { event: GameEvent }) => {
+const EventDetails = ({ event }: { event: GameEvent }) => {
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col">
       <div className="pb-6">
@@ -30,7 +30,7 @@ const EventDetails = async ({ event }: { event: GameEvent }) => {
       </div>
 
       <Card className="overflow-hidden mx-auto">
-        <div className={cn("flex mx-autow-full justify-center")}>
+        <div className={cn("flex mx-auto w-full justify-center")}>
           <EventTypeBadge
             eventType={event.eventType}
             eventHeading={event.heading}
@@ -38,22 +38,20 @@ const EventDetails = async ({ event }: { event: GameEvent }) => {
         </div>
         <CardHeader className="grid-cols-1 md:grid-cols-2">
           <CardTitle className="pt-2 md:pt-4 text-2xl">{event.name}</CardTitle>
-          {new Date() < new Date(event.start) ? (
-            <CardDescription className="md:pt-4 md:flex-1 md:ml-auto">
-              <AddToCalendar eventDetails={event} />
-            </CardDescription>
-          ) : null}
+          <CardDescription className="md:pt-4 md:flex-1 md:ml-auto">
+            <UpcomingAddToCalendar event={event} />
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 py-4">
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="font-medium">Starts:</p>
-                <p>{new Date(event.start).toLocaleString()}</p>
+                <p><LocalDateTime value={event.start} /></p>
               </div>
               <div>
                 <p className="font-medium">Ends:</p>
-                <p>{new Date(event.end).toLocaleString()}</p>
+                <p><LocalDateTime value={event.end} /></p>
               </div>
             </div>
           </div>
