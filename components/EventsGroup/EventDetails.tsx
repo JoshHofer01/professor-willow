@@ -49,11 +49,11 @@ const EventDetails = async ({ event }: { event: GameEvent }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="font-medium">Starts:</p>
-                <p>{new Date(event.start).toLocaleString()}</p>
+                <p>{event.start ? new Date(event.start).toLocaleString() : "TBA"}</p>
               </div>
               <div>
                 <p className="font-medium">Ends:</p>
-                <p>{new Date(event.end).toLocaleString()}</p>
+                <p>{event.end ? new Date(event.end).toLocaleString() : "TBA"}</p>
               </div>
             </div>
           </div>

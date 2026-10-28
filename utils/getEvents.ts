@@ -17,6 +17,9 @@ export async function getEvents() {
 
   eventsData.forEach((event) => {
     try {
+      // ScrapedDuck sends null for dates it doesn't know yet, and
+      // new Date(null) is a valid date (1970), so check before parsing.
+      if (!event.start || !event.end) return;
       const startDate = new Date(event.start);
       const endDate = new Date(event.end);
       if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {

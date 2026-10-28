@@ -101,7 +101,7 @@ describe("getEvents", () => {
     expect([...liveEvents, ...upcomingEvents, ...completedEvents]).toHaveLength(0);
   });
 
-  it("skips events with null dates instead of treating them as 1970 [bug 1.2]", async () => {
+  it("skips events with null dates instead of treating them as 1970", async () => {
     serve([makeEvent({ start: null, end: null }), makeEvent({ start: null })]);
     const { liveEvents, upcomingEvents, completedEvents } = await getEvents();
     expect([...liveEvents, ...upcomingEvents, ...completedEvents]).toHaveLength(0);
