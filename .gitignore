@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Local planning docs
 /docs/
+
+# Written by next dev (Next.js agent rules)
+/AGENTS.md
