@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import BackToTopButton from "../ClientComponents/BackToTopButton";
 import { useDebounce } from "@uidotdev/usehooks";
 import PokedexResults from "./PokedexResults";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 function filterPokedex(
   filterQuery: string,
@@ -59,11 +59,17 @@ export const PokedexDisplay = () => {
       router.push(`?${params.toString()}`);
     };
 
-  useEffect(() => {
+  // An effect event reads the latest URL without re-running on every change:
+  // the URL should only follow the search box when the debounced text changes.
+  const syncQueryToUrl = useEffectEvent((query: string) => {
     const currentQuery = searchParams.get("query") ?? "";
-    if (debouncedQuery !== currentQuery) {
-      updateFilter("query", debouncedQuery);
+    if (query !== currentQuery) {
+      updateFilter("query", query);
     }
+  });
+
+  useEffect(() => {
+    syncQueryToUrl(debouncedQuery);
   }, [debouncedQuery]);
 
   return (

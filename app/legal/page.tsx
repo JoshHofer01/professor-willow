@@ -138,7 +138,7 @@ const Legal = () => {
             >
               <p>
                 professorwillow.me may contain links to other websites or
-                content belonging to, or originating from, third parties. uch
+                content belonging to, or originating from, third parties. Such
                 external links are not investigated, monitored, or checked for
                 accuracy, adequacy, validity, reliability, availability, or
                 completeness by us.

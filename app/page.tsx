@@ -175,7 +175,7 @@ export default async function DashboardPage() {
         {/* Dev Notes */}
         <DashboardCard
           title="Dev Log"
-          description="Thank you so much for using ProfesorWillow!! Currently viewing last 3 site updates."
+          description="Thank you so much for using ProfessorWillow!! Currently viewing last 3 site updates."
           action={
             <Button variant="ghost" size="sm" asChild>
               <Link href="https://github.com/JoshHofer01/professor-willow/commits/main/">
