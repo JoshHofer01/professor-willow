@@ -45,7 +45,7 @@ describe("weServTransformURL", () => {
     expect(url.searchParams.get("url")).toBe(source);
   });
 
-  it("encodes source URLs that contain query characters [bug 3.14]", () => {
+  it("encodes source URLs that contain query characters", () => {
     const withQuery = "https://example.test/img.png?size=large&v=2";
     const url = new URL(weServTransformURL(withQuery, "pokedexImage"));
     expect(url.searchParams.get("url")).toBe(withQuery);

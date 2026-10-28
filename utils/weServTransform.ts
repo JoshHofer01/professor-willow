@@ -15,5 +15,6 @@ export function weServTransformURL(
 };
 
   const width = desktopImgSizeMap[imageType];
-  return `${urlPrefix}${url}&w=${width}${urlSuffix}`;
+  // Encode so a source URL with its own ?, & or # can't break the query.
+  return `${urlPrefix}${encodeURIComponent(url)}&w=${width}${urlSuffix}`;
 }
