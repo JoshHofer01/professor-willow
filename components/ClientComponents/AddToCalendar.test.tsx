@@ -29,7 +29,7 @@ describe("AddToCalendar", () => {
     expect(props.timeZone).toBe("currentBrowser");
   });
 
-  it("treats UTC (Z) events as UTC [bug 1.16]", () => {
+  it("treats UTC (Z) events as UTC", () => {
     const props = propsFor("2026-11-01T20:00:00.000Z", "2026-11-15T20:00:00.000Z");
     expect(props.timeZone).toBe("UTC");
   });
