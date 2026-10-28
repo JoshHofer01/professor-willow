@@ -57,7 +57,7 @@ describe("BossCard", () => {
     expect(screen.getByRole("img", { name: "fog" })).toBeInTheDocument();
   });
 
-  it("renders no broken image for unknown weather [bug 1.11]", () => {
+  it("renders no broken image for unknown weather", () => {
     const { container } = render(<BossCard raidBoss={boss()} weather={["windy", "volcanic"]} />);
     expect(container.querySelectorAll("img:not([src]), img[src='']")).toHaveLength(0);
   });
