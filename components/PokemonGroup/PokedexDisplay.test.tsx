@@ -109,7 +109,7 @@ describe("PokedexDisplay", () => {
     expect(links[0]).toHaveAttribute("href", href);
   });
 
-  it("shows Pokémon whose API image is missing, e.g. Unown [bug 3.16]", () => {
+  it("shows Pokémon whose API image is missing, e.g. Unown", () => {
     setSearchParams({ gen: "2", query: "unown" });
     render(<PokedexDisplay />);
     expect(shownNames()).toEqual(["Unown"]);

@@ -24,7 +24,9 @@ async function getPokemonIndex() {
     name: element.names.English,
     primaryType: element.primaryType.names.English,
     secondaryType: element.secondaryType ? element.secondaryType.names.English : null,
-    image: element.assets ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${element.dexNr}.png` : null,
+    // Sprites come from PokeAPI by dex number, so every entry has one, even
+    // when pokemon-go-api has no assets for it.
+    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${element.dexNr}.png`,
   }));
 
   await writeFile(filepath, JSON.stringify(pokemonDataMin, null, 2));
