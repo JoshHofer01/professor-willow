@@ -58,9 +58,16 @@ describe("FilterBox", () => {
     expect(screen.getAllByRole("option").map((o) => o.textContent)).toEqual(["Water"]);
   });
 
-  it("gives the combobox an accessible name [bug 2.9]", () => {
+  it("gives the combobox an accessible name", () => {
     render(<FilterBox dataType="type" setFilter={vi.fn()} initialValue="" />);
-    expect(screen.getByRole("combobox", { name: /type/i })).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Filter by type" })).toBeInTheDocument();
+  });
+
+  it("includes the selection in the combobox's name", () => {
+    render(<FilterBox dataType="generation" setFilter={vi.fn()} initialValue="1" />);
+    expect(
+      screen.getByRole("combobox", { name: "Filter by generation: Kanto (Gen I)" }),
+    ).toBeInTheDocument();
   });
 
   it("finds generations by region name, e.g. Kanto", async () => {

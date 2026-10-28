@@ -11,8 +11,7 @@ function shownNames() {
     .map((link) => within(link).getByRole("img").getAttribute("alt"));
 }
 
-// The type filter is the first combobox (they have no accessible names yet, see 2.9).
-const typeFilter = () => screen.getAllByRole("combobox")[0];
+const typeFilter = () => screen.getByRole("combobox", { name: /^Filter by type/ });
 
 describe("PokedexDisplay", () => {
   it("shows only the selected generation", () => {
