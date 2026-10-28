@@ -1,0 +1,95 @@
+[
+  {
+    "text": "<span>Catch 13 Ghost-type Pokémon</span>",
+    "rewards": [
+      {
+        "name": "Zubat wearing a top hat",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm41.fHALLOWEEN_2026_01.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 258,
+          "max": 285
+        }
+      },
+      {
+        "name": "Piplup wearing a Halloween Mischief costume",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm393.cHALLOWEEN_2021_NOEVOLVE.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 426,
+          "max": 460
+        }
+      }
+    ]
+  },
+  {
+    "text": "<span>Make 6 Nice Throws</span>",
+    "rewards": [
+      {
+        "name": "Misdreavus",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm200.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 779,
+          "max": 825
+        }
+      },
+      {
+        "name": "Duskull",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm355.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 273,
+          "max": 302
+        }
+      }
+    ]
+  },
+  {
+    "text": "<span>Win a raid</span>",
+    "rewards": [
+      {
+        "name": "Zubat wearing a top hat",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm41.fHALLOWEEN_2026_01.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 258,
+          "max": 285
+        }
+      },
+      {
+        "name": "Sinistea wearing a bow",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm854.fP_HALLOWEEN_2026_01.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 452,
+          "max": 488
+        }
+      }
+    ]
+  },
+  {
+    "text": "<span>Win a raid</span>",
+    "type": "battle",
+    "rewards": [
+      {
+        "name": "Lapras",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm131.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 1076,
+          "max": 1131
+        }
+      },
+      {
+        "name": "Vaporeon",
+        "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm134.icon.png",
+        "canBeShiny": false,
+        "combatPower": {
+          "min": 1275,
+          "max": 1335
+        }
+      }
+    ]
+  }
+]

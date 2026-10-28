@@ -1,0 +1,148 @@
+{
+  "id": "MR_MIME",
+  "formId": "MR_MIME",
+  "dexNr": 122,
+  "generation": 1,
+  "names": {
+    "English": "Mr. Mime"
+  },
+  "stats": {
+    "stamina": 120,
+    "attack": 192,
+    "defense": 205
+  },
+  "primaryType": {
+    "type": "POKEMON_TYPE_PSYCHIC",
+    "names": {
+      "English": "Psychic"
+    }
+  },
+  "secondaryType": {
+    "type": "POKEMON_TYPE_FAIRY",
+    "names": {
+      "English": "Fairy"
+    }
+  },
+  "pokemonClass": null,
+  "quickMoves": {
+    "CONFUSION_FAST": {
+      "id": "CONFUSION_FAST",
+      "power": 19,
+      "energy": 14,
+      "durationMs": 1500,
+      "type": {
+        "type": "POKEMON_TYPE_PSYCHIC",
+        "names": {
+          "English": "Psychic"
+        }
+      },
+      "names": {
+        "English": "Confusion"
+      },
+      "combat": {
+        "energy": 14,
+        "power": 16,
+        "turns": 4,
+        "buffs": null
+      }
+    },
+    "ZEN_HEADBUTT_FAST": {
+      "id": "ZEN_HEADBUTT_FAST",
+      "power": 11,
+      "energy": 9,
+      "durationMs": 1000,
+      "type": {
+        "type": "POKEMON_TYPE_PSYCHIC",
+        "names": {
+          "English": "Psychic"
+        }
+      },
+      "names": {
+        "English": "Zen Headbutt"
+      },
+      "combat": {
+        "energy": 6,
+        "power": 8,
+        "turns": 3,
+        "buffs": null
+      }
+    }
+  },
+  "cinematicMoves": {
+    "PSYBEAM": {
+      "id": "PSYBEAM",
+      "power": 65,
+      "energy": -50,
+      "durationMs": 3000,
+      "type": {
+        "type": "POKEMON_TYPE_PSYCHIC",
+        "names": {
+          "English": "Psychic"
+        }
+      },
+      "names": {
+        "English": "Psybeam"
+      },
+      "combat": {
+        "energy": -60,
+        "power": 70,
+        "turns": 1,
+        "buffs": null
+      }
+    },
+    "PSYCHIC": {
+      "id": "PSYCHIC",
+      "power": 95,
+      "energy": -50,
+      "durationMs": 3000,
+      "type": {
+        "type": "POKEMON_TYPE_PSYCHIC",
+        "names": {
+          "English": "Psychic"
+        }
+      },
+      "names": {
+        "English": "Psychic"
+      },
+      "combat": {
+        "energy": -55,
+        "power": 75,
+        "turns": 1,
+        "buffs": {
+          "activationChance": 10,
+          "attackerAttackStatsChange": null,
+          "attackerDefenseStatsChange": null,
+          "targetAttackStatsChange": null,
+          "targetDefenseStatsChange": -1
+        }
+      }
+    }
+  },
+  "eliteQuickMoves": [],
+  "eliteCinematicMoves": [],
+  "assets": {
+    "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm122.icon.png",
+    "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm122.s.icon.png"
+  },
+  "regionForms": {},
+  "evolutions": [],
+  "hasMegaEvolution": false,
+  "megaEvolutions": {},
+  "hasGigantamaxEvolution": false,
+  "assetForms": [
+    {
+      "form": "GALARIAN",
+      "costume": null,
+      "isFemale": false,
+      "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm122.fGALARIAN.icon.png",
+      "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm122.fGALARIAN.s.icon.png"
+    },
+    {
+      "form": null,
+      "costume": null,
+      "isFemale": false,
+      "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm122.icon.png",
+      "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm122.s.icon.png"
+    }
+  ]
+}

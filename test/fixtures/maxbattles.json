@@ -1,0 +1,112 @@
+{
+  "currentList": {
+    "tier_1": [
+      {
+        "id": "GIRATINA",
+        "assets": {
+          "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm487.fORIGIN.icon.png",
+          "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm487.fORIGIN.s.icon.png"
+        },
+        "level": 1,
+        "shiny": true,
+        "types": [
+          "Ghost",
+          "Dragon"
+        ],
+        "cpRange": [
+          2018,
+          2105
+        ],
+        "names": {
+          "English": "Giratina (Origin Forme)"
+        }
+      }
+    ],
+    "tier_2": [
+      {
+        "id": "COFAGRIGUS",
+        "assets": {
+          "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm563.icon.png",
+          "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm563.s.icon.png"
+        },
+        "level": 2,
+        "shiny": true,
+        "types": [
+          "Ghost"
+        ],
+        "cpRange": [
+          1231,
+          1299
+        ],
+        "names": {
+          "English": "Cofagrigus"
+        }
+      }
+    ],
+    "tier_3": [
+      {
+        "id": "TREVENANT",
+        "assets": {
+          "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm709.icon.png",
+          "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm709.s.icon.png"
+        },
+        "level": 3,
+        "shiny": true,
+        "types": [
+          "Ghost",
+          "Grass"
+        ],
+        "cpRange": [
+          1390,
+          1462
+        ],
+        "names": {
+          "English": "Trevenant"
+        }
+      }
+    ],
+    "tier_4": [],
+    "tier_5": [
+      {
+        "id": "PIKACHU",
+        "assets": {
+          "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm25.icon.png",
+          "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm25.s.icon.png"
+        },
+        "level": 5,
+        "shiny": true,
+        "types": [
+          "Electric"
+        ],
+        "cpRange": [
+          493,
+          536
+        ],
+        "names": {
+          "English": "Pikachu"
+        }
+      }
+    ],
+    "tier_6": [
+      {
+        "id": "SINISTEA",
+        "assets": {
+          "image": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm854.icon.png",
+          "shinyImage": "https://raw.githubusercontent.com/pokemon-go-api/assets/main/Pokemon/pm854.s.icon.png"
+        },
+        "level": 6,
+        "shiny": true,
+        "types": [
+          "Ghost"
+        ],
+        "cpRange": [
+          603,
+          650
+        ],
+        "names": {
+          "English": "Sinistea"
+        }
+      }
+    ]
+  }
+}
