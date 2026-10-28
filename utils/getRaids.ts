@@ -7,6 +7,7 @@ import {
 } from "@/interfaces/interfaces";
 import * as Sentry from "@sentry/nextjs";
 import pokemonData from "@/data/pokemonIndex.json";
+import { fetchJson } from "./fetchJson";
 import { getPkmnImgUrl } from "./getPkmnImgUrl";
 
 const pokedexLookup = new Map(
@@ -14,19 +15,13 @@ const pokedexLookup = new Map(
 );
 
 export async function getRaids() {
+  const raids = await fetchJson<Raid>(
+    "https://pokemon-go-api.github.io/pokemon-go-api/api/raidboss.json",
+    { source: "getRaids", revalidate: 600 },
+  );
+  if (!raids) return null;
+
   try {
-    const response = await fetch(
-      "https://pokemon-go-api.github.io/pokemon-go-api/api/raidboss.json",
-      { next: { revalidate: 600 } },
-    );
-
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const raids: Raid = await response.json();
-
     const augmentRaids = (raid: RaidPokemon, isShadow: boolean) => {
       const fixedAssets = fixBattleAssets(raid.assets, raid.id);
 
@@ -86,20 +81,13 @@ export async function getRaids() {
 }
 
 export async function getMaxBattles() {
+  const maxBattles = await fetchJson<MaxBattle>(
+    "https://pokemon-go-api.github.io/pokemon-go-api/api/maxbattles.json",
+    { source: "getMaxBattles", revalidate: 600 },
+  );
+  if (!maxBattles) return null;
+
   try {
-    const response = await fetch(
-      "https://pokemon-go-api.github.io/pokemon-go-api/api/maxbattles.json",
-      { next: { revalidate: 600 } },
-    );
-
-    if (!response.ok) {
-      Sentry.captureException(
-        `Failed to fetch Max Battles from API, ${response.status}`,
-      );
-    }
-
-    const maxBattles: MaxBattle = await response.json();
-
     const augmentBattles = (battle: BattlePokemon, isShadow: boolean) => {
       const fixedAssets = fixBattleAssets(battle.assets, battle.id);
 

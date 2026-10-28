@@ -14,6 +14,8 @@ export default defineConfig({
     // `// @vitest-environment node` comment at the top of the file.
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],
+    // jsdom renders of the full Pokédex grid can pass 5 s when suites run in parallel.
+    testTimeout: 15_000,
     // 42 of 54 live events have no UTC offset, so pin the zone for
     // deterministic dates. Suites testing time zones override it.
     env: { TZ: "UTC" },

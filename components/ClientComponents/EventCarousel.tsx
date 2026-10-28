@@ -17,6 +17,11 @@ export function CurrentEventsCarousel({
 }: {
   eventData: GameEvent[];
 }) {
+  if (eventData.length === 0) {
+    return (
+      <p className="text-muted-foreground italic">No live events right now.</p>
+    );
+  }
 
   return (
     <>

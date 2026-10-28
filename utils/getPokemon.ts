@@ -1,47 +1,26 @@
 import { PokemonData } from "@/interfaces/interfaces";
-import * as Sentry from "@sentry/nextjs";
+import { fetchJson } from "./fetchJson";
 import { getPkmnImgUrl } from "./getPkmnImgUrl";
 
+const POKEDEX_API = "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex";
+
 export async function getPokemonByDexNr(dexNr: string) {
-  try {
-    const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/id/${dexNr}.json`,
-    );
+  const pokemonData = await fetchJson<PokemonData>(`${POKEDEX_API}/id/${dexNr}.json`, {
+    source: "getPokemonByDexNr",
+  });
+  if (!pokemonData) return null;
 
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const pokemonData: PokemonData = await response.json();
-    const pokemon = fixAssets(pokemonData);
-
-    return { pokemon };
-  } catch (error) {
-    Sentry.captureException(error);
-    return null;
-  }
+  return { pokemon: fixAssets(pokemonData) };
 }
 
 export async function getPokemonByName(pokemonName: string) {
-  try {
-    const response = await fetch(
-      `https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/name/${pokemonName.toUpperCase()}.json`,
-    );
+  const pokemonData = await fetchJson<PokemonData>(
+    `${POKEDEX_API}/name/${pokemonName.toUpperCase()}.json`,
+    { source: "getPokemonByName" },
+  );
+  if (!pokemonData) return null;
 
-    if (!response.ok) {
-      Sentry.captureException(`Failed to fetch pokemon, ${response.status}`);
-      return null;
-    }
-
-    const pokemonData: PokemonData = await response.json();
-    const pokemon = fixAssets(pokemonData);
-
-    return { pokemon };
-  } catch (error) {
-    Sentry.captureException(`Error fetching pokemon, ${error}`);
-    return null;
-  }
+  return { pokemon: fixAssets(pokemonData) };
 }
 
 function fixAssets(pokemonData: PokemonData): PokemonData {

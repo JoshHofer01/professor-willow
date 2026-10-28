@@ -1,12 +1,14 @@
 import { GameEvent } from "@/interfaces/interfaces";
 import * as Sentry from "@sentry/nextjs";
+import { fetchJson } from "./fetchJson";
 
 export async function getEvents() {
-  const response = await fetch(
-    "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.json",
-    { next: { revalidate: 180 } }
-  );
-  const eventsData: GameEvent[] = await response.json();
+  // An outage resolves to empty lists so pages render their empty states.
+  const eventsData =
+    (await fetchJson<GameEvent[]>(
+      "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.json",
+      { source: "getEvents", revalidate: 180 },
+    )) ?? [];
 
   const now = new Date();
   const liveEvents: GameEvent[] = [];

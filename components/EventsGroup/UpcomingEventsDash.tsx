@@ -25,8 +25,8 @@ const EventPill = ({ event }: { event: GameEvent }) => {
 const UpcomingEventsDashboard = async () => {
   const { upcomingEvents } = await getEvents();
 
-  if (!upcomingEvents) {
-    return <ErrorPage message="Error getting upcoming events" />;
+  if (upcomingEvents.length === 0) {
+    return <ErrorPage message="No upcoming events right now" />;
   }
 
   // Modify latter number to change amount of pills shown

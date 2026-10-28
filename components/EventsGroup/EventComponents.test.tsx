@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NOW, makeEvent } from "@/test/fixtures/events";
+import { CurrentEventsCarousel } from "../ClientComponents/EventCarousel";
 import { EventPageCard, OverviewPageCard } from "../CustomCards/EventCards";
 import Countdown from "./Countdown";
 import EventPopout from "./EventPopout";
@@ -38,6 +39,20 @@ const completed = () =>
 beforeEach(() => {
   vi.useFakeTimers({ toFake: ["Date"] });
   vi.setSystemTime(NOW);
+});
+
+describe("CurrentEventsCarousel", () => {
+  it("shows an empty state when nothing is live", () => {
+    render(<CurrentEventsCarousel eventData={[]} />);
+    expect(screen.getByText("No live events right now.")).toBeInTheDocument();
+  });
+
+  it("shows a slide per live event with its position", () => {
+    render(<CurrentEventsCarousel eventData={[live(), upcoming()]} />);
+    expect(screen.getByRole("img", { name: "Halloween Part II" })).toBeInTheDocument();
+    expect(screen.getByText("1/2")).toBeInTheDocument();
+    expect(screen.getByText("2/2")).toBeInTheDocument();
+  });
 });
 
 describe("EventTypeBadge", () => {

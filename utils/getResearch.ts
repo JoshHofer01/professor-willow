@@ -1,24 +1,12 @@
 import { Research } from "@/interfaces/interfaces";
-import * as Sentry from "@sentry/nextjs";
+import { fetchJson } from "./fetchJson";
 
 export async function getResearch() {
-  try {
-    const response = await fetch(
-      "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/research.json",
-      { next: { revalidate: 600 } },
-    );
+  const research = await fetchJson<Research[]>(
+    "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/research.json",
+    { source: "getResearch", revalidate: 600 },
+  );
+  if (!research) return null;
 
-    if (!response.ok) {
-        return null;
-    }
-
-    const research: Research[] = await response.json();
-
-    return { research };
-
-  } catch (error) {
-    Sentry.captureException(error, {
-      extra: { source: "getResearch" },
-    });
-  }
+  return { research };
 }
