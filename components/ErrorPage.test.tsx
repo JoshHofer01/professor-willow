@@ -13,7 +13,7 @@ describe("ErrorPage", () => {
     expect(screen.getByText(/error getting upcoming events/i)).toBeInTheDocument();
   });
 
-  it("doesn't prefix the message with the component name [bug 1.8]", () => {
+  it("doesn't prefix the message with the component name", () => {
     const { container } = render(<ErrorPage message="Error getting upcoming events" />);
     expect(container).toHaveTextContent(/^Error getting upcoming events$/);
   });
