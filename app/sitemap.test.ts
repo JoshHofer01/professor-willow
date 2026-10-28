@@ -39,12 +39,12 @@ describe("sitemap", () => {
     expect(new Set(paths).size).toBe(paths.length);
   });
 
-  it("only lists routes that exist [bug 1.6]", () => {
+  it("only lists routes that exist", () => {
     const routes = new Set(staticRoutes());
     for (const path of sitemapPaths()) expect(routes.has(path), path).toBe(true);
   });
 
-  it("lists every static public route [bug 1.6]", () => {
+  it("lists every static public route", () => {
     const paths = new Set(sitemapPaths());
     for (const route of staticRoutes()) expect(paths.has(route), route).toBe(true);
   });
