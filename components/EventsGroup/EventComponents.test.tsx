@@ -161,7 +161,7 @@ describe("EventPopout", () => {
     expect(within(dialog).queryByTestId("add-to-calendar")).not.toBeInTheDocument();
   });
 
-  it("doesn't present the countdown as a button [bug 2.4]", async () => {
+  it("doesn't present the countdown as a button", async () => {
     const dialog = await openWithButton(live());
     expect(within(dialog).queryByRole("button", { name: /ends in/i })).not.toBeInTheDocument();
   });

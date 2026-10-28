@@ -13,7 +13,7 @@ import AddToCalendar from "../ClientComponents/AddToCalendar";
 import Link from "next/link";
 import EventTypeBadge from "./EventTypeBadge";
 import { cn } from "@/lib/utils";
-import { Button } from "../shadcn/button";
+import { buttonVariants } from "../shadcn/button";
 import { dateFormatter } from "@/utils/dateFormatter";
 import Countdown from "./Countdown";
 import { eventTypeColorMap } from "@/utils/maps";
@@ -66,7 +66,10 @@ const EventPopout = ({
         </div>
         <DialogFooter>
           {/* Timing badge */}
-          <Button variant="outline" className="rounded-3xl max-w-47.5 h-11.25"><Countdown event={gameEvent} /></Button>
+          {/* Styled like an outline button, but it's information, not a control. */}
+          <div className={cn(buttonVariants({ variant: "outline" }), "rounded-3xl max-w-47.5 h-11.25")}>
+            <Countdown event={gameEvent} />
+          </div>
           {/* AddToCalendar */}
           {gameEvent.status === "upcoming" ? (
             <AddToCalendar eventDetails={gameEvent} />
