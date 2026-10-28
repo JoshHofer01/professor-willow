@@ -36,7 +36,7 @@ describe("/events/[eventId]", () => {
     expect(metadata.title).toBe("Not Found | ProfessorWillow");
   });
 
-  it("returns a 404 instead of crashing when the feed is down [bug 1.4]", async () => {
+  it("returns a 404 instead of crashing when the feed is down", async () => {
     mockFetch({ [EVENTS_URL]: new TypeError("fetch failed") });
     await expect(EventPage(params(event.eventID))).rejects.toBeInstanceOf(NotFoundError);
   });

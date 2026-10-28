@@ -13,7 +13,7 @@ describe("/pokemon/[pokemonName]", () => {
     await expect(PokemonDetails(params("mr_mime"))).resolves.toBeTruthy();
   });
 
-  it("returns a 404 for an unknown Pokémon [bug 1.1]", async () => {
+  it("returns a 404 for an unknown Pokémon", async () => {
     mockFetch({ [`${API}/MISSINGNO.json`]: new Response("Not found", { status: 404 }) });
     await expect(PokemonDetails(params("missingno"))).rejects.toBeInstanceOf(NotFoundError);
   });
@@ -24,7 +24,7 @@ describe("/pokemon/[pokemonName]", () => {
     expect(metadata.title).toBe("Not Found | ProfessorWillow");
   });
 
-  it("titles the page with the Pokémon's display name [bug 1.1]", async () => {
+  it("titles the page with the Pokémon's display name", async () => {
     mockFetch({ [`${API}/MR_MIME.json`]: json(mrMime) });
     const metadata = await generateMetadata(params("mr_mime"));
     expect(metadata.title).toBe("Mr. Mime | ProfessorWillow");

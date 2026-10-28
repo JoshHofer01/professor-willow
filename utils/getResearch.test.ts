@@ -29,13 +29,13 @@ describe("getResearch", () => {
     expect(result?.research.some((t) => t.text.includes("<"))).toBe(false);
   });
 
-  it("returns null and reports a non-OK response [bug 1.4]", async () => {
+  it("returns null and reports a non-OK response", async () => {
     mockFetch({ [RESEARCH_URL]: new Response("nope", { status: 500 }) });
     await expect(getResearch()).resolves.toBeNull();
     expect(Sentry.captureException).toHaveBeenCalledTimes(1);
   });
 
-  it("returns null (not undefined) and reports a network failure [bug 1.4]", async () => {
+  it("returns null (not undefined) and reports a network failure", async () => {
     mockFetch({ [RESEARCH_URL]: new TypeError("fetch failed") });
     await expect(getResearch()).resolves.toBeNull();
     expect(Sentry.captureException).toHaveBeenCalledTimes(1);

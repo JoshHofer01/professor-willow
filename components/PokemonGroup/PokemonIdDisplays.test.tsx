@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { AssetForm, Move, PokemonType } from "@/interfaces/interfaces";
 import { makePokemon, neighbour } from "@/test/fixtures/pokemon";
-import { json, mockFetch } from "@/test/mockFetch";
 import {
   FormDisplay,
   MovesDisplay,
@@ -139,46 +138,24 @@ describe("FormDisplay", () => {
 });
 
 describe("Next / previous Pokémon", () => {
-  const API = "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex/id";
-
-  // These components currently fetch neighbours from the API; after 1.12 they
-  // read the local index and the fetch mocks below go unused.
-  const serveDex = (entries: Record<number, ReturnType<typeof neighbour> | null>) =>
-    mockFetch(
-      Object.fromEntries(
-        Object.entries(entries).map(([dexNr, mon]) => [
-          `${API}/${dexNr}.json`,
-          mon ? json(mon) : new Response("Not found", { status: 404 }),
-        ]),
-      ),
-    );
-
-  it("links to the next Pokémon and says when it is an evolution", async () => {
-    serveDex({ 2: neighbour(2, "IVYSAUR", "Ivysaur") });
-    const bulbasaur = makePokemon();
-
-    render(await NextMonDisplay({ pokemon: bulbasaur }));
+  it("links to the next Pokémon and says when it is an evolution", () => {
+    render(<NextMonDisplay pokemon={makePokemon()} />);
 
     expect(screen.getByText(/evolves into/i)).toBeInTheDocument();
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/pokemon/ivysaur");
+    expect(screen.getByRole("link", { name: "Ivysaur" })).toHaveAttribute("href", "/pokemon/ivysaur");
   });
 
-  it("links to the previous Pokémon with an absolute URL [bug 1.1]", async () => {
-    serveDex({ 1: neighbour(1, "BULBASAUR", "Bulbasaur") });
-
-    render(await PrevMonDisplay({ pokemon: neighbour(2, "IVYSAUR", "Ivysaur") }));
-
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/pokemon/bulbasaur");
+  it("links to the previous Pokémon with an absolute URL", () => {
+    render(<PrevMonDisplay pokemon={neighbour(2, "IVYSAUR", "Ivysaur")} />);
+    expect(screen.getByRole("link", { name: "Bulbasaur" })).toHaveAttribute("href", "/pokemon/bulbasaur");
   });
 
-  it("shows nothing before #1", async () => {
-    serveDex({ 0: null });
-    render(await PrevMonDisplay({ pokemon: makePokemon() }));
-    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+  it("shows nothing before #1", () => {
+    const { container } = render(<PrevMonDisplay pokemon={makePokemon()} />);
+    expect(container).toBeEmptyDOMElement();
   });
 
-  it("doesn't call the next Pokémon an evolution when it isn't one [bug 1.12]", async () => {
-    serveDex({ 43: neighbour(43, "ODDISH", "Oddish") });
+  it("doesn't call the next Pokémon an evolution when it isn't one", () => {
     const golbat = makePokemon({
       dexNr: 42,
       id: "GOLBAT",
@@ -186,35 +163,31 @@ describe("Next / previous Pokémon", () => {
       evolutions: [{ id: "CROBAT" }],
     });
 
-    render(await NextMonDisplay({ pokemon: golbat }));
+    render(<NextMonDisplay pokemon={golbat} />);
 
     expect(screen.queryByText(/evolves into/i)).not.toBeInTheDocument();
     expect(screen.getByText(/next pok[eé]mon/i)).toBeInTheDocument();
   });
 
-  it("skips gaps in the dex: #901 → #903 [bug 1.12]", async () => {
-    serveDex({ 902: null });
-
-    render(await NextMonDisplay({ pokemon: neighbour(901, "URSALUNA", "Ursaluna") }));
-
+  it("skips gaps in the dex: #901 → #903", () => {
+    render(<NextMonDisplay pokemon={neighbour(901, "URSALUNA", "Ursaluna")} />);
     expect(screen.getByRole("link")).toHaveAttribute("href", "/pokemon/sneasler");
   });
 
-  it("skips gaps in the dex: #903 → #901 [bug 1.12]", async () => {
-    serveDex({ 902: null });
-
-    render(await PrevMonDisplay({ pokemon: neighbour(903, "SNEASLER", "Sneasler") }));
-
+  it("skips gaps in the dex: #903 → #901", () => {
+    render(<PrevMonDisplay pokemon={neighbour(903, "SNEASLER", "Sneasler")} />);
     expect(screen.getByRole("link")).toHaveAttribute("href", "/pokemon/ursaluna");
   });
 
-  it("shows nothing (and no error) after the last Pokémon [bug 1.12]", async () => {
-    serveDex({ 1026: null });
-
+  it("shows nothing after the last Pokémon", () => {
     const { container } = render(
-      await NextMonDisplay({ pokemon: neighbour(1025, "PECHARUNT", "Pecharunt") }),
+      <NextMonDisplay pokemon={neighbour(1025, "PECHARUNT", "Pecharunt")} />,
     );
-
     expect(container).toBeEmptyDOMElement();
+  });
+
+  it("doesn't nest the tooltip button inside the link", () => {
+    const { container } = render(<NextMonDisplay pokemon={makePokemon()} />);
+    expect(container.querySelector("a button, button a")).toBeNull();
   });
 });

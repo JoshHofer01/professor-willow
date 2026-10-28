@@ -82,7 +82,7 @@ describe("getRaids", () => {
     expect(tier1[0].assets).toEqual({ image: "a.png", shinyImage: "b.png" });
   });
 
-  it("finds bosses whose API id differs from their display name, e.g. MR_MIME [bug 1.1]", async () => {
+  it("finds bosses whose API id differs from their display name, e.g. MR_MIME", async () => {
     mockFetch({ [RAIDS_URL]: json(raidFixture) });
 
     const { tier1 } = (await getRaids())!;
@@ -139,7 +139,7 @@ describe("getMaxBattles", () => {
     );
   });
 
-  it("returns null and reports once for a non-OK response with a JSON body [bug 1.9]", async () => {
+  it("returns null and reports once for a non-OK response with a JSON body", async () => {
     mockFetch({ [MAX_URL]: json({ currentList: {} }, { status: 500 }) });
     await expect(getMaxBattles()).resolves.toBeNull();
     expect(Sentry.captureException).toHaveBeenCalledTimes(1);

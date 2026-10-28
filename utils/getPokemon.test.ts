@@ -5,7 +5,7 @@ import bulbasaur from "@/test/fixtures/pokemon-bulbasaur.json";
 import mrMime from "@/test/fixtures/pokemon-mr_mime.json";
 import { json, mockFetch } from "@/test/mockFetch";
 import { getPkmnImgUrl } from "./getPkmnImgUrl";
-import { getPokemonByDexNr, getPokemonByName } from "./getPokemon";
+import { getPokemonByName } from "./getPokemon";
 
 const API = "https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex";
 
@@ -63,32 +63,11 @@ describe("getPokemonByName", () => {
   });
 
   it.each(["mr. mime", "ho-oh", "farfetch'd", "../pokedex", "nidoran♀"])(
-    "returns null for the invalid slug %j without fetching [bug 1.1]",
+    "returns null for the invalid slug %j without fetching",
     async (slug) => {
       const stub = mockFetch({});
       await expect(getPokemonByName(slug)).resolves.toBeNull();
       expect(stub).not.toHaveBeenCalled();
     },
   );
-});
-
-describe("getPokemonByDexNr", () => {
-  it("requests the id endpoint and rewrites assets", async () => {
-    const stub = mockFetch({ [`${API}/id/122.json`]: json(mrMime) });
-
-    const result = await getPokemonByDexNr("122");
-
-    expect(stub).toHaveBeenCalledWith(`${API}/id/122.json`);
-    expect(result?.pokemon.assets.image).toBe(getPkmnImgUrl(122));
-  });
-
-  it("returns null for a non-OK response", async () => {
-    mockFetch({ [`${API}/id/902.json`]: new Response("Not found", { status: 404 }) });
-    await expect(getPokemonByDexNr("902")).resolves.toBeNull();
-  });
-
-  it("returns null on a network failure", async () => {
-    mockFetch({ [`${API}/id/1.json`]: new TypeError("fetch failed") });
-    await expect(getPokemonByDexNr("1")).resolves.toBeNull();
-  });
 });

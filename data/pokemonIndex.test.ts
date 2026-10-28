@@ -45,7 +45,7 @@ describe("pokemonIndex.json", () => {
     }
   });
 
-  it("stores the API id of every entry, e.g. MR_MIME [bug 1.1]", () => {
+  it("stores the API id of every entry, e.g. MR_MIME", () => {
     for (const p of pokemonIndex as Array<(typeof pokemonIndex)[number] & { id?: string }>) {
       expect(p.id, p.name).toMatch(/^[A-Z0-9_]+$/);
     }

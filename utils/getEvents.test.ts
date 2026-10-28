@@ -115,19 +115,19 @@ describe("getEvents", () => {
       eventsData: [],
     };
 
-    it("resolves to empty lists on a non-OK response and reports it once [bug 1.4]", async () => {
+    it("resolves to empty lists on a non-OK response and reports it once", async () => {
       mockFetch({ [EVENTS_URL]: new Response("Server error", { status: 500 }) });
       await expect(getEvents()).resolves.toEqual(empty);
       expect(Sentry.captureException).toHaveBeenCalledTimes(1);
     });
 
-    it("resolves to empty lists when the body isn't JSON [bug 1.4]", async () => {
+    it("resolves to empty lists when the body isn't JSON", async () => {
       mockFetch({ [EVENTS_URL]: new Response("<html>oops</html>") });
       await expect(getEvents()).resolves.toEqual(empty);
       expect(Sentry.captureException).toHaveBeenCalledTimes(1);
     });
 
-    it("resolves to empty lists on a network failure [bug 1.4]", async () => {
+    it("resolves to empty lists on a network failure", async () => {
       mockFetch({ [EVENTS_URL]: new TypeError("fetch failed") });
       await expect(getEvents()).resolves.toEqual(empty);
       expect(Sentry.captureException).toHaveBeenCalledTimes(1);

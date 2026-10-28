@@ -103,7 +103,7 @@ describe("PokedexDisplay", () => {
     ["1", "nidoran♀", "/pokemon/nidoran_female"],
     ["1", "farfetch", "/pokemon/farfetchd"],
     ["6", "flab", "/pokemon/flabebe"],
-  ])("links gen %s %j to the API id %s [bug 1.1]", (gen, query, href) => {
+  ])("links gen %s %j to the API id %s", (gen, query, href) => {
     setSearchParams({ gen, query });
     render(<PokedexDisplay />);
     const links = screen.getAllByRole("link");

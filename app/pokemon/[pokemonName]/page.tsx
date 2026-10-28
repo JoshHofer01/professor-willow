@@ -87,8 +87,8 @@ const PokemonDetails = async ({ params }: Props) => {
             </div>
           </div>
 
-          {pokemon.dexNr == 1025 ? null : <NextMonDisplay pokemon={pokemon} />}
-          {pokemon.dexNr == 1 ? null : <PrevMonDisplay pokemon={pokemon} />}
+          <NextMonDisplay pokemon={pokemon} />
+          <PrevMonDisplay pokemon={pokemon} />
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>

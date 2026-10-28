@@ -2,6 +2,7 @@ import {
   AssetForm,
   Move,
   PokemonData,
+  PokemonDataMin,
   PokemonType,
 } from "@/interfaces/interfaces";
 import Image from "next/image";
@@ -14,90 +15,65 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/shadcn/tooltip";
-import { getPokemonByDexNr } from "@/utils/getPokemon";
-import ErrorPage from "@/components/ErrorPage";
+import { getPkmnImgUrl } from "@/utils/getPkmnImgUrl";
 import { weServTransformURL } from "@/utils/weServTransform";
 import { pokemonTypeColorMap } from "@/utils/maps";
-import { pokemonHref } from "@/utils/pokedex";
+import { pokedex, pokemonHref } from "@/utils/pokedex";
 
-export const NextMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
-  const nextMonNumber = (pokemon.dexNr + 1).toString();
-  const nextMonResult = await getPokemonByDexNr(nextMonNumber);
-
-  if (!nextMonResult) {
-    return (
-      <ErrorPage
-        message={`Error finding pokemon following ${pokemon.names.English}`}
-      />
-    );
-  }
-
-  const { pokemon: nextMon } = nextMonResult;
-
+const NeighbourLink = ({
+  label,
+  neighbour,
+}: {
+  label: string;
+  neighbour: PokemonDataMin;
+}) => {
   return (
     <div className="flex flex-row items-center gap-2">
-      {pokemon?.evolutions?.length ? (
-        <p className="text-xs">Evolves into:</p>
-      ) : (
-        <p className="text-xs">Next Pokemon:</p>
-      )}
-      <Link href={pokemonHref(nextMon.id)}>
-        <div className="transition-transform duration-200 hover:scale-110">
-          <>
-            <Tooltip>
-              <TooltipTrigger>
-                <Avatar>
-                  <AvatarImage
-                    src={nextMon?.assets.image}
-                    alt={nextMon?.id}
-                    className="object-scale-down"
-                  />
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{nextMon?.names.English}</p>
-              </TooltipContent>
-            </Tooltip>
-          </>
-        </div>
-      </Link>
+      <p className="text-xs">{label}</p>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Link
+            href={pokemonHref(neighbour.id)}
+            aria-label={neighbour.name}
+            className="transition-transform duration-200 hover:scale-110"
+          >
+            <Avatar>
+              <AvatarImage
+                src={getPkmnImgUrl(neighbour.dexNr)}
+                alt=""
+                className="object-scale-down"
+              />
+            </Avatar>
+          </Link>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{neighbour.name}</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };
 
-export const PrevMonDisplay = async ({ pokemon }: { pokemon: PokemonData }) => {
-  const prevMonNumber = (pokemon.dexNr - 1).toString();
-  const prevMonResult = await getPokemonByDexNr(prevMonNumber);
+// Neighbours come from the local index, so gaps in the API (e.g. #902) are skipped.
+export const NextMonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
+  const next = pokedex.find((entry) => entry.dexNr > pokemon.dexNr);
+  if (!next) return null;
 
-  if (!prevMonResult) {
-    return <div></div>;
-  }
-
-  const { pokemon: prevMon } = prevMonResult;
+  const isEvolution = pokemon.evolutions?.some((evo) => evo.id === next.id);
 
   return (
-    <div className="flex flex-row items-center gap-2">
-      <p className="text-xs">Previous Pokemon:</p>
-      <Link href={pokemonHref(prevMon.id)}>
-        <div className="transition-transform duration-200 hover:scale-110">
-          <Tooltip>
-            <TooltipTrigger>
-              <Avatar>
-                <AvatarImage
-                  src={prevMon?.assets.image}
-                  alt={prevMon?.id}
-                  className="object-scale-down"
-                />
-              </Avatar>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{prevMon?.names.English}</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </Link>
-    </div>
+    <NeighbourLink
+      label={isEvolution ? "Evolves into:" : "Next Pokemon:"}
+      neighbour={next}
+    />
   );
+};
+
+export const PrevMonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
+  const previous = pokedex.findLast((entry) => entry.dexNr < pokemon.dexNr);
+  if (!previous) return null;
+
+  return <NeighbourLink label="Previous Pokemon:" neighbour={previous} />;
 };
 
 export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
