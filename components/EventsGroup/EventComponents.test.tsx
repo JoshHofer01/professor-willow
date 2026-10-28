@@ -166,7 +166,7 @@ describe("EventPopout", () => {
     expect(within(dialog).queryByRole("button", { name: /ends in/i })).not.toBeInTheDocument();
   });
 
-  it("links to the event's detail page [bug 3.17]", async () => {
+  it("links to the event's detail page", async () => {
     const event = upcoming();
     const dialog = await openWithButton(event);
     expect(within(dialog).getByRole("link", { name: /view details/i })).toHaveAttribute(

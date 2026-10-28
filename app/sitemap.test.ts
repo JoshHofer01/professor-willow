@@ -1,11 +1,16 @@
 // @vitest-environment node
 import { readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
+import { makeEvent } from "@/test/fixtures/events";
+import { json, mockFetch } from "@/test/mockFetch";
 import sitemap from "./sitemap";
 
 const SITE = "https://professorwillow.me";
 const NOT_PUBLIC = new Set(["/settings"]);
+const EVENTS_URL =
+  "https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.json";
+const EVENT_PAGE = /^\/events\/[^/]+$/;
 
 /** Static routes from app/**\/page.tsx, with route groups removed. */
 function staticRoutes() {
@@ -25,27 +30,50 @@ function staticRoutes() {
     .filter((route) => !NOT_PUBLIC.has(route));
 }
 
-function sitemapPaths() {
-  return sitemap().map((entry) => new URL(entry.url).pathname.replace(/\/$/, "") || "/");
+async function sitemapPaths() {
+  return (await sitemap()).map((entry) => new URL(entry.url).pathname.replace(/\/$/, "") || "/");
 }
 
 describe("sitemap", () => {
-  it("uses absolute URLs on the production domain", () => {
-    for (const entry of sitemap()) expect(entry.url.startsWith(SITE)).toBe(true);
+  beforeEach(() => {
+    mockFetch({
+      [EVENTS_URL]: json([
+        makeEvent({ eventID: "pawniard-community-day" }),
+        makeEvent({ eventID: "halloween-2026" }),
+      ]),
+    });
   });
 
-  it("has no duplicate URLs", () => {
-    const paths = sitemapPaths();
+  it("uses absolute URLs on the production domain", async () => {
+    for (const entry of await sitemap()) expect(entry.url.startsWith(SITE)).toBe(true);
+  });
+
+  it("has no duplicate URLs", async () => {
+    const paths = await sitemapPaths();
     expect(new Set(paths).size).toBe(paths.length);
   });
 
-  it("only lists routes that exist", () => {
+  it("only lists routes that exist", async () => {
     const routes = new Set(staticRoutes());
-    for (const path of sitemapPaths()) expect(routes.has(path), path).toBe(true);
+    for (const path of await sitemapPaths()) {
+      expect(routes.has(path) || EVENT_PAGE.test(path), path).toBe(true);
+    }
   });
 
-  it("lists every static public route", () => {
-    const paths = new Set(sitemapPaths());
+  it("lists every static public route", async () => {
+    const paths = new Set(await sitemapPaths());
     for (const route of staticRoutes()) expect(paths.has(route), route).toBe(true);
+  });
+
+  it("lists a page for each event", async () => {
+    const paths = await sitemapPaths();
+    expect(paths).toContain("/events/pawniard-community-day");
+    expect(paths).toContain("/events/halloween-2026");
+  });
+
+  it("still lists the static routes when the events feed is down", async () => {
+    mockFetch({ [EVENTS_URL]: new TypeError("fetch failed") });
+    const paths = await sitemapPaths();
+    expect([...paths].sort()).toEqual(staticRoutes().sort());
   });
 });

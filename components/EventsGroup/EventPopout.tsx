@@ -84,6 +84,13 @@ const EventPopout = ({
           >
             {gameEvent.link}
           </Link>
+          {/* Event page */}
+          <Link
+            href={`/events/${encodeURIComponent(gameEvent.eventID)}`}
+            className="hover:underline underline-offset-4 text-primary text-sm font-semibold"
+          >
+            View details
+          </Link>
         </div>
         <DialogFooter>
           {/* Timing badge */}

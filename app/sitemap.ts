@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { getEvents } from '@/utils/getEvents'
 
 const SITE = 'https://professorwillow.me'
 
@@ -15,12 +16,23 @@ const routes: { path: string; priority: number }[] = [
   { path: '/legal', priority: 0.3 },
 ]
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
-  return routes.map(({ path, priority }) => ({
-    url: `${SITE}${path}`,
-    lastModified,
-    changeFrequency: 'daily',
-    priority,
-  }))
+  const events = await getEvents()
+
+  return [
+    ...routes.map(({ path, priority }) => ({
+      url: `${SITE}${path}`,
+      lastModified,
+      changeFrequency: 'daily' as const,
+      priority,
+    })),
+    // Event pages; an events outage just leaves them out.
+    ...events.map((event) => ({
+      url: `${SITE}/events/${encodeURIComponent(event.eventID)}`,
+      lastModified,
+      changeFrequency: 'daily' as const,
+      priority: 0.5,
+    })),
+  ]
 }
