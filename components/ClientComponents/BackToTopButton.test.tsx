@@ -39,13 +39,13 @@ describe("BackToTopButton", () => {
     expect(scroll).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
   });
 
-  it("has an accessible name [bug 2.6]", () => {
+  it("has an accessible name", () => {
     render(<BackToTopButton />);
     scrollTo(500);
     expect(screen.getByRole("button", { name: /back to top/i })).toBeInTheDocument();
   });
 
-  it("attaches one scroll listener however often it re-renders [bug 1.5]", () => {
+  it("attaches one scroll listener however often it re-renders", () => {
     const add = vi.spyOn(window, "addEventListener");
     const { rerender } = render(<BackToTopButton />);
 
@@ -57,7 +57,7 @@ describe("BackToTopButton", () => {
     expect(scrollListenerCalls(add)).toBe(1);
   });
 
-  it("removes its scroll listener on unmount [bug 1.5]", () => {
+  it("removes its scroll listener on unmount", () => {
     const remove = vi.spyOn(window, "removeEventListener");
     const { unmount } = render(<BackToTopButton />);
 

@@ -1,20 +1,16 @@
 "use client"
 
 import { ArrowUp } from "lucide-react";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BackToTopButton() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {
-        setShow(true);
-      } else {
-        setShow(false);
-      }
-    });
-  });
+    const onScroll = () => setShow(window.scrollY > 200);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const jumpToTop = () => {
     window.scrollTo({
@@ -23,20 +19,18 @@ export default function BackToTopButton() {
     });
   };
 
+  if (!show) return null;
+
   return (
-    <Fragment>
-      {show ? (
-        <div className="fixed top-15 right-0 mb-6 mr-6 z-8">
-          <button
-            onClick={jumpToTop}
-            className="bg-nav text-white rounded-full p-2 hover:bg-nav-accent"
-          >
-            <ArrowUp />
-          </button>
-        </div>
-      ) : (
-        <Fragment />
-      )}
-    </Fragment>
+    <div className="fixed top-15 right-0 mb-6 mr-6 z-8">
+      <button
+        type="button"
+        onClick={jumpToTop}
+        aria-label="Back to top"
+        className="bg-nav text-white rounded-full p-2 hover:bg-nav-accent"
+      >
+        <ArrowUp aria-hidden="true" />
+      </button>
+    </div>
   );
 }
