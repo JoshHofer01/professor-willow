@@ -77,63 +77,56 @@ export const PrevMonDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
 };
 
 export const StatsDisplay = ({ pokemon }: { pokemon: PokemonData }) => {
-  function getStatusColor(statValue: number, statTotal: number) {
-    return Math.round((statValue / statTotal) * 100) < 33
-      ? "bg-red-500"
-      : Math.round((statValue / statTotal) * 100) > 66
-        ? "bg-green-500"
-        : "bg-amber-500";
-  }
-
   return (
     <div>
       <h3 className="text-lg font-semibold">Stats</h3>
       <div className="space-y-2 mt-2">
-        <Tooltip>
-          <TooltipTrigger className="w-full">
-            <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">HP</span>
-              <Progress
-                value={Math.round((pokemon?.stats?.stamina / 420) * 100)}
-                className={getStatusColor(pokemon?.stats?.stamina, 420)}
-              />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{pokemon?.stats?.stamina}</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger className="w-full">
-            <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">Attack</span>
-              <Progress
-                value={Math.round((pokemon?.stats?.attack / 360) * 100)}
-                className={getStatusColor(pokemon?.stats?.attack, 360)}
-              />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{pokemon?.stats?.attack}</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger className="w-full">
-            <div className="grid grid-cols-4 items-center">
-              <span className="font-medium">Defense</span>
-              <Progress
-                value={Math.round((pokemon?.stats?.defense / 350) * 100)}
-                max={255}
-                className={getStatusColor(pokemon?.stats?.defense, 350)}
-              />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{pokemon?.stats?.defense}</p>
-          </TooltipContent>
-        </Tooltip>
+        {STATS.map(({ label, key, scale }) => (
+          <StatRow
+            key={key}
+            label={label}
+            value={pokemon?.stats?.[key]}
+            scale={scale}
+          />
+        ))}
       </div>
     </div>
+  );
+};
+
+// Bars are drawn against these values; a few Pokémon exceed them.
+const STATS = [
+  { label: "HP", key: "stamina", scale: 420 },
+  { label: "Attack", key: "attack", scale: 360 },
+  { label: "Defense", key: "defense", scale: 350 },
+] as const;
+
+const StatRow = ({
+  label,
+  value,
+  scale,
+}: {
+  label: string;
+  value: number;
+  scale: number;
+}) => {
+  // Clamped so outliers (e.g. Blissey's HP) fill the bar rather than shift it.
+  const percent = Math.min(100, Math.round((value / scale) * 100));
+  const color =
+    percent < 33 ? "bg-red-500" : percent > 66 ? "bg-green-500" : "bg-amber-500";
+
+  return (
+    <Tooltip>
+      <TooltipTrigger className="w-full">
+        <div className="grid grid-cols-4 items-center">
+          <span className="font-medium">{label}</span>
+          <Progress value={percent} aria-label={label} className={color} />
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{value}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 

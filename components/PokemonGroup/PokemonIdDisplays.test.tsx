@@ -49,7 +49,21 @@ describe("StatsDisplay", () => {
     expect(widths).toEqual(["translateX(-50%)", "translateX(-0%)", "translateX(-90%)"]);
   });
 
-  it("exposes each stat's value to assistive technology [bug 2.10]", () => {
+  it("fills the bar for stats beyond the scale instead of shifting it", () => {
+    render(<StatsDisplay pokemon={makePokemon({ stats: { stamina: 496, attack: 180, defense: 175 } })} />);
+    const [hp] = document.querySelectorAll<HTMLElement>("[data-slot=progress-indicator]");
+    expect(hp.style.transform).toBe("translateX(-0%)");
+    expect(hp).toHaveClass("bg-green-500");
+  });
+
+  it("names each stat bar", () => {
+    render(<StatsDisplay pokemon={makePokemon()} />);
+    for (const name of ["HP", "Attack", "Defense"]) {
+      expect(screen.getByRole("progressbar", { name })).toBeInTheDocument();
+    }
+  });
+
+  it("exposes each stat's value to assistive technology", () => {
     render(<StatsDisplay pokemon={makePokemon({ stats: { stamina: 210, attack: 180, defense: 175 } })} />);
     expect(screen.getAllByRole("progressbar").map((bar) => bar.getAttribute("aria-valuenow"))).toEqual([
       "50",
