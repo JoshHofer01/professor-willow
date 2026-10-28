@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import type { RaidPokemon } from "@/interfaces/interfaces";
 import maxBattlesFixture from "@/test/fixtures/maxbattles.json";
@@ -112,6 +113,36 @@ describe("RaidsDisplay", () => {
     render(await RaidsDisplay());
 
     expect(error.mock.calls.flat().join(" ")).not.toMatch(/same key/);
+  });
+});
+
+describe("tier sections", () => {
+  it("collapse and expand from a button inside the tier heading", async () => {
+    const user = userEvent.setup();
+    mockFetch({ [RAIDS_URL]: json(raidFixture) });
+    render(await RaidsDisplay());
+
+    const toggle = within(screen.getByRole("heading", { name: "Tier 4" })).getByRole("button", {
+      name: "Tier 4",
+    });
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText("Mega Sableye")).toBeInTheDocument();
+
+    toggle.focus();
+    await user.keyboard("{Enter}");
+
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByText("Mega Sableye")).not.toBeInTheDocument();
+  });
+
+  it("opens a battle boss's shiny from a View Shiny button", async () => {
+    const user = userEvent.setup();
+    mockFetch({ [MAX_URL]: json(maxBattlesFixture) });
+    render(await BattlesDisplay());
+
+    await user.click(screen.getAllByRole("button", { name: "View Shiny" })[0]);
+
+    expect(screen.getByRole("dialog", { name: /^Shiny / })).toBeInTheDocument();
   });
 });
 

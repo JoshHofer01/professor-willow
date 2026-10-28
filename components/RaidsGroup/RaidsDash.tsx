@@ -51,19 +51,20 @@ const RaidInfo = ({ raids }: { raids: RaidPokemon[] }) => {
 
 export const RaidBossImages = ({ imageCount }: { imageCount: string }) => {
   const imageCountNumber = parseInt(imageCount);
+  // A <span> so it can sit inside trigger buttons; the icons are decorative.
   return (
-    <div className="inline-flex justify-center mt-1">
+    <span className="inline-flex justify-center mt-1">
       {Array.from({ length: imageCountNumber }, (_, i) => (
         <Image
           key={i}
           src="/RaidBoss.png"
-          alt="RaidBoss"
+          alt=""
           width={20}
           height={20}
           className="object-scale-down w-5 h-5"
         />
       ))}
-    </div>
+    </span>
   );
 };
 
