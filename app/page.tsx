@@ -66,11 +66,9 @@ export default async function DashboardPage() {
         <DashboardCard
           title={`Live Events`}
           action={
-            <Link href={"events/live"}>
-              <Button variant="ghost" size="sm">
-                View All
-              </Button>
-            </Link>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/events/live">View All</Link>
+            </Button>
           }
           className="md:col-span-2 md:row-span-2 xl:row-span-1 2xl:row-span-2"
         >
@@ -127,11 +125,11 @@ export default async function DashboardPage() {
           title="Current Raid Bosses"
           className="row-span-3"
           action={
-            <Link href={"/raids"}>
-              <Button variant="ghost" size="sm" aria-label="More Raid Details">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/raids" aria-label="More Raid Details">
                 More Details
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           }
         >
           <RaidsDash />
@@ -179,15 +177,11 @@ export default async function DashboardPage() {
           title="Dev Log"
           description="Thank you so much for using ProfesorWillow!! Currently viewing last 3 site updates."
           action={
-            <Link
-              href={
-                "https://github.com/JoshHofer01/professor-willow/commits/main/"
-              }
-            >
-              <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="https://github.com/JoshHofer01/professor-willow/commits/main/">
                 Full Log
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           }
         >
           <div className="flex flex-col text-xs gap-1">

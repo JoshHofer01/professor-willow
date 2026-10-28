@@ -44,7 +44,7 @@ describe("DashboardCard", () => {
     expect(screen.getByRole("link", { name: /join/i })).toHaveAttribute("target", "_blank");
   });
 
-  it("doesn't nest a button inside the link [bug 2.1]", () => {
+  it("doesn't nest a button inside the link", () => {
     const { container } = render(
       <DashboardCard title="Events" button={{ text: "View all", href: "/events" }} />,
     );
