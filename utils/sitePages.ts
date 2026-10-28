@@ -1,6 +1,6 @@
 import { Calendar, ClockCheck, Inbox, LucideIcon, Swords } from "lucide-react";
 
-interface PageProps {
+export interface PageProps {
   title: string;
   href: string;
   icon: LucideIcon;
