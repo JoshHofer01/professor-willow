@@ -46,7 +46,7 @@ describe("EventDiffToNow", () => {
     expect(container.firstChild).toHaveClass("custom");
   });
 
-  it("never shows negative values once the time has passed [bug 1.10]", () => {
+  it("never shows negative values once the time has passed", () => {
     const { container } = render(<EventDiffToNow eventEnd={at(-(DAY + 2 * HOUR))} />);
     expect(container.textContent).not.toContain("-");
     expect(container).toHaveTextContent("0H0M");
