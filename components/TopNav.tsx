@@ -28,19 +28,12 @@ const TopNav = () => {
         </NavigationMenuItem>
         {pages.map((page) => (
           <NavigationMenuItem key={page.title} className={cn("my-1 mx-auto min-w-fit", page.hidesAt)}>
-            {!page.showsAtMin && !page.hasMenu ? (
+            {!page.hasMenu ? (
               <NavigationMenuLink
-                href={page.href}
+                asChild
                 className="flex-row data-[active=true]:focus:bg-nav-accent data-[active=true]:hover:bg-nav-accent data-[active=true]:nav-accent/50 hover:bg-nav-accent focus:bg-nav-accent focus:text-nav-accent-foreground focus-visible:ring-ring/50"
               >
-                {page.title}
-              </NavigationMenuLink>
-            ) : page.showsAtMin && !page.hasMenu ? (
-              <NavigationMenuLink
-                href={page.href}
-                className="flex-row data-[active=true]:focus:bg-nav-accent data-[active=true]:hover:bg-nav-accent data-[active=true]:nav-accent/50 hover:bg-nav-accent focus:bg-nav-accent focus:text-nav-accent-foreground focus-visible:ring-ring/50"
-              >
-                {page.title}
+                <Link href={page.href}>{page.title}</Link>
               </NavigationMenuLink>
             ) : (
               <>
