@@ -101,6 +101,8 @@ export function FilterBox({
                 <CommandItem
                   key={element.value}
                   value={element.value.toString()}
+                  // cmdk searches value and keywords, not the visible label.
+                  keywords={[element.label]}
                   onSelect={(currentValue) => {
                     const newValue = currentValue === value ? "" : currentValue;
                     setValue(newValue);

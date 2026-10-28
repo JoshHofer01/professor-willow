@@ -63,7 +63,7 @@ describe("FilterBox", () => {
     expect(screen.getByRole("combobox", { name: /type/i })).toBeInTheDocument();
   });
 
-  it("finds generations by region name, e.g. Kanto [bug 1.15]", async () => {
+  it("finds generations by region name, e.g. Kanto", async () => {
     const user = userEvent.setup();
     render(<FilterBox dataType="generation" setFilter={vi.fn()} initialValue="" />);
 
