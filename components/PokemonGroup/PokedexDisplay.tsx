@@ -77,12 +77,15 @@ export const PokedexDisplay = () => {
       <BackToTopButton />
       <div className="flex flex-wrap gap-2 mb-4">
           <SearchBox setQuery={setQuery} initialValue={query} className="max-w-xs lg:max-w-sm min-w-52"/>
+          {/* Keyed on the URL value so Back/Forward resets the shown selection. */}
           <FilterBox
+            key={`type-${filterType}`}
             dataType="type"
             setFilter={(val) => updateFilter("type", val)}
             initialValue={filterType}
           />
           <FilterBox
+            key={`gen-${filterGeneration}`}
             dataType="generation"
             setFilter={(val) => updateFilter("gen", val)}
             initialValue={filterGeneration}

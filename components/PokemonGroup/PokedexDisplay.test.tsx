@@ -87,6 +87,20 @@ describe("PokedexDisplay", () => {
     expect(router.push).toHaveBeenCalledWith("?gen=1");
   });
 
+  it("updates the filter labels when the URL changes (Back/Forward)", () => {
+    setSearchParams({ gen: "1", type: "Fire" });
+    const { rerender } = render(<PokedexDisplay />);
+    expect(typeFilter()).toHaveTextContent("Fire");
+
+    setSearchParams({ gen: "2" });
+    rerender(<PokedexDisplay />);
+
+    expect(typeFilter()).toHaveTextContent("Select type...");
+    expect(screen.getByRole("combobox", { name: /^Filter by generation/ })).toHaveTextContent(
+      "Johto (Gen II)",
+    );
+  });
+
   it("links each Pokémon to its detail page", () => {
     setSearchParams({ gen: "1", query: "bulba" });
     render(<PokedexDisplay />);
