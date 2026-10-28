@@ -2,9 +2,7 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/shadcn/dialog";
@@ -32,11 +30,10 @@ const EventPopout = ({
       <DialogTrigger asChild className="hover:cursor-pointer">
         {children}
       </DialogTrigger>
-      <DialogHeader className="hidden">
-        <DialogTitle>{gameEvent.name}</DialogTitle>
-        <DialogDescription>{gameEvent.name}</DialogDescription>
-      </DialogHeader>
-      <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl">
+      <DialogContent
+        className="max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-xl"
+        aria-describedby={undefined}
+      >
         {/* Image */}
         <div className="flex flex-col">
           <Image
@@ -50,7 +47,7 @@ const EventPopout = ({
         </div>
         <div id="content" className="flex flex-col gap-1">
           {/* Title */}
-          <h3 className="text-2xl sm:text-xl font-bold">{gameEvent.name}</h3>
+          <DialogTitle className="text-2xl sm:text-xl font-bold">{gameEvent.name}</DialogTitle>
           {/* Dates */}
           <div className="flex flex-row gap-2">
             <p>{dateFormatter.format(new Date(gameEvent.start))}</p>

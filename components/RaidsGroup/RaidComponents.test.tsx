@@ -17,12 +17,8 @@ const boss = (overrides: Partial<RaidPokemon> = {}): RaidPokemon => ({
   ...overrides,
 });
 
-// Popout dialog titles also render as <h2> (see 2.3), so keep tier headings only.
 const tierHeadings = () =>
-  screen
-    .getAllByRole("heading", { level: 2 })
-    .map((h) => h.textContent)
-    .filter((text) => /^Tier \d$/.test(text ?? ""));
+  screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent);
 
 describe("BossCard", () => {
   it("shows the boss name, image and types", () => {
